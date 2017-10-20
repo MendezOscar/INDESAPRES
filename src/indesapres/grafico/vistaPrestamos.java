@@ -1,15 +1,18 @@
-
 package indesapres.grafico;
 
 import indesapres.logica.ServiciosDB;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.print.PrinterException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -19,10 +22,10 @@ import javax.swing.table.TableRowSorter;
  * @author oscme
  */
 public class vistaPrestamos extends javax.swing.JFrame {
-   
+
     DefaultTableModel modelo = new DefaultTableModel();
     public TableRowSorter trsFiltro;
-    
+
     public vistaPrestamos() {
         initComponents();
         mostrarDatos();
@@ -32,7 +35,7 @@ public class vistaPrestamos extends javax.swing.JFrame {
         try {
             generarColumnas();
             ServiciosDB service = new ServiciosDB();
-            String query = "SELECT * FROM PRESTAMOS";
+            String query = "SELECT * FROM PRESTAMOS ORDER BY CONTADOR ASC";
             Statement st = service.con.createStatement();
             ResultSet rs = st.executeQuery(query);
             this.jTable2.setModel(modelo);
@@ -49,7 +52,7 @@ public class vistaPrestamos extends javax.swing.JFrame {
             Logger.getLogger(vistaClientes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void generarColumnas() {
         modelo.addColumn("CODIGO");
         modelo.addColumn("FECHA");
@@ -65,8 +68,8 @@ public class vistaPrestamos extends javax.swing.JFrame {
         modelo.addColumn("ABONO A CAPITAL");
         modelo.addColumn("INTERES GANADO");
     }
-    
-     public void filtro() {
+
+    public void filtro() {
         int columnaABuscar = 0;
         if (comboFiltro.getSelectedItem() == "CODIGO") {
             columnaABuscar = 0;
@@ -79,7 +82,7 @@ public class vistaPrestamos extends javax.swing.JFrame {
         }
         trsFiltro.setRowFilter(RowFilter.regexFilter(txtFiltro.getText(), columnaABuscar));
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -112,7 +115,7 @@ public class vistaPrestamos extends javax.swing.JFrame {
         jToolBar1.add(jLabel19);
 
         comboFiltro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        comboFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo", "Nombre", "Identidad" }));
+        comboFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CODIGO", "FECHA", "PRESTAMO" }));
         jToolBar1.add(comboFiltro);
 
         jLabel20.setForeground(new java.awt.Color(204, 204, 255));
@@ -132,7 +135,7 @@ public class vistaPrestamos extends javax.swing.JFrame {
         jToolBar1.add(jLabel21);
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton1.setText("Buscar");
+        jButton1.setText("Imprimir");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -272,4 +275,26 @@ public class vistaPrestamos extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
+
+    public void imprimir() {
+        try {
+            boolean fitWidth = true;
+            boolean interactive = true;
+            JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
+            MessageFormat headerFormat = new MessageFormat("Listado de Prestmos");
+            MessageFormat footerFormat = new MessageFormat("- Página {0} -");
+            jTable2.print(mode, headerFormat, footerFormat);
+            JOptionPane.showMessageDialog(jTable2,
+                    "Print complete (Impresión completa)",
+                    "Print result (Resultado de la impresión)",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } catch (PrinterException ex) {
+            Logger.getLogger(vistaClientes.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(jTable2,
+                    "Print fail (Fallo de impresión): " + ex.getMessage(),
+                    "Print result (Resultado de la impresión)",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 }

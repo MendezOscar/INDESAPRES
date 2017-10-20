@@ -1,15 +1,18 @@
-
 package indesapres.grafico;
 
 import indesapres.logica.ServiciosDB;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.print.PrinterException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -23,7 +26,7 @@ public class vistaClientes extends javax.swing.JFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     public TableRowSorter trsFiltro;
     String idCliente;
-    
+
     public vistaClientes() {
         initComponents();
         mostrarDatos();
@@ -33,7 +36,7 @@ public class vistaClientes extends javax.swing.JFrame {
         try {
             generarColumnas();
             ServiciosDB service = new ServiciosDB();
-            String query = "SELECT * FROM CLIENTES";
+            String query = "SELECT * FROM CLIENTES ORDER BY CONTADOR ASC";
             Statement st = service.con.createStatement();
             ResultSet rs = st.executeQuery(query);
             this.jTable2.setModel(modelo);
@@ -66,7 +69,7 @@ public class vistaClientes extends javax.swing.JFrame {
         modelo.addColumn("PROFESION");
         modelo.addColumn("TIPO");
     }
-    
+
     public void filtro() {
         int columnaABuscar = 0;
         if (comboFiltro.getSelectedItem() == "CODIGO") {
@@ -149,7 +152,7 @@ public class vistaClientes extends javax.swing.JFrame {
         jToolBar1.add(jLabel21);
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton1.setText("Buscar");
+        jButton1.setText("Imprimir");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -211,7 +214,7 @@ public class vistaClientes extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTable2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyPressed
@@ -220,6 +223,7 @@ public class vistaClientes extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        imprimir();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyPressed
@@ -293,5 +297,55 @@ public class vistaClientes extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
-       
+
+    public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
+        boolean fitWidth = true;
+        boolean interactive = true;
+        JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
+        try {
+            boolean complete = jTable.print(mode,
+                    new MessageFormat(header),
+                    new MessageFormat(footer),
+                    showPrintDialog,
+                    null,
+                    interactive);
+            if (complete) {
+                JOptionPane.showMessageDialog(jTable,
+                        "Print complete (Impresión completa)",
+                        "Print result (Resultado de la impresión)",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(jTable,
+                        "Print canceled (Impresión cancelada)",
+                        "Print result (Resultado de la impresión)",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (PrinterException pe) {
+            JOptionPane.showMessageDialog(jTable,
+                    "Print fail (Fallo de impresión): " + pe.getMessage(),
+                    "Print result (Resultado de la impresión)",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void imprimir() {
+        try {
+            boolean fitWidth = true;
+            boolean interactive = true;
+            JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
+            MessageFormat headerFormat = new MessageFormat("Listado de Clientes");
+            MessageFormat footerFormat = new MessageFormat("- Página {0} -");
+            jTable2.print(mode, headerFormat, footerFormat);
+            JOptionPane.showMessageDialog(jTable2,
+                        "Print complete (Impresión completa)",
+                        "Print result (Resultado de la impresión)",
+                        JOptionPane.INFORMATION_MESSAGE);
+        } catch (PrinterException ex) {
+            Logger.getLogger(vistaClientes.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(jTable2,
+                    "Print fail (Fallo de impresión): " + ex.getMessage(),
+                    "Print result (Resultado de la impresión)",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

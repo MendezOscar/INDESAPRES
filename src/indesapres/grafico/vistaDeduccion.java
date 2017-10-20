@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -32,7 +31,7 @@ public class vistaDeduccion extends javax.swing.JFrame {
         try {
             generarColumnas();
             ServiciosDB service = new ServiciosDB();
-            String query = "SELECT * FROM DEDUCCION";
+            String query = "SELECT * FROM DEDUCCION ORDER BY CONTADOR ASC";
             Statement st = service.con.createStatement();
             ResultSet rs = st.executeQuery(query);
             this.jTable2.setModel(modelo);

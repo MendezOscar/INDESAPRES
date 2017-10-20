@@ -783,7 +783,6 @@ public class registrarDeduccion extends javax.swing.JFrame {
         ServiciosDB service = new ServiciosDB();
         ArrayList<Deducciones> depts;
         depts = (ArrayList<Deducciones>) service.obtenerUltimaDeduccionByIdPrestamo(idPrestamo);
-        System.out.println("size: " + depts.size());
         if (depts.isEmpty()) {
             numero = depts.size() + 1;
             return numero;
