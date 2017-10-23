@@ -101,6 +101,9 @@
               <SubComponents>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\filter.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Especifico"/>
                   </Properties>
                   <Events>
@@ -109,6 +112,9 @@
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\todos.png"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="General"/>
                   </Properties>
                   <Events>

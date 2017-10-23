@@ -104,6 +104,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu5.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\reporteDeducion.png")); // NOI18N
         jMenu5.setText("Deducciones");
 
+        jMenuItem7.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\filter.png")); // NOI18N
         jMenuItem7.setText("Especifico");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +113,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem7);
 
+        jMenuItem5.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\todos.png")); // NOI18N
         jMenuItem5.setText("General");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

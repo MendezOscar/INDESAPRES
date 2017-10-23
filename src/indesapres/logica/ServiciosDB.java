@@ -458,6 +458,24 @@ public class ServiciosDB {
         }
         return null;
     }
+     
+     public List<Deducciones> obtenerUltimaDeduccionByIdPrestamoAcs(String idPrestamo) {
+        try {
+            String query = "SELECT * FROM DEDUCCION WHERE IDPRESTAMO = " + "'" + idPrestamo + "'" + " ORDER BY CONTADOR ASC";
+            PreparedStatement stmt = con.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<Deducciones> depts = new ArrayList<>();
+            while (rs.next()) {
+                depts.add(new Deducciones(rs.getString("IDDEDUCCION"), rs.getString("FECHA"), rs.getString("IDPRESTAMO"), 
+                    rs.getString("NOMBRE") , rs.getFloat("PRESTAMO"), rs.getFloat("DEDUCCION"),
+                    rs.getFloat("SALDODEUDOR"), rs.getInt("CONTADOR")));
+            }
+            return depts;
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiciosDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
     
     public List<Deducciones> findAllDeducciones() throws SQLException {
         try (Statement stmt = con.createStatement()) {

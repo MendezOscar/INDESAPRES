@@ -6,6 +6,7 @@ import indesapres.modelos.Prestamos;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,6 +17,8 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
     /**
      * Creates new form vistaDeduccionPorPrestamo
      */
+    DefaultTableModel modelo = new DefaultTableModel();
+
     public vistaDeduccionPorPrestamo() {
         initComponents();
     }
@@ -98,6 +101,11 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton2);
 
         jLabel23.setForeground(new java.awt.Color(204, 204, 255));
@@ -107,10 +115,6 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
@@ -118,7 +122,7 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -158,16 +162,12 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1075, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(366, 366, 366)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(285, 285, 285)
-                                .addComponent(jLabel2))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jInteres, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,6 +214,10 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
         vistaPrestamos vp = new vistaPrestamos();
         vp.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
@@ -273,21 +277,31 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
         obtenerDeducciones();
     }
 
+    public void agregarFilas() {
+        DefaultTableModel temp = (DefaultTableModel) jTable2.getModel();
+        //Object nuevo[] = {"", "", 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+        Object nuevo[] = {"", "", "", "", "", "", "", "", "", "", ""};
+        temp.addRow(nuevo);
+    }
+
     public void obtenerDeducciones() {
+        int fila = 0;
         String idPrestamo = txtFiltro.getText();
         ServiciosDB service = new ServiciosDB();
         Prestamos pres = service.findByIdPrestamos(idPrestamo);
         Deducciones ded;
         ArrayList<Deducciones> depts;
-        depts = (ArrayList<Deducciones>) service.obtenerUltimaDeduccionByIdPrestamo(idPrestamo);
+        depts = (ArrayList<Deducciones>) service.obtenerUltimaDeduccionByIdPrestamoAcs(idPrestamo);
         for (int x = 0; x < depts.size(); x++) {
             ded = depts.get(x);
+            agregarFilas();
             jTable2.setValueAt(ded.getIdDeduccion(), x + 1, 0);
-            jTable2.setValueAt(ded.getFecha(), 0, 1);
+            jTable2.setValueAt(ded.getFecha(), x + 1, 1);
             jTable2.setValueAt(pres.getAbonocapital(), x + 1, 7);
             jTable2.setValueAt(pres.getInteresganado(), x + 1, 8);
             jTable2.setValueAt(ded.getDeduccion(), x + 1, 9);
             jTable2.setValueAt(ded.getSaldoDeudor(), x + 1, 10);
+
         }
     }
 

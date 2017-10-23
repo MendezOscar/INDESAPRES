@@ -3,7 +3,10 @@ package indesapres.grafico;
 import indesapres.logica.ServiciosDB;
 import indesapres.modelos.Clientes;
 import indesapres.modelos.Prestamos;
+import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -13,6 +16,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
+import org.apache.poi.xwpf.usermodel.UnderlinePatterns;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 /**
  *
@@ -22,7 +30,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
 
     public DefaultTableModel tm;
     Date fechaActual;
-    
+
     public registrarPrestamo() {
         initComponents();
         setearFecha();
@@ -156,6 +164,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jporAnual = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -459,6 +468,14 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
+        jButton9.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton9.setText("Generar Documento");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -508,7 +525,10 @@ public class registrarPrestamo extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jporAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(37, 37, 37)
-                                .addComponent(jButton7)))
+                                .addComponent(jButton7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton9)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -542,7 +562,8 @@ public class registrarPrestamo extends javax.swing.JFrame {
                     .addComponent(jPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7)
                     .addComponent(jLabel8)
-                    .addComponent(jporAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jporAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton9))
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                 .addContainerGap())
@@ -674,7 +695,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
                 jTable2.setValueAt(abonocapital, 0, 4);
                 jTable2.setValueAt(interesganado, 0, 5);
             } else {
-               float interesAcumulado;
+                float interesAcumulado;
                 float base = (float) 1200;
                 interesAcumulado = (prestamo * interesAnual * plazo) / base;
                 float Totalinteresganado = interesAcumulado;
@@ -714,38 +735,37 @@ public class registrarPrestamo extends javax.swing.JFrame {
         } else if (prestamo >= 80001 && prestamo <= 100000) {
             int plazo = 26;
             jPlazo.setText(Integer.toString(plazo));
-        }else if (prestamo >= 100001 && prestamo <= 150000) {
+        } else if (prestamo >= 100001 && prestamo <= 150000) {
             int plazo = 36;
             jPlazo.setText(Integer.toString(plazo));
-        }  
-        else if (prestamo <= 150001) {
+        } else if (prestamo <= 150001) {
             JOptionPane.showMessageDialog(null, "Sujeto a analisis");
         }
     }//GEN-LAST:event_jPlazoMouseClicked
 
     private void jporAnualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jporAnualMouseClicked
         // TODO add your handling code here:
-       int plazo = Integer.parseInt(jPlazo.getText());
+        int plazo = Integer.parseInt(jPlazo.getText());
         float prestamo = Float.parseFloat(jPrestamo.getText());
         if (plazo == 5) {
             float interesanual = (float) 18;
             jporAnual.setText(Float.toString(interesanual));
-        }else if (plazo == 15) {
+        } else if (plazo == 15) {
             float interesanual = (float) 20;
             jporAnual.setText(Float.toString(interesanual));
-        }else if (plazo == 22) {
+        } else if (plazo == 22) {
             float interesanual = (float) 22;
             jporAnual.setText(Float.toString(interesanual));
-        }else if (plazo == 24 && (prestamo >= 50001 && prestamo <= 80000)) {
+        } else if (plazo == 24 && (prestamo >= 50001 && prestamo <= 80000)) {
             float interesanual = (float) 23;
             jporAnual.setText(Float.toString(interesanual));
-        }else if (plazo == 26 && (prestamo >= 80001 && prestamo <= 100000)) {
+        } else if (plazo == 26 && (prestamo >= 80001 && prestamo <= 100000)) {
             float interesanual = (float) 25;
             jporAnual.setText(Float.toString(interesanual));
-        }else if (plazo == 36 && (prestamo >= 100001 && prestamo <= 150000)) {
+        } else if (plazo == 36 && (prestamo >= 100001 && prestamo <= 150000)) {
             float interesanual = (float) 25.5;
             jporAnual.setText(Float.toString(interesanual));
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Sujeto a analisis");
         }
     }//GEN-LAST:event_jporAnualMouseClicked
@@ -792,6 +812,11 @@ public class registrarPrestamo extends javax.swing.JFrame {
         vc.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        generarDocumento();
+    }//GEN-LAST:event_jButton9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -834,6 +859,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JTextField jCodigo;
     public static javax.swing.JTextField jCodigo1;
     private javax.swing.JTextField jCodigo2;
@@ -893,7 +919,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
     public boolean isFloat(float n) {
         return n % 1 != 0;
     }
-    
+
     public int setearnumero() {
         int numero;
         String idCliente = jCodigo1.getText();
@@ -903,20 +929,85 @@ public class registrarPrestamo extends javax.swing.JFrame {
         numero = depts.size() + 1;
         return numero;
     }
-    
-    public void setearCodigo(){
+
+    public void setearCodigo() {
         String idCliente = jCodigo1.getText();
         ServiciosDB service = new ServiciosDB();
-        ArrayList<Prestamos> depts ;
+        ArrayList<Prestamos> depts;
         depts = (ArrayList<Prestamos>) service.obtenerUltimoPrestamoByIdCliente(idCliente);
-        if (depts.isEmpty()){
+        if (depts.isEmpty()) {
             String code = idCliente + "-" + "1";
             jCodigo.setText(code);
-        }else{
+        } else {
             Prestamos pres = depts.get(0);
             int consecutivo = pres.getContador() + 1;
             String code = idCliente + "-" + consecutivo;
             jCodigo.setText(code);
         }
+    }
+
+    public void generarDocumento() {
+        
+        XWPFDocument lol = new XWPFDocument();
+
+        XWPFParagraph paragraph = lol.createParagraph();
+        XWPFRun run = paragraph.createRun();
+
+        run.setText("SOLICITUD DE PRESTAMOS");
+
+        run.setFontSize(25);
+        run.setFontFamily("Helvetica");
+        run.setUnderline(UnderlinePatterns.THICK);
+        run.setBold(true);
+        run.setItalic(true);
+        run.setColor("DF0101");
+
+        paragraph.setAlignment(ParagraphAlignment.CENTER);
+        String ubicacion = "C:\\Users\\oscme\\Escritorio\\contrato";
+        String parrafo = "Yo Ada Mendez Lopez con numero identidad N 0505-1995-00061 y risidente en Aldea el Batey Santa "
+                + "Cruz de Yojoa, Cortes Socio(a) activo(a) de Compañía Agrícola Olivo S. A. por este medio acudo a INDESA de"
+                + "C.V. en SOLICITUD de un préstamo por valor de 5000 Estoy entendido que de aprobarse esta solicitud, el "
+                + "valor autorizado sufrirá un incremento por concepto de  la tasa de interés y otros gastos de administración "
+                + "aplicados al mismo; de interés y otros gastos de administración aplicados al mismo para que; periódicamente "
+                + "de mis ingresos realice la deducción de 590 Del pago por renta quincenal--------------------- L.    ___________ \n"
+                + "Del incentivo trimestral a la producción-------        ___________ \n"
+                + "Del Bono Navideño ---------------------------------        ___________  Suma    L  _____________"
+                + "más los correspondientes intereses ganados y/o cargos por mora, y éste valor lo traslade automáticamente a INDESA de C.V. hasta cancelar el total del  préstamo autorizado.\n"
+                + "\n"
+                + "El Batey Santa Cruz de Yojoa, Cortes. 13 De 10 dos mil diez y 17 \n"
+                + "\n"
+                + " \n"
+                + "___________________________                                                 _____________________________\n"
+                + "   Nombre del solicitante                                                      Firma  del Solicitante\n"
+                + "    Cel. /Tel. Nº______________\n"
+                + "CÁLCULOS / VALORES\n"
+                + "\n"
+                + "Valor autorizado…………………………………………………………………..  L ____________                 S U M A\n"
+                + "+ Intereses  ganados…………………………………………………………….     ____________        L ____________\n"
+                + "Taza de interés _______%  anual, pagadero en  _____ meses;  Plazo de pago ______ meses, para realizar _____ pagos quincenales        mensuales       de; L _____________ (Capital L. __________ + intereses L.___________) por pago/letra.\n"
+                + ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n"
+                + "	                           	AUTORIZADO        \n"
+                + "                                                                                                                               \n"
+                + "                                                                                                                                        L.   ______________  -\n"
+                + "		                                                      1ra. cuota    ________________\n"
+                + "	                                                             ts. Papelería   _______________\n"
+                + "							             Valor. Chk. L.   _______________";
+        XWPFParagraph paragraph2 = lol.createParagraph();
+        XWPFRun runs = paragraph2.createRun();
+        runs.addBreak();
+        runs.setFontSize(15);
+        runs.setFontFamily("Arial");
+        runs.setText(parrafo);
+
+        paragraph2.setAlignment(ParagraphAlignment.CENTER);
+
+        try {
+            FileOutputStream output = new FileOutputStream(ubicacion + ".docx");
+            lol.write(output);
+            output.close();
+            JOptionPane.showMessageDialog(null, "WORD EXPORTADOS CON EXITOS!");
+        } catch (HeadlessException | IOException e) {
+        }
+
     }
 }
