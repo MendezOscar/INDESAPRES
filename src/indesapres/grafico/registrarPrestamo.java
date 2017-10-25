@@ -1,6 +1,7 @@
 package indesapres.grafico;
 
 import indesapres.logica.ServiciosDB;
+import indesapres.logica.WordGenerator;
 import indesapres.modelos.Clientes;
 import indesapres.modelos.Prestamos;
 import java.awt.HeadlessException;
@@ -11,7 +12,9 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -947,67 +950,40 @@ public class registrarPrestamo extends javax.swing.JFrame {
     }
 
     public void generarDocumento() {
-        
-        XWPFDocument lol = new XWPFDocument();
-
-        XWPFParagraph paragraph = lol.createParagraph();
-        XWPFRun run = paragraph.createRun();
-
-        run.setText("SOLICITUD DE PRESTAMOS");
-
-        run.setFontSize(25);
-        run.setFontFamily("Helvetica");
-        run.setUnderline(UnderlinePatterns.THICK);
-        run.setBold(true);
-        run.setItalic(true);
-        run.setColor("DF0101");
-
-        paragraph.setAlignment(ParagraphAlignment.CENTER);
-        String ubicacion = "C:\\Users\\oscme\\Escritorio\\contrato";
-        String parrafo = "Yo Ada Mendez Lopez con numero identidad N 0505-1995-00061 y risidente en Aldea el Batey Santa "
-                + "Cruz de Yojoa, Cortes Socio(a) activo(a) de Compañía Agrícola Olivo S. A. por este medio acudo a INDESA de"
-                + "C.V. en SOLICITUD de un préstamo por valor de 5000 Estoy entendido que de aprobarse esta solicitud, el "
-                + "valor autorizado sufrirá un incremento por concepto de  la tasa de interés y otros gastos de administración "
-                + "aplicados al mismo; de interés y otros gastos de administración aplicados al mismo para que; periódicamente "
-                + "de mis ingresos realice la deducción de 590 Del pago por renta quincenal--------------------- L.    ___________ \n"
-                + "Del incentivo trimestral a la producción-------        ___________ \n"
-                + "Del Bono Navideño ---------------------------------        ___________  Suma    L  _____________"
-                + "más los correspondientes intereses ganados y/o cargos por mora, y éste valor lo traslade automáticamente a INDESA de C.V. hasta cancelar el total del  préstamo autorizado.\n"
-                + "\n"
-                + "El Batey Santa Cruz de Yojoa, Cortes. 13 De 10 dos mil diez y 17 \n"
-                + "\n"
-                + " \n"
-                + "___________________________                                                 _____________________________\n"
-                + "   Nombre del solicitante                                                      Firma  del Solicitante\n"
-                + "    Cel. /Tel. Nº______________\n"
-                + "CÁLCULOS / VALORES\n"
-                + "\n"
-                + "Valor autorizado…………………………………………………………………..  L ____________                 S U M A\n"
-                + "+ Intereses  ganados…………………………………………………………….     ____________        L ____________\n"
-                + "Taza de interés _______%  anual, pagadero en  _____ meses;  Plazo de pago ______ meses, para realizar _____ pagos quincenales        mensuales       de; L _____________ (Capital L. __________ + intereses L.___________) por pago/letra.\n"
-                + ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n"
-                + "	                           	AUTORIZADO        \n"
-                + "                                                                                                                               \n"
-                + "                                                                                                                                        L.   ______________  -\n"
-                + "		                                                      1ra. cuota    ________________\n"
-                + "	                                                             ts. Papelería   _______________\n"
-                + "							             Valor. Chk. L.   _______________";
-        XWPFParagraph paragraph2 = lol.createParagraph();
-        XWPFRun runs = paragraph2.createRun();
-        runs.addBreak();
-        runs.setFontSize(15);
-        runs.setFontFamily("Arial");
-        runs.setText(parrafo);
-
-        paragraph2.setAlignment(ParagraphAlignment.CENTER);
-
         try {
-            FileOutputStream output = new FileOutputStream(ubicacion + ".docx");
-            lol.write(output);
-            output.close();
-            JOptionPane.showMessageDialog(null, "WORD EXPORTADOS CON EXITOS!");
-        } catch (HeadlessException | IOException e) {
+            String titulo = "Solicitud de Prestamo";
+            String parrafo1 = "Yo Ada Mendez Lopez con numero identidad N 0505-1995-00061 y risidente en Aldea el Batey Santa "
+                    + "Cruz de Yojoa, Cortes Socio(a) activo(a) de Compañía Agrícola Olivo S. A. por este medio acudo a INDESA de "
+                    + "C.V. en SOLICITUD de un préstamo por valor de 5000 Estoy entendido que de aprobarse esta solicitud, el "
+                    + "valor autorizado sufrirá un incremento por concepto de  la tasa de interés y otros gastos de administración "
+                    + "aplicados al mismo; de interés y otros gastos de administración aplicados al mismo para que; periódicamente "
+                    + "de mis ingresos realice la deducción de 590 Del pago";
+            String parrafo2 = "por renta quincenal------------------- L.  ___________ \n"
+                    + "Del incentivo trimestral a la producción-----      ___________ \n"
+                    + "Del Bono Navideño -----------------------------    ___________  Suma L  __________";
+            String parrafo3 ="más los correspondientes intereses ganados y/o cargos por mora, y éste valor lo traslade automáticamente "
+                    + "a INDESA de C.V. hasta cancelar el total del  préstamo autorizado.\n"
+                    + "El Batey Santa Cruz de Yojoa, Cortes. 13 De 10 dos mil diez y 17 \n"
+                    + "\n";
+            String parrafo4 ="____________________________              ______________________________"
+                    + "          Nombre del solicitante                    Firma  del Solicitante"
+                    + "    Cel. /Tel. Nº___________\n"
+                    + "\n";
+            String parrafo5 =        "CÁLCULOS / VALORES\n";
+            String parrafo6 = "Valor autorizado……………………………………………..  L ___________ S U M A\n"
+                    + "+ Intereses  ganados……………………………………….    ____________   L ____________\n"
+                    + "Taza de interés ___%  anual, pagadero en  __ meses;  Plazo de pago ___ meses, para realizar __ pagos quincenales"
+                    + " mensuales de; L _______ (Capital L. _______ + intereses L._________) por pago/letra.\n";
+            String parrafo7 = ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n"
+                    + "	                           	AUTORIZADO        \n";
+            String parrafo8 = "                                               L.   ______________ -\n"
+                    + "		                                    1ra. cuota     ______________\n"
+                    + "	                                           ts. Papelería   ______________\n"
+                    + "					           Valor. Chk. L.  ______________";
+            WordGenerator wg = new WordGenerator();
+            wg.createWord(titulo, parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7, parrafo8);
+        } catch (IOException ex) {
+            Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 }
