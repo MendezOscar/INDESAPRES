@@ -19,11 +19,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
-import org.apache.poi.xwpf.usermodel.UnderlinePatterns;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 /**
  *
@@ -37,97 +32,13 @@ public class registrarPrestamo extends javax.swing.JFrame {
     public registrarPrestamo() {
         initComponents();
         setearFecha();
-    }
-
-    public void setearFecha() {
-        fechaActual = new Date();
-        jDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(fechaActual));
-    }
-
-    public Prestamos enviarDatos() {
-        Prestamos pres;
-        String idPrestamo = jCodigo.getText();
-        String fecha = jDate.getText();
-        String idCliente = jCodigo1.getText();
-        String Nombre = jCodigo2.getText();
-        float prestamo = Float.parseFloat(jPrestamo.getText());
-        float porInteresanual = Float.parseFloat(jporAnual.getText());
-        float porInteresAcumulado = Float.parseFloat(String.valueOf(tm.getValueAt(0, 0)));
-        int plazo = Integer.parseInt(jPlazo.getText());
-        float totalIntereses = Float.parseFloat(String.valueOf(tm.getValueAt(0, 1)));
-        float capitalInteres = Float.parseFloat(String.valueOf(tm.getValueAt(0, 2)));
-        float deduccion = Float.parseFloat(String.valueOf(tm.getValueAt(0, 3)));
-        float abonocapital = Float.parseFloat(String.valueOf(tm.getValueAt(0, 4)));
-        float interesGanado = Float.parseFloat(String.valueOf(tm.getValueAt(0, 5)));
-        int numero = setearnumero();
-        pres = new Prestamos(idPrestamo, fecha, idCliente, Nombre, prestamo, plazo, porInteresanual, porInteresAcumulado, totalIntereses, capitalInteres, deduccion, abonocapital, interesGanado, numero);
-        return pres;
-    }
-
-    public void limpiar() {
-        jCodigo.setText("");
-        jCodigo1.setText("");
-        jDate.setText("");
-        jCodigo2.setText("");
-        jPrestamo.setText("");
-        jPlazo.setText("");
-        jporAnual.setText("");
-        jTable2.setValueAt(0.0, 0, 0);
-        jTable2.setValueAt(0.0, 0, 1);
-        jTable2.setValueAt(0.0, 0, 2);
-        jTable2.setValueAt(0.0, 0, 3);
-        jTable2.setValueAt(0.0, 0, 4);
-        jTable2.setValueAt(0.0, 0, 5);
-    }
-
-    public void setearBusqueda(Prestamos pres) {
-        this.tm = (DefaultTableModel) jTable2.getModel();
-        jCodigo.setText(pres.getIdPrestamo());
-        jCodigo1.setText(pres.getIdCliente());
-        jDate.setText(pres.getFecha());
-        jPrestamo.setText(Float.toString(pres.getPrestamos()));
-        jPlazo.setText(Float.toString(pres.getPlazo()));
-        jporAnual.setText(Float.toString(pres.getInteresanual()));
-        jTable2.setValueAt(pres.getInteresAcumulado(), 0, 0);
-        jTable2.setValueAt(pres.getTotalinteres(), 0, 1);
-        jTable2.setValueAt(pres.getCapitalinteres(), 0, 2);
-        jTable2.setValueAt(pres.getDeduccion(), 0, 3);
-        jTable2.setValueAt(pres.getAbonocapital(), 0, 4);
-        jTable2.setValueAt(pres.getInteresganado(), 0, 5);
-        buscarCliente();
-    }
-
-    public void buscarCliente() {
-        String id = jCodigo1.getText();
-        if ("".equals(id)) {
-            JOptionPane.showMessageDialog(null, "No hay codigo de cliente ingresado");
-        } else {
-            try {
-                Clientes clie;
-                ServiciosDB service = new ServiciosDB();
-                clie = service.findByIdClientes(id);
-                if (clie != null) {
-                    setearCliente(clie);
-                } else {
-                    JOptionPane.showMessageDialog(null, "El Cliente: " + id + " no existe");
-                }
-
-            } catch (SQLException ex) {
-                Logger.getLogger(registrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
-    public void setearCliente(Clientes clie) {
-        jCodigo2.setText(clie.getNombre() + " " + clie.getApellido());
+        ocultar();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -149,41 +60,52 @@ public class registrarPrestamo extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jCodigo = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jCodigo1 = new javax.swing.JTextField();
+        jButton8 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jDate = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jCodigo2 = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jCodigo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jPrestamo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jPlazo = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
-        jDate = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jporAnual = new javax.swing.JTextField();
-        jButton8 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        jCheque = new javax.swing.JTextField();
+        jBanco = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        jAval = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jide = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jDireccion = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabora = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        jAnio = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        jmes = new javax.swing.JTextField();
+        jLabel31 = new javax.swing.JLabel();
+        jTel = new javax.swing.JTextField();
+        jSalario = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
+        jLabor = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        tipoPago = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Registrar Prestamo");
 
         jToolBar1.setBackground(new java.awt.Color(204, 204, 255));
         jToolBar1.setRollover(true);
@@ -337,24 +259,6 @@ public class registrarPrestamo extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\PrestamoGrande.png")); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel1.setText("CODIGO DEL PRESTAMO");
-
-        jCodigo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCodigoActionPerformed(evt);
-            }
-        });
-        jCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jCodigoKeyPressed(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel3.setText("FECHA");
-
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel4.setText("CODIGO CLIENTE");
 
@@ -370,6 +274,29 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
+        jButton8.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton8.setText("Buscar");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel3.setText("FECHA");
+
+        jDate.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jDate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jDateMouseClicked(evt);
+            }
+        });
+        jDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDateActionPerformed(evt);
+            }
+        });
+
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel5.setText("NOMBRE CLIENTE");
 
@@ -380,28 +307,20 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "% Interes Acum.", "Total Interes Ganado", "Capital + Interes", "Deduccion", "Abono a Capital", "Interes Ganado"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
-            };
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel1.setText("CODIGO DEL PRESTAMO");
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+        jCodigo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCodigoActionPerformed(evt);
             }
         });
-        jTable2.addKeyListener(new java.awt.event.KeyAdapter() {
+        jCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTable2KeyPressed(evt);
+                jCodigoKeyPressed(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable2);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel6.setText("PRESTAMO");
@@ -428,26 +347,6 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton7.setText("Calcular");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-
-        jDate.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jDate.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jDateMouseClicked(evt);
-            }
-        });
-        jDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jDateActionPerformed(evt);
-            }
-        });
-
         jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel8.setText("% INTERES ANUAL");
 
@@ -463,30 +362,235 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton8.setText("Buscar");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        jButton7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton7.setText("Calcular");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "% Interes Acum.", "Total Interes Ganado", "Capital + Interes", "Deduccion", "Abono a Capital", "Interes Ganado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable2KeyPressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("NUMERO DE CHEQUE");
+
+        jCheque.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jCheque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jChequeActionPerformed(evt);
+            }
+        });
+        jCheque.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jChequeKeyPressed(evt);
+            }
+        });
+
+        jBanco.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jBanco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBancoActionPerformed(evt);
+            }
+        });
+        jBanco.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jBancoKeyPressed(evt);
+            }
+        });
+
+        jLabel32.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel32.setText("BANCO");
+
+        jButton10.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton10.setText("Generar Pagare");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
             }
         });
 
         jButton9.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton9.setText("Generar Documento");
+        jButton9.setText("Generar Solicitud de Prestamo");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
             }
         });
 
+        jAval.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jAval.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAvalActionPerformed(evt);
+            }
+        });
+        jAval.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jAvalKeyPressed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("NOMBRE AVAL");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("IDENTIDAD");
+
+        jide.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jide.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jideActionPerformed(evt);
+            }
+        });
+        jide.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jideKeyPressed(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("DIRECCION");
+
+        jDireccion.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jDireccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDireccionActionPerformed(evt);
+            }
+        });
+        jDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jDireccionKeyPressed(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setText("EMPRESA DONDE LABORA");
+
+        jLabora.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jLaboraActionPerformed(evt);
+            }
+        });
+        jLabora.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLaboraKeyPressed(evt);
+            }
+        });
+
+        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel27.setText("AÑOS DE ANTIGUEDAD");
+
+        jAnio.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jAnio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAnioActionPerformed(evt);
+            }
+        });
+        jAnio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jAnioKeyPressed(evt);
+            }
+        });
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel28.setText("MESES ");
+
+        jmes.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jmes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmesActionPerformed(evt);
+            }
+        });
+        jmes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jmesKeyPressed(evt);
+            }
+        });
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel31.setText("TELEFONO");
+
+        jTel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTelActionPerformed(evt);
+            }
+        });
+        jTel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTelKeyPressed(evt);
+            }
+        });
+
+        jSalario.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jSalario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSalarioActionPerformed(evt);
+            }
+        });
+        jSalario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jSalarioKeyPressed(evt);
+            }
+        });
+
+        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel30.setText("SALARIO");
+
+        jLabor.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jLaborActionPerformed(evt);
+            }
+        });
+        jLabor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLaborKeyPressed(evt);
+            }
+        });
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel29.setText("LABOR DESEMPEÑADA");
+
+        jLabel33.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel33.setText("TIPOS DE PAGO");
+
+        tipoPago.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        tipoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mensuales", "Quicenales" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1052, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1056, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -494,55 +598,117 @@ public class registrarPrestamo extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCodigo1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                                .addComponent(jCodigo1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton8)
                                 .addGap(47, 47, 47)
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
                                 .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(237, 237, 237))
+                                .addGap(135, 135, 135))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCodigo2, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
-                                .addGap(172, 172, 172))
+                                .addComponent(jCodigo2))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(95, 95, 95))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel32)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)
+                                .addComponent(jButton10))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jAval, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton9))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(18, 18, 18)
+                                .addComponent(jide, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabora, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel27)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jporAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(jButton7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton9)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                                .addComponent(jLabel28)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jmes, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jporAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel33)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(147, 147, 147))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(jPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton7)
+                            .addComponent(jLabel8)
+                            .addComponent(jporAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel33)
+                            .addComponent(tipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -556,20 +722,47 @@ public class registrarPrestamo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jCheque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton10)
+                    .addComponent(jLabel32)
+                    .addComponent(jBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jAval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton9))
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7)
-                    .addComponent(jLabel8)
-                    .addComponent(jporAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9))
-                .addGap(16, 16, 16)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                .addContainerGap())
+                    .addComponent(jide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27)
+                    .addComponent(jAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28)
+                    .addComponent(jmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(jLabor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel30)
+                    .addComponent(jSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel31)
+                    .addComponent(jTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36))
         );
 
         pack();
@@ -647,78 +840,64 @@ public class registrarPrestamo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCodigoActionPerformed
-
     private void jCodigo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCodigo1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCodigo1ActionPerformed
+
+    private void jCodigo1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCodigo1KeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            buscarCliente();
+            setearCodigo();
+            verificarTipoCliente();
+        }
+    }//GEN-LAST:event_jCodigo1KeyPressed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        vistaClientes vc = new vistaClientes();
+        vc.setVisible(true);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateMouseClicked
+        // TODO add your handling code here:
+        setearFecha();
+    }//GEN-LAST:event_jDateMouseClicked
+
+    private void jDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDateActionPerformed
 
     private void jCodigo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCodigo2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCodigo2ActionPerformed
 
-    private void jTable2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyPressed
+    private void jCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCodigoActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_jCodigoActionPerformed
 
-    }//GEN-LAST:event_jTable2KeyPressed
+    private void jCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCodigoKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String id = jCodigo.getText();
+            if ("".equals(id)) {
+                JOptionPane.showMessageDialog(null, "Ingrese codigo");
+            } else {
+                Prestamos pres;
+                ServiciosDB service = new ServiciosDB();
+                pres = service.findByIdPrestamos(id);
+                if (pres != null) {
+                    setearBusqueda(pres);
+                } else {
+                    JOptionPane.showMessageDialog(null, "El Prestamo: " + id + " no existe");
+                }
+            }
+        }
+    }//GEN-LAST:event_jCodigoKeyPressed
 
     private void jPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPrestamoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPrestamoActionPerformed
-
-    private void jPlazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlazoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPlazoActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        this.tm = (DefaultTableModel) jTable2.getModel();
-        float interesAnual = Float.parseFloat(jporAnual.getText());
-        float prestamo = Float.parseFloat(jPrestamo.getText());
-        float plazo = Float.parseFloat(jPlazo.getText());
-        if (prestamo == 0.0) {
-            JOptionPane.showMessageDialog(null, "Introduzca la cantidad del prestamo");
-        }
-        if (plazo == 0) {
-            JOptionPane.showMessageDialog(null, "Introduzca el plazo del prestamo");
-        } else {
-            if (plazo <= 12) {
-                float porcentaje = convertirInteres(Float.toString(interesAnual));
-                float Totalinteresganado = (float) (prestamo * porcentaje);
-                float Capitalinteres = prestamo + Totalinteresganado;
-                float deduccion = Capitalinteres / (plazo * 2);
-                float abonocapital = prestamo / (plazo * 2);
-                float interesganado = Totalinteresganado / (plazo * 2);
-                jTable2.setValueAt(0.0, 0, 0);
-                jTable2.setValueAt(Totalinteresganado, 0, 1);
-                jTable2.setValueAt(Capitalinteres, 0, 2);
-                jTable2.setValueAt(deduccion, 0, 3);
-                jTable2.setValueAt(abonocapital, 0, 4);
-                jTable2.setValueAt(interesganado, 0, 5);
-            } else {
-                float interesAcumulado;
-                float base = (float) 1200;
-                interesAcumulado = (prestamo * interesAnual * plazo) / base;
-                float Totalinteresganado = interesAcumulado;
-                float capitalInteres = prestamo + Totalinteresganado;
-                float deduccion = capitalInteres / (plazo * 2);
-                float abonoCapital = prestamo / (plazo * 2);
-                double interesganado = Totalinteresganado / (plazo * 2);
-                jTable2.setValueAt(0.0, 0, 0);
-                jTable2.setValueAt(Totalinteresganado, 0, 1);
-                jTable2.setValueAt(capitalInteres, 0, 2);
-                jTable2.setValueAt(deduccion, 0, 3);
-                jTable2.setValueAt(abonoCapital, 0, 4);
-                jTable2.setValueAt(interesganado, 0, 5);
-            }
-        }
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jDateActionPerformed
 
     private void jPlazoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPlazoMouseClicked
         // TODO add your handling code here:
@@ -745,6 +924,10 @@ public class registrarPrestamo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Sujeto a analisis");
         }
     }//GEN-LAST:event_jPlazoMouseClicked
+
+    private void jPlazoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlazoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPlazoActionPerformed
 
     private void jporAnualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jporAnualMouseClicked
         // TODO add your handling code here:
@@ -777,48 +960,175 @@ public class registrarPrestamo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jporAnualActionPerformed
 
-    private void jCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCodigoKeyPressed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            String id = jCodigo.getText();
-            if ("".equals(id)) {
-                JOptionPane.showMessageDialog(null, "Ingrese codigo");
+        this.tm = (DefaultTableModel) jTable2.getModel();
+        float interesAnual = Float.parseFloat(jporAnual.getText());
+        float prestamo = Float.parseFloat(jPrestamo.getText());
+        float plazo = Float.parseFloat(jPlazo.getText());
+        if (prestamo == 0.0) {
+            JOptionPane.showMessageDialog(null, "Introduzca la cantidad del prestamo");
+        }
+        if (plazo == 0) {
+            JOptionPane.showMessageDialog(null, "Introduzca el plazo del prestamo");
+        } else {
+            if (plazo <= 12) {
+                float porcentaje = convertirInteres(Float.toString(interesAnual));
+                float Totalinteresganado = (float) (prestamo * porcentaje);
+                float Capitalinteres = prestamo + Totalinteresganado;
+                float deduccion = Capitalinteres / (obtenerPlazo());
+                float abonocapital = prestamo / (obtenerPlazo());
+                float interesganado = Totalinteresganado / (obtenerPlazo());
+                jTable2.setValueAt(0.0, 0, 0);
+                jTable2.setValueAt(Totalinteresganado, 0, 1);
+                jTable2.setValueAt(Capitalinteres, 0, 2);
+                jTable2.setValueAt(deduccion, 0, 3);
+                jTable2.setValueAt(abonocapital, 0, 4);
+                jTable2.setValueAt(interesganado, 0, 5);
             } else {
-                Prestamos pres;
-                ServiciosDB service = new ServiciosDB();
-                pres = service.findByIdPrestamos(id);
-                if (pres != null) {
-                    setearBusqueda(pres);
-                } else {
-                    JOptionPane.showMessageDialog(null, "El Prestamo: " + id + " no existe");
-                }
+                float interesAcumulado;
+                float base = (float) 1200;
+                interesAcumulado = (prestamo * interesAnual * plazo) / base;
+                float Totalinteresganado = interesAcumulado;
+                float capitalInteres = prestamo + Totalinteresganado;
+                float deduccion = capitalInteres / (obtenerPlazo());
+                float abonoCapital = prestamo / (obtenerPlazo());
+                double interesganado = Totalinteresganado / (obtenerPlazo());
+                jTable2.setValueAt(0.0, 0, 0);
+                jTable2.setValueAt(Totalinteresganado, 0, 1);
+                jTable2.setValueAt(capitalInteres, 0, 2);
+                jTable2.setValueAt(deduccion, 0, 3);
+                jTable2.setValueAt(abonoCapital, 0, 4);
+                jTable2.setValueAt(interesganado, 0, 5);
             }
         }
-    }//GEN-LAST:event_jCodigoKeyPressed
+    }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateMouseClicked
+    private void jTable2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyPressed
         // TODO add your handling code here:
-        setearFecha();
-    }//GEN-LAST:event_jDateMouseClicked
+    }//GEN-LAST:event_jTable2KeyPressed
 
-    private void jCodigo1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCodigo1KeyPressed
+    private void jChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChequeActionPerformed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            buscarCliente();
-            setearCodigo();
-        }
-    }//GEN-LAST:event_jCodigo1KeyPressed
+    }//GEN-LAST:event_jChequeActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here
-        vistaClientes vc = new vistaClientes();
-        vc.setVisible(true);
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void jChequeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jChequeKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jChequeKeyPressed
+
+    private void jBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBancoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBancoActionPerformed
+
+    private void jBancoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBancoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBancoKeyPressed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        generarDocumento();
+        try {
+            String id = jCodigo1.getText();
+            Clientes clie;
+            ServiciosDB service = new ServiciosDB();
+            clie = service.findByIdClientes(id);
+            if (null == clie.getTipo()) {
+                JOptionPane.showMessageDialog(null, "No se especifico tipo de Cliente");
+            } else {
+                switch (clie.getTipo()) {
+                    case "Socio Olivo":
+                        generarDocumentoSocio();
+                        break;
+                    case "Socio Indesa":
+                        generarDocumentoIndesa();
+                        break;
+                    case "Empleado":
+                        generarDocumentoEmpleado();
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "No se especifico tipo de Cliente");
+                        break;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jAvalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAvalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jAvalActionPerformed
+
+    private void jAvalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jAvalKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jAvalKeyPressed
+
+    private void jideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jideActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jideActionPerformed
+
+    private void jideKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jideKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jideKeyPressed
+
+    private void jDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDireccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDireccionActionPerformed
+
+    private void jDireccionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDireccionKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDireccionKeyPressed
+
+    private void jLaboraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLaboraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLaboraActionPerformed
+
+    private void jLaboraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLaboraKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLaboraKeyPressed
+
+    private void jAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAnioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jAnioActionPerformed
+
+    private void jAnioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jAnioKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jAnioKeyPressed
+
+    private void jmesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmesActionPerformed
+
+    private void jmesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jmesKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmesKeyPressed
+
+    private void jTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTelActionPerformed
+
+    private void jTelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTelKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTelKeyPressed
+
+    private void jSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSalarioActionPerformed
+
+    private void jSalarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSalarioKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSalarioKeyPressed
+
+    private void jLaborActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLaborActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLaborActionPerformed
+
+    private void jLaborKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLaborKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLaborKeyPressed
 
     /**
      * @param args the command line arguments
@@ -848,13 +1158,19 @@ public class registrarPrestamo extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new registrarPrestamo().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new registrarPrestamo().setVisible(true);
+            }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField jAnio;
+    private javax.swing.JTextField jAval;
+    private javax.swing.JTextField jBanco;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -863,11 +1179,17 @@ public class registrarPrestamo extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JTextField jCheque;
     private javax.swing.JTextField jCodigo;
     public static javax.swing.JTextField jCodigo1;
     private javax.swing.JTextField jCodigo2;
     private javax.swing.JTextField jDate;
+    private javax.swing.JTextField jDireccion;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -882,21 +1204,117 @@ public class registrarPrestamo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jLabor;
+    private javax.swing.JTextField jLabora;
     private javax.swing.JTextField jPlazo;
     private javax.swing.JTextField jPrestamo;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jSalario;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTel;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JTextField jide;
+    private javax.swing.JTextField jmes;
     private javax.swing.JTextField jporAnual;
+    private javax.swing.JComboBox<String> tipoPago;
     // End of variables declaration//GEN-END:variables
+
+    public void setearFecha() {
+        fechaActual = new Date();
+        jDate.setText(new SimpleDateFormat("dd/MM/yyyy").format(fechaActual));
+    }
+
+    public Prestamos enviarDatos() {
+        Prestamos pres;
+        String idPrestamo = jCodigo.getText();
+        String fecha = jDate.getText();
+        String idCliente = jCodigo1.getText();
+        String Nombre = jCodigo2.getText();
+        float prestamo = Float.parseFloat(jPrestamo.getText());
+        float porInteresanual = Float.parseFloat(jporAnual.getText());
+        float porInteresAcumulado = Float.parseFloat(String.valueOf(tm.getValueAt(0, 0)));
+        int plazo = Integer.parseInt(jPlazo.getText());
+        float totalIntereses = Float.parseFloat(String.valueOf(tm.getValueAt(0, 1)));
+        float capitalInteres = Float.parseFloat(String.valueOf(tm.getValueAt(0, 2)));
+        float deduccion = Float.parseFloat(String.valueOf(tm.getValueAt(0, 3)));
+        float abonocapital = Float.parseFloat(String.valueOf(tm.getValueAt(0, 4)));
+        float interesGanado = Float.parseFloat(String.valueOf(tm.getValueAt(0, 5)));
+        int numero = setearnumero();
+        pres = new Prestamos(idPrestamo, fecha, idCliente, Nombre, prestamo, plazo, porInteresanual, porInteresAcumulado, totalIntereses, capitalInteres, deduccion, abonocapital, interesGanado, numero);
+        return pres;
+    }
+
+    public void limpiar() {
+        jCodigo.setText("");
+        jCodigo1.setText("");
+        jDate.setText("");
+        jCodigo2.setText("");
+        jPrestamo.setText("");
+        jPlazo.setText("");
+        jporAnual.setText("");
+        jTable2.setValueAt(0.0, 0, 0);
+        jTable2.setValueAt(0.0, 0, 1);
+        jTable2.setValueAt(0.0, 0, 2);
+        jTable2.setValueAt(0.0, 0, 3);
+        jTable2.setValueAt(0.0, 0, 4);
+        jTable2.setValueAt(0.0, 0, 5);
+    }
+
+    public void setearBusqueda(Prestamos pres) {
+        this.tm = (DefaultTableModel) jTable2.getModel();
+        jCodigo.setText(pres.getIdPrestamo());
+        jCodigo1.setText(pres.getIdCliente());
+        jDate.setText(pres.getFecha());
+        jPrestamo.setText(Float.toString(pres.getPrestamos()));
+        jPlazo.setText(Float.toString(pres.getPlazo()));
+        jporAnual.setText(Float.toString(pres.getInteresanual()));
+        jTable2.setValueAt(pres.getInteresAcumulado(), 0, 0);
+        jTable2.setValueAt(pres.getTotalinteres(), 0, 1);
+        jTable2.setValueAt(pres.getCapitalinteres(), 0, 2);
+        jTable2.setValueAt(pres.getDeduccion(), 0, 3);
+        jTable2.setValueAt(pres.getAbonocapital(), 0, 4);
+        jTable2.setValueAt(pres.getInteresganado(), 0, 5);
+        buscarCliente();
+    }
+
+    public void buscarCliente() {
+        String id = jCodigo1.getText();
+        if ("".equals(id)) {
+            JOptionPane.showMessageDialog(null, "No hay codigo de cliente ingresado");
+        } else {
+            try {
+                Clientes clie;
+                ServiciosDB service = new ServiciosDB();
+                clie = service.findByIdClientes(id);
+                if (clie != null) {
+                    setearCliente(clie);
+                } else {
+                    JOptionPane.showMessageDialog(null, "El Cliente: " + id + " no existe");
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(registrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void setearCliente(Clientes clie) {
+        jCodigo2.setText(clie.getNombre() + " " + clie.getApellido());
+    }
 
     public float convertirInteres(String interes) {
         float cinteres = Float.parseFloat(interes);
@@ -933,6 +1351,16 @@ public class registrarPrestamo extends javax.swing.JFrame {
         return numero;
     }
 
+    public float obtenerPlazo() {
+        float plazo = Float.parseFloat(jPlazo.getText());
+        if ("Quincenales".equals(tipoPago.getSelectedItem().toString())) {
+            return plazo * 2;
+        } else if ("Mensuales".equals(tipoPago.getSelectedItem().toString())) {
+            return plazo;
+        }
+        return plazo;
+    }
+
     public void setearCodigo() {
         String idCliente = jCodigo1.getText();
         ServiciosDB service = new ServiciosDB();
@@ -949,40 +1377,289 @@ public class registrarPrestamo extends javax.swing.JFrame {
         }
     }
 
-    public void generarDocumento() {
+    public void ocultar() {
+        jCheque.setVisible(false);
+        jLabor.setVisible(false);
+        jSalario.setVisible(false);
+        jTel.setVisible(false);
+        jmes.setVisible(false);
+        jAnio.setVisible(false);
+        jLabora.setVisible(false);
+        jBanco.setVisible(false);
+        jDireccion.setVisible(false);
+        jide.setVisible(false);
+        jAval.setVisible(false);
+        jLabel10.setVisible(false);
+        jLabel11.setVisible(false);
+        jLabel12.setVisible(false);
+        jLabel9.setVisible(false);
+        jLabel32.setVisible(false);
+        jLabel13.setVisible(false);
+        jLabel29.setVisible(false);
+        jLabel27.setVisible(false);
+        jLabel28.setVisible(false);
+        jLabel30.setVisible(false);
+        jLabel31.setVisible(false);
+
+    }
+
+    public void mostrar() {
+        jCheque.setVisible(true);
+        jLabor.setVisible(true);
+        jSalario.setVisible(true);
+        jTel.setVisible(true);
+        jmes.setVisible(true);
+        jAnio.setVisible(true);
+        jLabora.setVisible(true);
+        jBanco.setVisible(true);
+        jDireccion.setVisible(true);
+        jide.setVisible(true);
+        jAval.setVisible(true);
+        jLabel10.setVisible(true);
+        jLabel11.setVisible(true);
+        jLabel12.setVisible(true);
+        jLabel9.setVisible(true);
+        jLabel32.setVisible(true);
+        jLabel3.setVisible(true);
+        jLabel29.setVisible(true);
+        jLabel27.setVisible(true);
+        jLabel28.setVisible(true);
+        jLabel30.setVisible(true);
+        jLabel31.setVisible(true);
+    }
+
+    public void verificarTipoCliente() {
         try {
-            String titulo = "Solicitud de Prestamo";
-            String parrafo1 = "Yo Ada Mendez Lopez con numero identidad N 0505-1995-00061 y risidente en Aldea el Batey Santa "
-                    + "Cruz de Yojoa, Cortes Socio(a) activo(a) de Compañía Agrícola Olivo S. A. por este medio acudo a INDESA de "
-                    + "C.V. en SOLICITUD de un préstamo por valor de 5000 Estoy entendido que de aprobarse esta solicitud, el "
+            String id = jCodigo1.getText();
+            Clientes clie;
+            ServiciosDB service = new ServiciosDB();
+            clie = service.findByIdClientes(id);
+            if (null == clie.getTipo()) {
+                JOptionPane.showMessageDialog(null, "No se especifico tipo de Cliente");
+            } else {
+                switch (clie.getTipo()) {
+                    case "Socio Olivo":
+                        mostrar();
+                        break;
+                    case "Socio Indesa":
+                        mostrar();
+                        break;
+                    case "Empleado":
+                        mostrar();
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "No se especifico tipo de Cliente");
+                        break;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String Tipopagos() {
+        String pagos = "";
+        if ("Quincenales".equals(tipoPago.getSelectedItem().toString())) {
+            return "quincenales";
+        } else if ("Mensuales".equals(tipoPago.getSelectedItem().toString())) {
+            return "mensuales";
+        }
+        return pagos;
+    }
+
+    public void generarDocumentoSocio() {
+        try {
+            String idCleinte = jCodigo1.getText();
+            String idPrestamo = jCodigo.getText();
+            ServiciosDB service = new ServiciosDB();
+            ArrayList<Prestamos> depts;
+            depts = (ArrayList<Prestamos>) service.obtenerUltimoPrestamoByIdCliente(idCleinte);
+            Prestamos pres = depts.get(0);
+            Clientes clie = service.findByIdClientes(pres.getIdCliente());
+
+            String parrafo1 = "Yo " + pres.getNombre() + " con numero identidad N " + clie.getIdentidad() + " y risidente " + clie.getDireccion() + ""
+                    + " Socio(a) activo(a) de Compañía Agrícola Olivo S. A. por este medio acudo a INDESA de "
+                    + "C.V. en SOLICITUD de un préstamo por valor de " + pres.getPrestamos() + " Estoy entendido que de aprobarse esta solicitud, el "
                     + "valor autorizado sufrirá un incremento por concepto de  la tasa de interés y otros gastos de administración "
                     + "aplicados al mismo; de interés y otros gastos de administración aplicados al mismo para que; periódicamente "
                     + "de mis ingresos realice la deducción de 590 Del pago";
-            String parrafo2 = "por renta quincenal------------------- L.  ___________ \n"
+            String parrafo2 = "por renta quincenal------------------- L.  " + pres.getDeduccion() + " \n"
                     + "Del incentivo trimestral a la producción-----      ___________ \n"
                     + "Del Bono Navideño -----------------------------    ___________  Suma L  __________";
-            String parrafo3 ="más los correspondientes intereses ganados y/o cargos por mora, y éste valor lo traslade automáticamente "
+            String parrafo3 = "más los correspondientes intereses ganados y/o cargos por mora, y éste valor lo traslade automáticamente "
                     + "a INDESA de C.V. hasta cancelar el total del  préstamo autorizado.\n"
-                    + "El Batey Santa Cruz de Yojoa, Cortes. 13 De 10 dos mil diez y 17 \n"
-                    + "\n";
-            String parrafo4 ="____________________________              ______________________________"
-                    + "          Nombre del solicitante                    Firma  del Solicitante"
-                    + "    Cel. /Tel. Nº___________\n"
-                    + "\n";
-            String parrafo5 =        "CÁLCULOS / VALORES\n";
-            String parrafo6 = "Valor autorizado……………………………………………..  L ___________ S U M A\n"
-                    + "+ Intereses  ganados……………………………………….    ____________   L ____________\n"
-                    + "Taza de interés ___%  anual, pagadero en  __ meses;  Plazo de pago ___ meses, para realizar __ pagos quincenales"
-                    + " mensuales de; L _______ (Capital L. _______ + intereses L._________) por pago/letra.\n";
-            String parrafo7 = ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n"
-                    + "	                           	AUTORIZADO        \n";
-            String parrafo8 = "                                               L.   ______________ -\n"
-                    + "		                                    1ra. cuota     ______________\n"
-                    + "	                                           ts. Papelería   ______________\n"
-                    + "					           Valor. Chk. L.  ______________";
+                    + "El Batey Santa Cruz de Yojoa, Cortes. 13 De 10 dos mil diez y 17 \n";
+            String parrafo4 = "____________________________              ______________________________"
+                    + "          Nombre del solicitante                    Firma  del Solicitante";
+            String parrafo5 = "Cel. /Tel. Nº " + clie.getTelefono();
+            String parrafo6 = "CÁLCULOS / VALORES\n";
+            String parrafo7 = "Valor autorizado……………………………………………..  L " + pres.getPrestamos() + "      S U M A\n";
+            String parrafo8 = "+ Intereses  ganados……………………………………….    " + pres.getTotalinteres() + "   L " + pres.getCapitalinteres() + "\n";
+            String parrafo9 = "Taza de interés " + pres.getInteresanual() + "%  anual, pagadero en  " + pres.getPlazo() + " "
+                    + "meses; para realizar pagos " + Tipopagos() + ""
+                    + " L " + pres.getDeduccion() + " (Capital L. " + pres.getAbonocapital() + " + intereses L." + pres.getInteresganado() + ") por pago/letra.\n";
+            String parrafo10 = ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n";
+            String parrafo11 = "	                           	AUTORIZADO        \n";
+            String parrafo12 = "                                                         Lps.   " + pres.getCapitalinteres() + " -\n";
+            String parrafo13 = "                                               Saldo Anterior   ______________ -\n";
+            String parrafo14 = "		                                     1ra. cuota     " + pres.getDeduccion() + "\n";
+            String parrafo15 = "	                                            ts. Papelería   " + 25.0 + "\n";
+            String parrafo16 = "					            Valor. Chk. L.  _____________";
             WordGenerator wg = new WordGenerator();
-            wg.createWord(titulo, parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7, parrafo8);
-        } catch (IOException ex) {
+            wg.createWordSocio(parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7, parrafo8, parrafo9,
+                    parrafo10, parrafo11, parrafo12, parrafo13, parrafo14, parrafo15, parrafo16, idPrestamo);
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void generarDocumentoIndesa() {
+        try {
+            String idCleinte = jCodigo1.getText();
+            String idPrestamo = jCodigo.getText();
+            ServiciosDB service = new ServiciosDB();
+            ArrayList<Prestamos> depts;
+            depts = (ArrayList<Prestamos>) service.obtenerUltimoPrestamoByIdCliente(idCleinte);
+            Prestamos pres = depts.get(0);
+            Clientes clie = service.findByIdClientes(pres.getIdCliente());
+
+            String parrafo1 = "Yo " + pres.getNombre() + ", con identidad Nº " + clie.getIdentidad()
+                    + "Y residente en " + clie.getDireccion() + ", " + clie.getMunicipio() + ", " + clie.getDepartamento() + ","
+                    + " Socio(a) activo(a) de INDESA de C. V. por éste medio acudo a ésta empresa, en SOLICITUD de un préstamo "
+                    + "por valor de L " + pres.getPrestamos() + ". Estoy entendido que de aprobarse esta solicitud, el valor "
+                    + "autorizado sufrirá un incremento por concepto de  la tasa de interés que corresponda y otros gastos"
+                    + " de administración aplicados al mismo, así también; estoy enterado que el valor de toda cuota atrasada,"
+                    + " sufrirá un recargo del 2% mensual y  en éste acto, me comprometo a pagar   en forma quincenal en la "
+                    + "ventanilla de INDESA, la cuota aprobada para la cancelación del valor recibido a préstamo.";
+            String parrafo2 = "El Batey Santa Cruz de Yojoa, Cortes.  De del año dos mil diez y ";
+            String parrafo3 = "_____________________________                   __________________________\n"
+                    + "          Nombre del solicitante                           Firma  del Solicitante";
+            String parrafo4 = "Cel. /Tel. Nº" + clie.getTelefono();
+            String parrafo5 = "_________________________________________________________________________________________";
+            String parrafo6 = "AVAL";
+            String parrafo7 = "Nombre " + jAval.getText() + " Id. " + jide.getText() + " Residente en " + jDireccion.getText()
+                    + " socio(a) de compañía Agrícola Olivo, por este acto acepto y con decisión propia  me convierto en "
+                    + "Aval Solidario de " + pres.getNombre() + " haciéndome responsable por la morosidad que en determinado "
+                    + "momento, éste contrajera con INDESA.";
+            String parrafo8 = "_____________________________                   __________________________\n"
+                    + "          Nombre del Aval                                    Firma  del Aval";
+            String parrafo9 = "Tel/Cel. Nº " + jTel.getText();
+            String parrafo10 = ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,";
+            String parrafo11 = "CALCULOS/VALORES";
+            String parrafo12 = "Valor autorizado……………………………………………..  L " + pres.getPrestamos() + "      S U M A\n";
+            String parrafo13 = "+ Intereses  ganados……………………………………….    " + pres.getTotalinteres() + "   L " + pres.getCapitalinteres();
+            String parrafo14 = "Taza de interés " + pres.getInteresanual() + "%  anual, pagadero en  " + pres.getPlazo() + " "
+                    + "meses; para realizar pagos " + Tipopagos() + ""
+                    + " L " + pres.getDeduccion() + " (Capital L. " + pres.getAbonocapital() + " + intereses L." + pres.getInteresganado() + ") por pago/letra.\n";
+            String parrafo15 = ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::";
+            String parrafo16 = "AUTORIZADO";
+            String parrafo17 = "                                                         Lps.   " + pres.getCapitalinteres() + " -\n";
+            String parrafo18 = "                                               Saldo Anterior   ______________ -\n";
+            String parrafo19 = "		                                     1ra. cuota     " + pres.getDeduccion() + "\n";
+            String parrafo20 = "	                                            ts. Papelería   " + 25.0 + "\n";
+            String parrafo21 = "					            Valor. Chk. L.  _____________";
+
+            WordGenerator wg = new WordGenerator();
+            wg.createWordIndesa(parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7, parrafo8, parrafo9,
+                    parrafo10, parrafo11, parrafo12, parrafo13, parrafo14, parrafo15, parrafo16, parrafo17, parrafo18,
+                    parrafo19, parrafo20, parrafo21, idPrestamo);
+        } catch (SQLException ex) {
+            Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void generarDocumentoEmpleado() {
+        try {
+            String idCleinte = jCodigo1.getText();
+            String idPrestamo = jCodigo.getText();
+            ServiciosDB service = new ServiciosDB();
+            ArrayList<Prestamos> depts;
+            depts = (ArrayList<Prestamos>) service.obtenerUltimoPrestamoByIdCliente(idCleinte);
+            Prestamos pres = depts.get(0);
+            Clientes clie = service.findByIdClientes(pres.getIdCliente());
+
+            String parrafo1 = "Yo " + pres.getNombre() + ", con identidad Nº " + clie.getIdentidad()
+                    + "Y residente en " + clie.getDireccion() + ", " + clie.getMunicipio() + ", " + clie.getDepartamento() + ","
+                    + "; empleado de Compañía Agrícola olivo S. A. con Código Nº____________, prestando mis servicios para"
+                    + " el área de " + clie.getProfesion() + "; acudo en SOLICITUD de un préstamo por valor de "
+                    + " Lps. " + pres.getPrestamos() + ". Estoy entendido que de aprobarse mi  solicitud, el valor aprobado "
+                    + "sufrirá un incremento por concepto de la tasa de interés aplicada al mismo, además; en éste acto,"
+                    + " autorizo al departamento de Recurso Humano de mi empleadora, para que deduzca de mi pago "
+                    + " " + Tipopagos() + " y traslade automáticamente a INDESA de C.V. el valor de Lps." + pres.getDeduccion() + ", "
+                    + "hasta cancelar el valor prestado más sus intereses.";
+            String parrafo2 = "El Batey Santa Cruz de Yojoa, Cortes. De del año dos mil ";
+            String parrafo3 = "_______________________________________                __ ______________________________\n"
+                    + "              Nombre del solicitante                                   Firma  del Solicitante";
+            String parrafo4 = "Tel/Cel. Nº " + clie.getTelefono();
+            String parrafo5 = "________________________________________________________________________________________";
+            String parrafo6 = "AVAL";
+            String parrafo7 = "Nombre " + jAval.getText() + " Id.Nº " + jide.getText() + " Residente en " + jDireccion.getText()
+                    + " Empleado de " + jLabora.getText() + " antigüedad  " + jAnio.getText() + " años, " + jmes.getText() + " meses, "
+                    + "cargo/labor " + jLabor.getText() + " Salario neto (con deducciones) L " + jSalario.getText() + "  Cel. Nº " + jTel.getText();
+            String parrafo8 = "_____________________________________                    _________________________________\n"
+                    + "               Nombre Completo (aval)                                     Firma (aval)";
+            String parrafo9 = ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,";
+            String parrafo10 = "CALCULOS/VALORES";
+            String parrafo11 = "Valor autorizado……………………………………………..  L " + pres.getPrestamos() + "      S U M A\n";
+            String parrafo12 = "+ Intereses  ganados……………………………………….    " + pres.getTotalinteres() + "   L " + pres.getCapitalinteres();
+            String parrafo13 = "Taza de interés " + pres.getInteresanual() + "%  anual, pagadero en  " + pres.getPlazo() + " "
+                    + "meses; para realizar pagos " + Tipopagos() + ""
+                    + " L " + pres.getDeduccion() + " (Capital L. " + pres.getAbonocapital() + " + intereses L." + pres.getInteresganado() + ") por pago/letra.\n";
+            String parrafo14 = "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::";
+            String parrafo15 = "AUTORIZADO";
+            String parrafo16 = "                                                         Lps.   " + pres.getCapitalinteres() + " -\n";
+            String parrafo17 = "                                               Saldo Anterior   ______________ -\n";
+            String parrafo18 = "		                                     1ra. cuota     " + pres.getDeduccion() + "\n";
+            String parrafo19 = "	                                            ts. Papelería   " + 25.0 + "\n";
+            String parrafo20 = "					            Valor. Chk. L.  _____________";
+
+            WordGenerator wg = new WordGenerator();
+            wg.createWordEmpleado(parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7, parrafo8, parrafo9,
+                    parrafo10, parrafo11, parrafo12, parrafo13, parrafo14, parrafo15, parrafo16, parrafo17, parrafo18,
+                    parrafo19, parrafo20, idPrestamo);
+        } catch (SQLException ex) {
+            Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void generarPagare() {
+        try {
+            String idCleinte = jCodigo1.getText();
+            String idPrestamo = jCodigo.getText();
+            ServiciosDB service = new ServiciosDB();
+            ArrayList<Prestamos> depts;
+            depts = (ArrayList<Prestamos>) service.obtenerUltimoPrestamoByIdCliente(idCleinte);
+            Prestamos pres = depts.get(0);
+            Clientes clie = service.findByIdClientes(pres.getIdCliente());
+
+            String titulo = "PAGARE";
+            String parrafo1 = "YO: " + pres.getNombre() + " Hondureño(a), Mayor de edad, con identidad Nº " + clie.getIdentidad()
+                    + "de profesión /oficio " + clie.getProfesion() + " residente en " + clie.getDireccion() + ", " + clie.getMunicipio() + ", " + clie.getDepartamento()
+                    + "; por este acto declaro que: DEBO Y PAGARE a la sociedad mercantil INDESA de C.V. la cantidad de:"
+                    + " L. " + pres.getPrestamos() + " más los intereses correspondientes al " + pres.getInteresanual() + "% anual;"
+                    + " préstamo pagadero en " + pres.getPlazo() + " meses, a partir de la fecha.  Con el bien entendido que "
+                    + "toda cuota/ letra atrasada, sufrirá un recargo del 2% mensual. Este préstamo  me ha sido concedido "
+                    + "por INDESA de C.V. para resolver asuntos de carácter particular, como ser__________________________"
+                    + " Y me fue otorgado según cheque Nº: " + jCheque.getText() + ", con fecha " + pres.getFecha() + " "
+                    + "contra el banco " + jBanco.getText() + " y a mi nombre, valor que he recibido a satisfacción. Y para "
+                    + "los fines que a INDESA de C.V. convenga, firmo el presente PAGARE a los: días del mes: del año dos mil diez y ";
+            String parrafo2 = "____________________________                           _______________________ "
+                    + "           Nombre del Deudor                                      Firma del  Deudor  ";
+            String parrafo3 = "_________________________________________________________________________________";
+            String parrafo4 = "AVAL";
+            String parrafo5 = "YO: " + jAval.getText() + " Hondureño, Mayor de edad, con identidad Nº " + jide.getText() + ""
+                    + " de profesión/oficio   " + jLabor.getText() + "  y residente en: " + jDireccion.getText() + " por este "
+                    + "acto y con pleno conocimiento he decidido avalar en forma solidaria a:" + pres.getNombre() + " en "
+                    + "caso de incumplimiento con su compromiso deudor contraído con INDESA de C.V.  En tal sentido "
+                    + "manifiesto que soy empleado de " + jLabora.getText() + " en el Cargo/labor " + jLabor.getText()
+                    + "Sueldo mensual Lps. " + jSalario.getText() + ",  antigüedad de " + jAnio.getText() + " Años, " + jmes.getText() + " Meses.";
+            String parrafo6 = "___________________________________                _____ __________ _______________\n"
+                    + "                Nombre del Aval                                     Firma del Aval   ";
+            String parrafo7 = "Tel/Cel. Nº " + jTel.getText();
+            
+            WordGenerator wg = new WordGenerator();
+            wg.createWordPagare(titulo, parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7, idPrestamo);
+        } catch (SQLException ex) {
             Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

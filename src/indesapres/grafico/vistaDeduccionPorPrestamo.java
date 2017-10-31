@@ -4,8 +4,13 @@ import indesapres.logica.ServiciosDB;
 import indesapres.modelos.Deducciones;
 import indesapres.modelos.Prestamos;
 import java.awt.event.KeyEvent;
+import java.awt.print.PrinterException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -217,6 +222,7 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        imprimir();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
@@ -305,4 +311,25 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
         }
     }
 
+    public void imprimir() {
+        try {
+            boolean fitWidth = true;
+            boolean interactive = true;
+            JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
+            MessageFormat headerFormat = new MessageFormat("Listado de Clientes");
+            MessageFormat footerFormat = new MessageFormat("- Página {0} -");
+            jTable2.print(mode, headerFormat, footerFormat);
+            JOptionPane.showMessageDialog(jTable2,
+                        "Print complete (Impresión completa)",
+                        "Print result (Resultado de la impresión)",
+                        JOptionPane.INFORMATION_MESSAGE);
+        } catch (PrinterException ex) {
+            Logger.getLogger(vistaClientes.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(jTable2,
+                    "Print fail (Fallo de impresión): " + ex.getMessage(),
+                    "Print result (Resultado de la impresión)",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
 }

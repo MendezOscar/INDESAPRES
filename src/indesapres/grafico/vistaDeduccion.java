@@ -3,12 +3,16 @@ package indesapres.grafico;
 import indesapres.logica.ServiciosDB;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.print.PrinterException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -142,10 +146,15 @@ public class vistaDeduccion extends javax.swing.JFrame {
         jToolBar1.add(jLabel21);
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton1.setText("Buscar");
+        jButton1.setText("Imprimir");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton1);
 
         jLabel22.setForeground(new java.awt.Color(204, 204, 255));
@@ -195,6 +204,11 @@ public class vistaDeduccion extends javax.swing.JFrame {
         jTable2.setRowSorter(trsFiltro);
     }//GEN-LAST:event_txtFiltroKeyPressed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        imprimir();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -242,4 +256,26 @@ public class vistaDeduccion extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
+
+    public void imprimir() {
+        try {
+            boolean fitWidth = true;
+            boolean interactive = true;
+            JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
+            MessageFormat headerFormat = new MessageFormat("Listado de Clientes");
+            MessageFormat footerFormat = new MessageFormat("- Página {0} -");
+            jTable2.print(mode, headerFormat, footerFormat);
+            JOptionPane.showMessageDialog(jTable2,
+                        "Print complete (Impresión completa)",
+                        "Print result (Resultado de la impresión)",
+                        JOptionPane.INFORMATION_MESSAGE);
+        } catch (PrinterException ex) {
+            Logger.getLogger(vistaClientes.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(jTable2,
+                    "Print fail (Fallo de impresión): " + ex.getMessage(),
+                    "Print result (Resultado de la impresión)",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 }

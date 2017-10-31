@@ -81,6 +81,9 @@ public class vistaClientes extends javax.swing.JFrame {
         if (comboFiltro.getSelectedItem() == "IDENTIDAD") {
             columnaABuscar = 3;
         }
+        if (comboFiltro.getSelectedItem() == "TIPO") {
+            columnaABuscar = 12;
+        }
         trsFiltro.setRowFilter(RowFilter.regexFilter(txtFiltro.getText(), columnaABuscar));
     }
 
@@ -132,7 +135,7 @@ public class vistaClientes extends javax.swing.JFrame {
         jToolBar1.add(jLabel19);
 
         comboFiltro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        comboFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CODIGO", "NOMBRE", "IDENTIDAD" }));
+        comboFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CODIGO", "NOMBRE", "IDENTIDAD", "TIPO" }));
         jToolBar1.add(comboFiltro);
 
         jLabel20.setForeground(new java.awt.Color(204, 204, 255));
@@ -297,36 +300,6 @@ public class vistaClientes extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
-
-    public void utilJTablePrint(JTable jTable, String header, String footer, boolean showPrintDialog) {
-        boolean fitWidth = true;
-        boolean interactive = true;
-        JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
-        try {
-            boolean complete = jTable.print(mode,
-                    new MessageFormat(header),
-                    new MessageFormat(footer),
-                    showPrintDialog,
-                    null,
-                    interactive);
-            if (complete) {
-                JOptionPane.showMessageDialog(jTable,
-                        "Print complete (Impresión completa)",
-                        "Print result (Resultado de la impresión)",
-                        JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(jTable,
-                        "Print canceled (Impresión cancelada)",
-                        "Print result (Resultado de la impresión)",
-                        JOptionPane.WARNING_MESSAGE);
-            }
-        } catch (PrinterException pe) {
-            JOptionPane.showMessageDialog(jTable,
-                    "Print fail (Fallo de impresión): " + pe.getMessage(),
-                    "Print result (Resultado de la impresión)",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
 
     public void imprimir() {
         try {

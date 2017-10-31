@@ -1,4 +1,5 @@
 package indesapres.grafico;
+
 import indesapres.logica.ServiciosDB;
 import indesapres.modelos.Clientes;
 import java.awt.event.KeyEvent;
@@ -14,12 +15,12 @@ import javax.swing.JOptionPane;
  * @author oscme
  */
 public class registrarCliente extends javax.swing.JFrame {
-    
+
     public registrarCliente() {
         initComponents();
     }
-    
-    public Clientes enviarDatos(){
+
+    public Clientes enviarDatos() {
         Clientes clie;
         String idCliente = jidCliente.getText();
         String nombre = jNombre.getText();
@@ -38,8 +39,8 @@ public class registrarCliente extends javax.swing.JFrame {
         clie = new Clientes(idCliente, nombre, apellido, identidad, departamento, municipio, direccion, estadocivil, telefono, genero, edad, profesion, Tipo, numero);
         return clie;
     }
-    
-    public void limpiar(){
+
+    public void limpiar() {
         jidCliente.setText("");
         jNombre.setText("");
         jApellido.setText("");
@@ -50,8 +51,8 @@ public class registrarCliente extends javax.swing.JFrame {
         jEdad.setText("");
         jProfesion.setText("");
     }
-    
-    public void setearBusqueda(Clientes clie){
+
+    public void setearBusqueda(Clientes clie) {
         jNombre.setText(clie.getNombre());
         jApellido.setText(clie.getApellido());
         jIdentidad.setText(clie.getIdentidad());
@@ -65,7 +66,7 @@ public class registrarCliente extends javax.swing.JFrame {
         jProfesion.setText(clie.getProfesion());
         jTipo.setSelectedItem(clie.getTipo());
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -370,7 +371,7 @@ public class registrarCliente extends javax.swing.JFrame {
         jLabel25.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\clientes.png")); // NOI18N
 
         jTipo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Socio", "Empleado", "Particular" }));
+        jTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Socio Olivo", "Socio Indesa", "Empleado" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -400,24 +401,26 @@ public class registrarCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jIdentidad, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addGap(28, 28, 28)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jApellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
-                                        .addComponent(jNombre, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addComponent(jidCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTipo, 0, 0, Short.MAX_VALUE)
-                                .addGap(613, 613, 613))))
+                                .addGap(613, 613, 613))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jIdentidad, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel1))
+                                        .addGap(28, 28, 28)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(jApellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                                                .addComponent(jNombre, javax.swing.GroupLayout.Alignment.LEADING))
+                                            .addComponent(jidCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -527,9 +530,9 @@ public class registrarCliente extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String id = jidCliente.getText();
-        if ("".equals(jidCliente.getText())){
+        if ("".equals(jidCliente.getText())) {
             JOptionPane.showMessageDialog(null, "Ingrese codigo");
-        }else{
+        } else {
             try {
                 Clientes clie;
                 clie = enviarDatos();
@@ -560,9 +563,9 @@ public class registrarCliente extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         String id = jidCliente.getText();
-        if("".equals(id)){
+        if ("".equals(id)) {
             JOptionPane.showMessageDialog(null, "Ingrese codigo");
-        }else{
+        } else {
             try {
                 Clientes clie;
                 ServiciosDB service = new ServiciosDB();
@@ -585,25 +588,25 @@ public class registrarCliente extends javax.swing.JFrame {
 
     private void jidClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jidClienteKeyPressed
         // TODO add your handling code here:
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String id = jidCliente.getText();
-        if("".equals(id)){
-            JOptionPane.showMessageDialog(null, "Ingrese codigo");
-        }else{
-            try {
-                Clientes clie;
-                ServiciosDB service = new ServiciosDB();
-                clie = service.findByIdClientes(id);
-                if (clie != null) {
-                    setearBusqueda(clie);
-                } else {
-                    JOptionPane.showMessageDialog(null, "El Cliente: " + id + " no existe");
-                }
+            if ("".equals(id)) {
+                JOptionPane.showMessageDialog(null, "Ingrese codigo");
+            } else {
+                try {
+                    Clientes clie;
+                    ServiciosDB service = new ServiciosDB();
+                    clie = service.findByIdClientes(id);
+                    if (clie != null) {
+                        setearBusqueda(clie);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El Cliente: " + id + " no existe");
+                    }
 
-            } catch (SQLException ex) {
-                Logger.getLogger(registrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(registrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        }
         }
     }//GEN-LAST:event_jidClienteKeyPressed
 
@@ -713,14 +716,18 @@ public class registrarCliente extends javax.swing.JFrame {
         numero = depts.size() + 1;
         return numero;
     }
-    
-    public void setearUltimo(){
+
+    public void setearUltimo() {
         String Tipo = jTipo.getSelectedItem().toString();
         ServiciosDB service = new ServiciosDB();
         ArrayList<Clientes> depts;
         depts = (ArrayList<Clientes>) service.obtenerUltimoCleinteByTipo(Tipo);
-        Clientes clie = depts.get(0);
-        jidCliente.setText(clie.getIdCliente());
+        if (depts.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay registro, Ingrese uno nuevo");
+        } else {
+            Clientes clie = depts.get(0);
+            jidCliente.setText(clie.getIdCliente());
+        }
+
     }
 }
-
