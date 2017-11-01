@@ -1,20 +1,18 @@
 package indesapres.grafico;
 
+import indesapres.logica.NumberToLetterConverter;
 import indesapres.logica.ServiciosDB;
 import indesapres.logica.WordGenerator;
 import indesapres.modelos.Clientes;
 import indesapres.modelos.Prestamos;
-import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -603,9 +601,9 @@ public class registrarPrestamo extends javax.swing.JFrame {
                                 .addComponent(jButton8)
                                 .addGap(47, 47, 47)
                                 .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(135, 135, 135))
+                                .addGap(149, 149, 149))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -613,8 +611,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(95, 95, 95))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -694,37 +691,41 @@ public class registrarPrestamo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(jPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton7)
-                            .addComponent(jLabel8)
-                            .addComponent(jporAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel33)
-                            .addComponent(tipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jCodigo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jCodigo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton8)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jCodigo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7)
+                    .addComponent(jLabel8)
+                    .addComponent(jporAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel33)
+                    .addComponent(tipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -1488,7 +1489,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
                     + "Del Bono Navideño -----------------------------    ___________  Suma L  __________";
             String parrafo3 = "más los correspondientes intereses ganados y/o cargos por mora, y éste valor lo traslade automáticamente "
                     + "a INDESA de C.V. hasta cancelar el total del  préstamo autorizado.\n"
-                    + "El Batey Santa Cruz de Yojoa, Cortes. 13 De 10 dos mil diez y 17 \n";
+                    + "El Batey Santa Cruz de Yojoa, Cortes. 13 " + obtenerMes() + " del 10 dos mil diez y 17 \n";
             String parrafo4 = "____________________________              ______________________________"
                     + "          Nombre del solicitante                    Firma  del Solicitante";
             String parrafo5 = "Cel. /Tel. Nº " + clie.getTelefono();
@@ -1513,6 +1514,51 @@ public class registrarPrestamo extends javax.swing.JFrame {
         }
     }
 
+    public int obtenerAnio() {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            String fecha = jDate.getText();
+            Date date = format.parse(fecha);
+            String formato = "yyyy";
+            SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
+            return Integer.parseInt(dateFormat.format(date));
+        } catch (ParseException ex) {
+            Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public int obtenerDia() {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            String fecha = jDate.getText();
+            Date date = format.parse(fecha);
+            String formato = "dd";
+            SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
+            return Integer.parseInt(dateFormat.format(date));
+        } catch (ParseException ex) {
+            Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public String obtenerMes() {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            String fecha = jDate.getText();
+            Date date = format.parse(fecha);
+            String formato = "MM";
+            SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
+            int mes = Integer.parseInt(dateFormat.format(date));
+            String meses[] = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
+                "octubre", "Noviembre", "Diciembre"};
+            return meses[mes - 1];
+        } catch (ParseException ex) {
+            Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+    }
+
     private void generarDocumentoIndesa() {
         try {
             String idCleinte = jCodigo1.getText();
@@ -1531,7 +1577,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
                     + " de administración aplicados al mismo, así también; estoy enterado que el valor de toda cuota atrasada,"
                     + " sufrirá un recargo del 2% mensual y  en éste acto, me comprometo a pagar   en forma quincenal en la "
                     + "ventanilla de INDESA, la cuota aprobada para la cancelación del valor recibido a préstamo.";
-            String parrafo2 = "El Batey Santa Cruz de Yojoa, Cortes.  De del año dos mil diez y ";
+            String parrafo2 = "El Batey Santa Cruz de Yojoa, Cortes.  De " + obtenerMes() + " del año dos mil diez y ";
             String parrafo3 = "_____________________________                   __________________________\n"
                     + "          Nombre del solicitante                           Firma  del Solicitante";
             String parrafo4 = "Cel. /Tel. Nº" + clie.getTelefono();
@@ -1587,7 +1633,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
                     + " autorizo al departamento de Recurso Humano de mi empleadora, para que deduzca de mi pago "
                     + " " + Tipopagos() + " y traslade automáticamente a INDESA de C.V. el valor de Lps." + pres.getDeduccion() + ", "
                     + "hasta cancelar el valor prestado más sus intereses.";
-            String parrafo2 = "El Batey Santa Cruz de Yojoa, Cortes. De del año dos mil ";
+            String parrafo2 = "El Batey Santa Cruz de Yojoa, Cortes. " + obtenerMes() + "De del año dos mil ";
             String parrafo3 = "_______________________________________                __ ______________________________\n"
                     + "              Nombre del solicitante                                   Firma  del Solicitante";
             String parrafo4 = "Tel/Cel. Nº " + clie.getTelefono();
@@ -1642,7 +1688,8 @@ public class registrarPrestamo extends javax.swing.JFrame {
                     + "por INDESA de C.V. para resolver asuntos de carácter particular, como ser__________________________"
                     + " Y me fue otorgado según cheque Nº: " + jCheque.getText() + ", con fecha " + pres.getFecha() + " "
                     + "contra el banco " + jBanco.getText() + " y a mi nombre, valor que he recibido a satisfacción. Y para "
-                    + "los fines que a INDESA de C.V. convenga, firmo el presente PAGARE a los: días del mes: del año dos mil diez y ";
+                    + "los fines que a INDESA de C.V. convenga, firmo el presente PAGARE a los: días del mes: "
+                    + " " + obtenerMes() + " del año dos mil diez y ";
             String parrafo2 = "____________________________                           _______________________ "
                     + "           Nombre del Deudor                                      Firma del  Deudor  ";
             String parrafo3 = "_________________________________________________________________________________";
@@ -1656,11 +1703,12 @@ public class registrarPrestamo extends javax.swing.JFrame {
             String parrafo6 = "___________________________________                _____ __________ _______________\n"
                     + "                Nombre del Aval                                     Firma del Aval   ";
             String parrafo7 = "Tel/Cel. Nº " + jTel.getText();
-            
+
             WordGenerator wg = new WordGenerator();
             wg.createWordPagare(titulo, parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7, idPrestamo);
         } catch (SQLException ex) {
             Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }
