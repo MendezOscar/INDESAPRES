@@ -157,6 +157,11 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem9.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\mes.png")); // NOI18N
         jMenuItem9.setText("Mensuales");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem9);
 
         jMenuBar1.add(jMenu6);
@@ -227,6 +232,12 @@ public class Menu extends javax.swing.JFrame {
         deduccionesQuincenales vd = new deduccionesQuincenales();
         vd.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+        deduccionesMensuales dm = new deduccionesMensuales();
+        dm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments

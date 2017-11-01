@@ -588,7 +588,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1056, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1076, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -602,7 +602,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCodigo1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                                .addComponent(jCodigo1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton8)
                                 .addGap(47, 47, 47)
@@ -669,7 +669,8 @@ public class registrarPrestamo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel31)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTel, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTel, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -686,7 +687,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
                         .addComponent(jLabel33)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(147, 147, 147))))
         );
@@ -699,19 +700,14 @@ public class registrarPrestamo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jCodigo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton8)
-                                    .addComponent(jLabel3))
-                                .addGap(18, 18, 18))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 42, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jCodigo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton8)
+                            .addComponent(jLabel3)
+                            .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jCodigo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1262,7 +1258,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
         float prestamo = obtenerPrestamo();
         float porInteresanual = Float.parseFloat(jporAnual.getText());
         float porInteresAcumulado = Float.parseFloat(String.valueOf(tm.getValueAt(0, 0)));
-        int plazo = Integer.parseInt(jPlazo.getText());
+        float plazo = Float.parseFloat(jPlazo.getText());
         float totalIntereses = Float.parseFloat(String.valueOf(tm.getValueAt(0, 1)));
         float capitalInteres = Float.parseFloat(String.valueOf(tm.getValueAt(0, 2)));
         float deduccion = Float.parseFloat(String.valueOf(tm.getValueAt(0, 3)));
@@ -1418,6 +1414,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
         jLabel28.setVisible(false);
         jLabel30.setVisible(false);
         jLabel31.setVisible(false);
+        jButton10.setVisible(false);
 
     }
 
@@ -1438,12 +1435,13 @@ public class registrarPrestamo extends javax.swing.JFrame {
         jLabel12.setVisible(true);
         jLabel9.setVisible(true);
         jLabel32.setVisible(true);
-        jLabel3.setVisible(true);
+        jLabel13.setVisible(true);
         jLabel29.setVisible(true);
         jLabel27.setVisible(true);
         jLabel28.setVisible(true);
         jLabel30.setVisible(true);
         jLabel31.setVisible(true);
+        jButton10.setVisible(true);
     }
 
     public void verificarTipoCliente() {
@@ -1457,10 +1455,8 @@ public class registrarPrestamo extends javax.swing.JFrame {
             } else {
                 switch (clie.getTipo()) {
                     case "Socio Olivo":
-                        mostrar();
                         break;
                     case "Socio Indesa":
-                        mostrar();
                         break;
                     case "Empleado":
                         mostrar();
@@ -1505,15 +1501,15 @@ public class registrarPrestamo extends javax.swing.JFrame {
                     + "valor autorizado sufrirá un incremento por concepto de  la tasa de interés y otros gastos de administración "
                     + "aplicados al mismo; de interés y otros gastos de administración aplicados al mismo para que; periódicamente "
                     + "de mis ingresos realice la deducción de " + pres.getDeduccion() + " Del pago";
-            String parrafo2 = "por renta quincenal------------------------- L.  " + pres.getDeduccion()
-                    + "Del incentivo trimestral a la producción------------   ___________"
-                    + "Del Bono Navideño ----------------------------------   ___________  Suma L__________";
+            String parrafo2 = "por renta quincenal------------------------- L.  " + pres.getDeduccion()+ "\n";
+            String parrafo17 = "Del incentivo trimestral a la producción------------   ___________ \n";
+            String parrafo18 = "Del Bono Navideño ----------------------------------   ___________  Suma L__________ \n";
             String parrafo3 = "más los correspondientes intereses ganados y/o cargos por mora, y éste valor lo traslade automáticamente "
                     + "a INDESA de C.V. hasta cancelar el total del  préstamo autorizado.\n"
                     + "El Batey Santa Cruz de Yojoa, Cortes. 13 " + obtenerMes() + " del 10 dos mil diez y 17 \n";
             String parrafo4 = "____________________________              ______________________________"
                     + "          Nombre del solicitante                    Firma  del Solicitante";
-            String parrafo5 = "Cel. /Tel. Nº " + clie.getTelefono();
+            String parrafo5 = "Cel. /Tel. Nº " + clie.getTelefono()+ "\n";
             String parrafo6 = "CÁLCULOS / VALORES\n";
             String parrafo7 = "Valor autorizado……………………………………………..  L " + pres.getPrestamos() + "      S U M A";
             String parrafo8 = "+ Intereses  ganados……………………………………….    " + pres.getTotalinteres() + "   L " + pres.getCapitalinteres();
@@ -1529,7 +1525,8 @@ public class registrarPrestamo extends javax.swing.JFrame {
             String parrafo16 = "					            Valor. Chk. L. " + total;
             WordGenerator wg = new WordGenerator();
             wg.createWordSocio(parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7, parrafo8, parrafo9,
-                    parrafo10, parrafo11, parrafo12, parrafo13, parrafo14, parrafo15, parrafo16, idPrestamo);
+                    parrafo10, parrafo11, parrafo12, parrafo13, parrafo14, parrafo15, parrafo16, idPrestamo, parrafo17,
+                    parrafo18);
         } catch (SQLException | IOException ex) {
             Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1602,19 +1599,19 @@ public class registrarPrestamo extends javax.swing.JFrame {
                     + " de administración aplicados al mismo, así también; estoy enterado que el valor de toda cuota atrasada,"
                     + " sufrirá un recargo del 2% mensual y  en éste acto, me comprometo a pagar   en forma quincenal en la "
                     + "ventanilla de INDESA, la cuota aprobada para la cancelación del valor recibido a préstamo.";
-            String parrafo2 = "El Batey Santa Cruz de Yojoa, Cortes.  De " + obtenerMes() + " del año dos mil diez y ";
+            String parrafo2 = "El Batey Santa Cruz de Yojoa, Cortes.  De " + obtenerMes() + " del año dos mil diez y \n";
             String parrafo3 = "_____________________________                   __________________________\n"
-                    + "          Nombre del solicitante                           Firma  del Solicitante";
-            String parrafo4 = "Cel. /Tel. Nº" + clie.getTelefono();
+                    + "          Nombre del solicitante                           Firma  del Solicitante\n";
+            String parrafo4 = "Cel. /Tel. Nº" + clie.getTelefono()+"\n";
             String parrafo5 = "_________________________________________________________________________________________";
             String parrafo6 = "AVAL";
             String parrafo7 = "Nombre " + jAval.getText() + " Id. " + jide.getText() + " Residente en " + jDireccion.getText()
                     + " socio(a) de compañía Agrícola Olivo, por este acto acepto y con decisión propia  me convierto en "
                     + "Aval Solidario de " + pres.getNombre() + " haciéndome responsable por la morosidad que en determinado "
-                    + "momento, éste contrajera con INDESA.";
+                    + "momento, éste contrajera con INDESA.\n";
             String parrafo8 = "_____________________________                   __________________________\n"
-                    + "          Nombre del Aval                                    Firma  del Aval";
-            String parrafo9 = "Tel/Cel. Nº " + jTel.getText();
+                    + "          Nombre del Aval                                    Firma  del Aval \n";
+            String parrafo9 = "Tel/Cel. Nº " + jTel.getText() +" \n";
             String parrafo10 = ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,";
             String parrafo11 = "CALCULOS/VALORES";
             String parrafo12 = "Valor autorizado……………………………………………..  L " + pres.getPrestamos() + "      S U M A\n";
@@ -1656,42 +1653,34 @@ public class registrarPrestamo extends javax.swing.JFrame {
             String parrafo1 = "Yo " + pres.getNombre() + ", con identidad Nº " + clie.getIdentidad()
                     + "Y residente en " + clie.getDireccion() + ", " + clie.getMunicipio() + ", " + clie.getDepartamento() + ","
                     + "; empleado de Compañía Agrícola olivo S. A. con Código Nº____________, prestando mis servicios para"
-                    + " el área de " + clie.getProfesion() + "; acudo en SOLICITUD de un préstamo por valor de "
+                    + " el área de " + clie.getArea() + "/" + clie.getDepartamento()+"; acudo en SOLICITUD de un préstamo por valor de "
                     + " Lps. " + pres.getPrestamos() + "(" + nc.convertNumberToLetter(prestamo) + ")" + ". Estoy entendido que de aprobarse mi  solicitud, el valor aprobado "
                     + "sufrirá un incremento por concepto de la tasa de interés aplicada al mismo, además; en éste acto,"
                     + " autorizo al departamento de Recurso Humano de mi empleadora, para que deduzca de mi pago "
                     + " " + Tipopagos() + " y traslade automáticamente a INDESA de C.V. el valor de Lps." + pres.getDeduccion() + ", "
                     + "hasta cancelar el valor prestado más sus intereses.";
             String parrafo2 = "El Batey Santa Cruz de Yojoa, Cortes. " + obtenerMes() + "De del año dos mil ";
-            String parrafo3 = "_______________________________________                __ ______________________________\n"
-                    + "              Nombre del solicitante                                   Firma  del Solicitante";
-            String parrafo4 = "Tel/Cel. Nº " + clie.getTelefono();
-            String parrafo5 = "________________________________________________________________________________________";
-            String parrafo6 = "AVAL";
-            String parrafo7 = "Nombre " + jAval.getText() + " Id.Nº " + jide.getText() + " Residente en " + jDireccion.getText()
-                    + " Empleado de " + jLabora.getText() + " antigüedad  " + jAnio.getText() + " años, " + jmes.getText() + " meses, "
-                    + "cargo/labor " + jLabor.getText() + " Salario neto (con deducciones) L " + jSalario.getText() + "  Cel. Nº " + jTel.getText() + "\n";
-            String parrafo8 = "_____________________________________                  _________________________________\n"
-                    + "               Nombre Completo (aval)                                 Firma (aval)";
-            String parrafo9 = ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,";
-            String parrafo10 = "CALCULOS/VALORES";
-            String parrafo11 = "Valor autorizado……………………………………………..  L " + pres.getPrestamos() + "      S U M A\n";
-            String parrafo12 = "+ Intereses  ganados……………………………………….    " + pres.getTotalinteres() + "   L " + pres.getCapitalinteres();
-            String parrafo13 = "Taza de interés " + pres.getInteresanual() + "%  anual, pagadero en  " + pres.getPlazo() + " "
+            String parrafo3 = "______________________________               ______________________________\n"
+                    + "             Nombre del solicitante                    Firma  del Solicitante\n";
+            String parrafo4 = "Tel/Cel. Nº " + clie.getTelefono() + "\n";
+            String parrafo5 = ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,";
+            String parrafo6 = "CALCULOS/VALORES";
+            String parrafo7 = "Valor autorizado……………………………………………..  L " + pres.getPrestamos() + "      S U M A\n";
+            String parrafo8 = "+ Intereses  ganados……………………………………….    " + pres.getTotalinteres() + "   L " + pres.getCapitalinteres();
+            String parrafo9 = "Taza de interés " + pres.getInteresanual() + "%  anual, pagadero en  " + pres.getPlazo() + " "
                     + "meses; para realizar pagos " + Tipopagos() + ""
                     + " L " + pres.getDeduccion() + " (Capital L. " + pres.getAbonocapital() + " + intereses L." + pres.getInteresganado() + ") por pago/letra.\n";
-            String parrafo14 = "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::";
-            String parrafo15 = "AUTORIZADO";
-            String parrafo16 = "                                                         Lps.   " + pres.getCapitalinteres() + " -\n";
-            String parrafo17 = "                                               Saldo Anterior    " + verificarSiPrestamo() + "\n";
-            String parrafo18 = "		                                     1ra. cuota     " + pres.getDeduccion() + "\n";
-            String parrafo19 = "	                                            ts. Papelería   " + papeleria + "\n";
-            String parrafo20 = "					            Valor. Chk. L.  " + total;
+            String parrafo10 = "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::";
+            String parrafo11 = "AUTORIZADO";
+            String parrafo12 = "                                                         Lps.   " + pres.getCapitalinteres() + " -\n";
+            String parrafo13 = "                                               Saldo Anterior    " + verificarSiPrestamo() + "\n";
+            String parrafo14 = "		                                     1ra. cuota     " + pres.getDeduccion() + "\n";
+            String parrafo15 = "	                                            ts. Papelería   " + papeleria + "\n";
+            String parrafo16 = "					            Valor. Chk. L.  " + total;
 
             WordGenerator wg = new WordGenerator();
             wg.createWordEmpleado(parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7, parrafo8, parrafo9,
-                    parrafo10, parrafo11, parrafo12, parrafo13, parrafo14, parrafo15, parrafo16, parrafo17, parrafo18,
-                    parrafo19, parrafo20, idPrestamo);
+                    parrafo10, parrafo11, parrafo12, parrafo13, parrafo14, parrafo15, parrafo16, idPrestamo);
         } catch (SQLException ex) {
             Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1749,7 +1738,10 @@ public class registrarPrestamo extends javax.swing.JFrame {
         ServiciosDB service = new ServiciosDB();
         ArrayList<Prestamos> depts;
         depts = (ArrayList<Prestamos>) service.obtenerUltimoPrestamoByIdCliente(idCliente);
-        Prestamos pres = depts.get(0);
+        if (depts.isEmpty()){
+            return saldoDeudor;
+        }else {
+            Prestamos pres = depts.get(0);
         Deducciones ded = service.findByIdPrestamo(pres.getIdPrestamo());
         if (ded == null) {
             return saldoDeudor;
@@ -1761,6 +1753,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
                 return saldoDeudor;
             }
         }
+        } 
     }
     
     public float obtenerPrestamo(){

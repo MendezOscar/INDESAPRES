@@ -136,21 +136,20 @@ public final class deduccionesMensuales extends javax.swing.JFrame {
             for (int x = 0; x < depts.size(); x++) {
                 pres = depts.get(x);
                 ded = service.findByIdPrestamo(pres.getIdPrestamo());
-                agregarFilas();
                 if ("Mensuales".equals(pres.getTipoPago()) && ded == null) {
                     jTable3.setValueAt(pres.getIdCliente(), x, 0);
                     jTable3.setValueAt(pres.getNombre(), x, 1);
                     jTable3.setValueAt(pres.getCapitalinteres(), x, 2);
                     jTable3.setValueAt(pres.getDeduccion(), x, 3);
                     jTable3.setValueAt(pres.getCapitalinteres() - pres.getDeduccion(), x, 4);
-                }
-                if ("Mensuales".equals(pres.getTipoPago()) && ded.getSaldoDeudor() != 0.0) {
+                } else if ("Mensuales".equals(pres.getTipoPago()) && ded.getSaldoDeudor() != 0.0) {
                     jTable3.setValueAt(pres.getIdCliente(), x, 0);
                     jTable3.setValueAt(pres.getNombre(), x, 1);
                     jTable3.setValueAt(pres.getCapitalinteres(), x, 2);
                     jTable3.setValueAt(pres.getDeduccion(), x, 3);
                     jTable3.setValueAt(ded.getSaldoDeudor(), x, 4);
                 }
+                agregarFilas();
             }
         } catch (SQLException ex) {
             Logger.getLogger(deduccionesQuincenales.class.getName()).log(Level.SEVERE, null, ex);
