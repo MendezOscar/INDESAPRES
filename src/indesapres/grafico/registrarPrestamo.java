@@ -1269,7 +1269,9 @@ public class registrarPrestamo extends javax.swing.JFrame {
         float abonocapital = Float.parseFloat(String.valueOf(tm.getValueAt(0, 4)));
         float interesGanado = Float.parseFloat(String.valueOf(tm.getValueAt(0, 5)));
         int numero = setearnumero();
-        pres = new Prestamos(idPrestamo, fecha, idCliente, Nombre, prestamo, plazo, porInteresanual, porInteresAcumulado, totalIntereses, capitalInteres, deduccion, abonocapital, interesGanado, numero);
+        String tipPago = tipoPago.getSelectedItem().toString();
+        pres = new Prestamos(idPrestamo, fecha, idCliente, Nombre, prestamo, plazo, porInteresanual, porInteresAcumulado, 
+                totalIntereses, capitalInteres, deduccion, abonocapital, interesGanado, numero, tipPago);
         return pres;
     }
 
@@ -1303,6 +1305,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
         jTable2.setValueAt(pres.getDeduccion(), 0, 3);
         jTable2.setValueAt(pres.getAbonocapital(), 0, 4);
         jTable2.setValueAt(pres.getInteresganado(), 0, 5);
+        tipoPago.setSelectedItem(pres.getTipoPago());
         buscarCliente();
     }
 

@@ -136,7 +136,7 @@ public class deduccionesQuincenales extends javax.swing.JFrame {
     private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
 
-    public void setearDeduccion() {
+   public void setearDeduccion() {
         try {
             ServiciosDB service = new ServiciosDB();
             Prestamos pres;
@@ -145,24 +145,28 @@ public class deduccionesQuincenales extends javax.swing.JFrame {
             depts = (ArrayList<Prestamos>) service.findAllPrestamos();
             for (int x = 0; x < depts.size(); x++) {
                 pres = depts.get(x);
-                agregarFilas();
-                jTable3.setValueAt(pres.getIdCliente(), x, 0);
-                jTable3.setValueAt(pres.getNombre(), x, 1);
-                jTable3.setValueAt(pres.getCapitalinteres(), x, 2);
-                jTable3.setValueAt(pres.getDeduccion(), x, 3);
                 ded = service.findByIdPrestamo(pres.getIdPrestamo());
-                if(ded == null){
-                    jTable3.setValueAt(pres.getCapitalinteres()-pres.getDeduccion(), x, 4);
-                }else {
+                agregarFilas();
+                if ("Mensuales".equals(pres.getTipoPago()) && ded == null) {
+                    jTable3.setValueAt(pres.getIdCliente(), x, 0);
+                    jTable3.setValueAt(pres.getNombre(), x, 1);
+                    jTable3.setValueAt(pres.getCapitalinteres(), x, 2);
+                    jTable3.setValueAt(pres.getDeduccion(), x, 3);
+                    jTable3.setValueAt(pres.getCapitalinteres() - pres.getDeduccion(), x, 4);
+                }
+                if ("Mensuales".equals(pres.getTipoPago()) && ded.getSaldoDeudor() != 0.0) {
+                    jTable3.setValueAt(pres.getIdCliente(), x, 0);
+                    jTable3.setValueAt(pres.getNombre(), x, 1);
+                    jTable3.setValueAt(pres.getCapitalinteres(), x, 2);
+                    jTable3.setValueAt(pres.getDeduccion(), x, 3);
                     jTable3.setValueAt(ded.getSaldoDeudor(), x, 4);
                 }
-                
             }
         } catch (SQLException ex) {
             Logger.getLogger(deduccionesQuincenales.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+   
     public void agregarFilas() {
         DefaultTableModel temp = (DefaultTableModel) jTable3.getModel();
         Object nuevo[] = {"", "", "", "", "", "", "", "", ""};

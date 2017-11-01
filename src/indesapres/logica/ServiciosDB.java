@@ -191,8 +191,9 @@ public class ServiciosDB {
      
      public void createPrestamos(Prestamos pres){
         String query = "INSERT INTO PRESTAMOS "
-                + "(IDPRESTAMO, FECHA, IDCLIENTE, NOMBRE, PRESTAMO, PLAZO, INTERESANUAL, INTERESACUMULADO, TOTALINTERESES, CAPITALINTERES, DEDUCCION, ABONOCAPITAL, INTERESGANADO, CONTADOR) "
-                + "VALUES (? , ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "(IDPRESTAMO, FECHA, IDCLIENTE, NOMBRE, PRESTAMO, PLAZO, INTERESANUAL, INTERESACUMULADO, TOTALINTERESES,"
+                + " CAPITALINTERES, DEDUCCION, ABONOCAPITAL, INTERESGANADO, CONTADOR, TIPOPAGO) "
+                + "VALUES (? , ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setString(1, pres.getIdPrestamo());
             stmt.setString(2, pres.getFecha());
@@ -208,6 +209,7 @@ public class ServiciosDB {
             stmt.setFloat(12, pres.getAbonocapital());
             stmt.setFloat(13, pres.getInteresganado());
             stmt.setInt(14, pres.getContador());
+            stmt.setString(15, pres.getTipoPago());
             System.out.println(query);
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, " El Cliente: " + pres.getIdPrestamo() + " se ha guardado Exitosamente.");
@@ -218,7 +220,9 @@ public class ServiciosDB {
 
     public void updatePrestamo(String id, Prestamos pres) throws SQLException {
         String query = "UPDATE PRESTAMOS "
-                + "SET FECHA= ?, IDCLIENTE =?, NOMBRE=?, PRESTAMO?, PLAZO=?, INTERESANUAL= ?, INTERESACUMULADO= ?, TOTALINTERESES= ?, CAPITALINTERES= ?, DEDUCCION= ?, ABONOCAPITAL= ?, INTERESGANADO= ?, CONTADOR=?"
+                + "SET FECHA= ?, IDCLIENTE =?, NOMBRE=?, PRESTAMO?, PLAZO=?, INTERESANUAL= ?, INTERESACUMULADO= ?, "
+                + "TOTALINTERESES= ?, CAPITALINTERES= ?, DEDUCCION= ?, ABONOCAPITAL= ?, INTERESGANADO= ?, "
+                + "CONTADOR=?, TIPOPAGO=?"
                 + "WHERE IDPRESTAMO= ?";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setString(1, pres.getFecha());
@@ -234,7 +238,8 @@ public class ServiciosDB {
             stmt.setFloat(11, pres.getAbonocapital());
             stmt.setFloat(12, pres.getInteresganado());
             stmt.setInt(13, pres.getContador());
-            stmt.setString(14, pres.getIdPrestamo());
+            stmt.setString(14, pres.getTipoPago());
+            stmt.setString(15, pres.getIdPrestamo());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "El Prestamo: " + id + " se ha actualizado correctamente.");
         } catch (SQLException se) {
@@ -269,7 +274,7 @@ public class ServiciosDB {
                     rs.getString("NOMBRE"), rs.getFloat("PRESTAMO"), rs.getFloat("PLAZO"), rs.getFloat("INTERESANUAL"),
                     rs.getFloat("INTERESACUMULADO"), rs.getFloat("TOTALINTERESES"),
                     rs.getFloat("CAPITALINTERES"), rs.getFloat("DEDUCCION"), rs.getFloat("ABONOCAPITAL"),
-                    rs.getFloat("INTERESGANADO"), rs.getInt("CONTADOR")));
+                    rs.getFloat("INTERESGANADO"), rs.getInt("CONTADOR"), rs.getString("TIPOPAGO")));
         } catch (SQLException se) {
             JOptionPane.showMessageDialog(null, "ERROR Codigo de Prestamo: " + id + " no se ha encontrado.");
         }
@@ -287,7 +292,7 @@ public class ServiciosDB {
                         rs.getString("NOMBRE"), rs.getFloat("PRESTAMO"), rs.getFloat("PLAZO"), rs.getFloat("INTERESANUAL"),
                         rs.getFloat("INTERESACUMULADO"), rs.getFloat("TOTALINTERESES"),
                         rs.getFloat("CAPITALINTERES"), rs.getFloat("DEDUCCION"), rs.getFloat("ABONOCAPITAL"),
-                        rs.getFloat("INTERESGANADO"), rs.getInt("CONTADOR")));
+                        rs.getFloat("INTERESGANADO"), rs.getInt("CONTADOR"), rs.getString("TIPOPAGO")));
             }
             return depts;
         } catch (SQLException ex) {
@@ -307,7 +312,7 @@ public class ServiciosDB {
                         rs.getString("NOMBRE"), rs.getFloat("PRESTAMO"), rs.getFloat("PLAZO"), rs.getFloat("INTERESANUAL"),
                         rs.getFloat("INTERESACUMULADO"), rs.getFloat("TOTALINTERESES"),
                         rs.getFloat("CAPITALINTERES"), rs.getFloat("DEDUCCION"), rs.getFloat("ABONOCAPITAL"),
-                        rs.getFloat("INTERESGANADO"), rs.getInt("CONTADOR")));
+                        rs.getFloat("INTERESGANADO"), rs.getInt("CONTADOR"), rs.getString("TIPOPAGO")));
             }
             return depts;
         } catch (SQLException ex) {
@@ -326,7 +331,7 @@ public class ServiciosDB {
                     rs.getString("NOMBRE"), rs.getFloat("PRESTAMO"), rs.getFloat("PLAZO"), rs.getFloat("INTERESANUAL"), 
                     rs.getFloat("INTERESACUMULADO"), rs.getFloat("TOTALINTERESES"),
                     rs.getFloat("CAPITALINTERES"), rs.getFloat("DEDUCCION"), rs.getFloat("ABONOCAPITAL"),
-                    rs.getFloat("INTERESGANADO"), rs.getInt("CONTADOR")));
+                    rs.getFloat("INTERESGANADO"), rs.getInt("CONTADOR"), rs.getString("TIPOPAGO")));
             }
             return depts;
         } catch (SQLException se) {
