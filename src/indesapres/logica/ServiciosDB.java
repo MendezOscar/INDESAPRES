@@ -36,8 +36,9 @@ public class ServiciosDB {
      
     public void createCliente(Clientes clie){
         String query = "INSERT INTO CLIENTES "
-                + "(IDCLIENTE, NOMBRE, APELLIDO, IDENTIDAD, DEPARTAMENTO, MUNICIPIO, DIRECCION, ESTADOCIVIL, TELEFONO, GENERO, EDAD, PROFESION, TIPO, CONTADOR) "
-                + "VALUES (? , ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "(IDCLIENTE, NOMBRE, APELLIDO, IDENTIDAD, DEPARTAMENTO, MUNICIPIO, DIRECCION, ESTADOCIVIL, "
+                + "TELEFONO, GENERO, EDAD, PROFESION, TIPO, CONTADOR, AREA, DEPTO) "
+                + "VALUES (? , ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setString(1, clie.getIdCliente());
             stmt.setString(2, clie.getNombre());
@@ -53,6 +54,8 @@ public class ServiciosDB {
             stmt.setString(12, clie.getProfesion());
             stmt.setString(13, clie.getTipo());
             stmt.setInt(14, clie.getNumero());
+            stmt.setString(15, clie.getArea());
+            stmt.setString(16, clie.getDepto());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null," El Cliente: " + clie.getIdCliente() +" se ha guardado Exitosamente.");
         } catch (SQLException se) {
@@ -63,7 +66,8 @@ public class ServiciosDB {
     
     public void updateCliente(String id, Clientes clie) throws SQLException {
         String query = "UPDATE CLIENTES "
-                + "SET NOMBRE= ?, APELLIDO= ?, IDENTIDAD= ?, DEPARTAMENTO= ?, MUNICIPIO= ?, DIRECCION= ?, ESTADOCIVIL= ?, TELEFONO= ?, GENERO= ?, EDAD= ?, PROFESION= ?, TIPO=?, CONTADOR=?"
+                + "SET NOMBRE= ?, APELLIDO= ?, IDENTIDAD= ?, DEPARTAMENTO= ?, MUNICIPIO= ?, DIRECCION= ?, ESTADOCIVIL= ?, "
+                + "TELEFONO= ?, GENERO= ?, EDAD= ?, PROFESION= ?, TIPO=?, CONTADOR=?, AREA=?, DEPTO=?"
                 + "WHERE IDCLIENTE= ?";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setString(1, clie.getNombre());
@@ -79,7 +83,9 @@ public class ServiciosDB {
             stmt.setString(11, clie.getProfesion());
             stmt.setString(12, clie.getTipo());
             stmt.setInt(13, clie.getNumero());
-            stmt.setString(14, clie.getIdCliente());
+            stmt.setString(14, clie.getArea());
+            stmt.setString(15, clie.getDepto());
+            stmt.setString(16, clie.getIdCliente());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "El Ciente: " + id + " se ha actualizado correctamente.");
         } catch (SQLException se) {
@@ -115,7 +121,7 @@ public class ServiciosDB {
                     rs.getString("IDENTIDAD"), rs.getString("DEPARTAMENTO"), rs.getString("MUNICIPIO"),
                     rs.getString("DIRECCION"), rs.getString("ESTADOCIVIL"), rs.getString("TELEFONO"),
                     rs.getString("GENERO"), rs.getInt("EDAD"), rs.getString("PROFESION"), rs.getString("TIPO"),
-                    rs.getInt("CONTADOR")));
+                    rs.getInt("CONTADOR"), rs.getString("AREA"), rs.getString("DEPTO")));
         } catch (SQLException se) {
             JOptionPane.showMessageDialog(null, "ERROR Codigo de cliente: " + id + "no se ha encontrado.");
         }
@@ -133,7 +139,7 @@ public class ServiciosDB {
                     rs.getString("IDENTIDAD"), rs.getString("DEPARTAMENTO"), rs.getString("MUNICIPIO"),
                     rs.getString("DIRECCION"), rs.getString("ESTADOCIVIL"), rs.getString("TELEFONO"),
                     rs.getString("GENERO"), rs.getInt("EDAD"), rs.getString("PROFESION"), rs.getString("TIPO"),
-                    rs.getInt("CONTADOR")));
+                    rs.getInt("CONTADOR"), rs.getString("AREA"), rs.getString("DEPTO")));
             }
             return depts;
         } catch (SQLException ex) {
@@ -153,7 +159,7 @@ public class ServiciosDB {
                     rs.getString("IDENTIDAD"), rs.getString("DEPARTAMENTO"), rs.getString("MUNICIPIO"),
                     rs.getString("DIRECCION"), rs.getString("ESTADOCIVIL"), rs.getString("TELEFONO"),
                     rs.getString("GENERO"), rs.getInt("EDAD"), rs.getString("PROFESION"), rs.getString("TIPO"),
-                    rs.getInt("CONTADOR")));
+                    rs.getInt("CONTADOR"), rs.getString("AREA"), rs.getString("DEPTO")));
             }
             return depts;
         } catch (SQLException ex) {
@@ -172,7 +178,7 @@ public class ServiciosDB {
                     rs.getString("IDENTIDAD"), rs.getString("DEPARTAMENTO"), rs.getString("MUNICIPIO"),
                     rs.getString("DIRECCION"), rs.getString("ESTADOCIVIL"), rs.getString("TELEFONO"),
                     rs.getString("GENERO"), rs.getInt("EDAD"), rs.getString("PROFESION"), rs.getString("TIPO"),
-                    rs.getInt("CONTADOR")));
+                    rs.getInt("CONTADOR"), rs.getString("AREA"), rs.getString("DEPTO")));
             }
             return depts;
         } catch (SQLException se) {

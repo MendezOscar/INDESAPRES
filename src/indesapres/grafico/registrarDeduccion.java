@@ -694,9 +694,14 @@ public class registrarDeduccion extends javax.swing.JFrame {
     private void jidPrestamoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jidPrestamoKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            setearCodigo();
-            buscarPrestamo();
-            buscarCliente();
+            Deducciones ded = verificarPagos();
+            if (ded.getSaldoDeudor() == 0.0) {
+                JOptionPane.showMessageDialog(null, "El Prestamo: " + ded.getIdPrestamo() + " ya esta pagado");
+            } else {
+                setearCodigo();
+                buscarPrestamo();
+                buscarCliente();
+            }
         }
     }//GEN-LAST:event_jidPrestamoKeyPressed
 
@@ -809,5 +814,13 @@ public class registrarDeduccion extends javax.swing.JFrame {
             String code = idPrestamo + "-" + consecutivo + "-" + "de" + plazo;
             jidDeduccion.setText(code);
         }
+    }
+
+    public Deducciones verificarPagos() {
+        ServiciosDB service = new ServiciosDB();
+        String idPrestamo = jidPrestamo.getText();
+        Prestamos pres = service.findByIdPrestamos(idPrestamo);
+        Deducciones ded = service.findByIdPrestamo(pres.getIdPrestamo());
+        return ded;
     }
 }

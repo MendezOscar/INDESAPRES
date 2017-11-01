@@ -19,8 +19,10 @@ public class Clientes {
     private String Profesion;
     private String Tipo;
     private int Numero;
+    private String area;
+    private String depto;
 
-    public Clientes(String idCliente, String Nombre, String Apellido, String Identidad, String Departamento, String Municipio, String Direccion, String Estadocivil, String Telefono, String Genero, int Edad, String Profesion, String Tipo, int Numero) {
+    public Clientes(String idCliente, String Nombre, String Apellido, String Identidad, String Departamento, String Municipio, String Direccion, String Estadocivil, String Telefono, String Genero, int Edad, String Profesion, String Tipo, int Numero, String area, String depto) {
         this.idCliente = idCliente;
         this.Nombre = Nombre;
         this.Apellido = Apellido;
@@ -35,6 +37,24 @@ public class Clientes {
         this.Profesion = Profesion;
         this.Tipo = Tipo;
         this.Numero = Numero;
+        this.area = area;
+        this.depto = depto;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public String getDepto() {
+        return depto;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public void setDepto(String depto) {
+        this.depto = depto;
     }
 
     public int getNumero() {

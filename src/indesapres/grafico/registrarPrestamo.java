@@ -4,6 +4,7 @@ import indesapres.logica.NumberToLetterConverter;
 import indesapres.logica.ServiciosDB;
 import indesapres.logica.WordGenerator;
 import indesapres.modelos.Clientes;
+import indesapres.modelos.Deducciones;
 import indesapres.modelos.Prestamos;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -327,6 +328,11 @@ public class registrarPrestamo extends javax.swing.JFrame {
         jPrestamo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPrestamoActionPerformed(evt);
+            }
+        });
+        jPrestamo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPrestamoKeyPressed(evt);
             }
         });
 
@@ -1132,6 +1138,13 @@ public class registrarPrestamo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLaborKeyPressed
 
+    private void jPrestamoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPrestamoKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            setPrestamo();
+        }
+    }//GEN-LAST:event_jPrestamoKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -1246,7 +1259,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
         String fecha = jDate.getText();
         String idCliente = jCodigo1.getText();
         String Nombre = jCodigo2.getText();
-        float prestamo = Float.parseFloat(jPrestamo.getText());
+        float prestamo = obtenerPrestamo();
         float porInteresanual = Float.parseFloat(jporAnual.getText());
         float porInteresAcumulado = Float.parseFloat(String.valueOf(tm.getValueAt(0, 0)));
         int plazo = Integer.parseInt(jPlazo.getText());
@@ -1480,14 +1493,15 @@ public class registrarPrestamo extends javax.swing.JFrame {
             Clientes clie = service.findByIdClientes(pres.getIdCliente());
             NumberToLetterConverter nc = new NumberToLetterConverter();
             String prestamo = Float.toString(pres.getPrestamos());
-            
+            float papeleria = (float) 25.0;
+            float total = pres.getCapitalinteres() - verificarSiPrestamo() - pres.getDeduccion() - papeleria;
 
             String parrafo1 = "Yo " + pres.getNombre() + " con numero identidad N " + clie.getIdentidad() + " y risidente " + clie.getDireccion() + ""
                     + " Socio(a) activo(a) de Compañía Agrícola Olivo S. A. por este medio acudo a INDESA de "
-                    + "C.V. en SOLICITUD de un préstamo por valor de " + pres.getPrestamos() + "("+nc.convertNumberToLetter(prestamo)+")" + " Estoy entendido que de aprobarse esta solicitud, el "
+                    + "C.V. en SOLICITUD de un préstamo por valor de " + pres.getPrestamos() + "(" + nc.convertNumberToLetter(prestamo) + ")" + " Estoy entendido que de aprobarse esta solicitud, el "
                     + "valor autorizado sufrirá un incremento por concepto de  la tasa de interés y otros gastos de administración "
                     + "aplicados al mismo; de interés y otros gastos de administración aplicados al mismo para que; periódicamente "
-                    + "de mis ingresos realice la deducción de "+pres.getDeduccion()+" Del pago";
+                    + "de mis ingresos realice la deducción de " + pres.getDeduccion() + " Del pago";
             String parrafo2 = "por renta quincenal------------------------- L.  " + pres.getDeduccion()
                     + "Del incentivo trimestral a la producción------------   ___________"
                     + "Del Bono Navideño ----------------------------------   ___________  Suma L__________";
@@ -1506,10 +1520,10 @@ public class registrarPrestamo extends javax.swing.JFrame {
             String parrafo10 = ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n";
             String parrafo11 = "	                           	AUTORIZADO        \n";
             String parrafo12 = "                                                         Lps.   " + pres.getCapitalinteres() + " -\n";
-            String parrafo13 = "                                               Saldo Anterior   ______________ -\n";
+            String parrafo13 = "                                               Saldo Anterior    " + verificarSiPrestamo() + "\n";
             String parrafo14 = "		                                     1ra. cuota     " + pres.getDeduccion() + "\n";
-            String parrafo15 = "	                                            ts. Papelería   " + 25.0 + "\n";
-            String parrafo16 = "					            Valor. Chk. L.  _____________";
+            String parrafo15 = "	                                            ts. Papelería   " + papeleria + "\n";
+            String parrafo16 = "					            Valor. Chk. L. " + total;
             WordGenerator wg = new WordGenerator();
             wg.createWordSocio(parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7, parrafo8, parrafo9,
                     parrafo10, parrafo11, parrafo12, parrafo13, parrafo14, parrafo15, parrafo16, idPrestamo);
@@ -1574,11 +1588,13 @@ public class registrarPrestamo extends javax.swing.JFrame {
             Clientes clie = service.findByIdClientes(pres.getIdCliente());
             NumberToLetterConverter nc = new NumberToLetterConverter();
             String prestamo = Float.toString(pres.getPrestamos());
+            float papeleria = (float) 25.0;
+            float total = pres.getCapitalinteres() - verificarSiPrestamo() - pres.getDeduccion() - papeleria;
 
             String parrafo1 = "Yo " + pres.getNombre() + ", con identidad Nº " + clie.getIdentidad()
                     + "Y residente en " + clie.getDireccion() + ", " + clie.getMunicipio() + ", " + clie.getDepartamento() + ","
                     + " Socio(a) activo(a) de INDESA de C. V. por éste medio acudo a ésta empresa, en SOLICITUD de un préstamo "
-                    + "por valor de L " + pres.getPrestamos() + "("+nc.convertNumberToLetter(prestamo)+")" + ". Estoy entendido que de aprobarse esta solicitud, el valor "
+                    + "por valor de L " + pres.getPrestamos() + "(" + nc.convertNumberToLetter(prestamo) + ")" + ". Estoy entendido que de aprobarse esta solicitud, el valor "
                     + "autorizado sufrirá un incremento por concepto de  la tasa de interés que corresponda y otros gastos"
                     + " de administración aplicados al mismo, así también; estoy enterado que el valor de toda cuota atrasada,"
                     + " sufrirá un recargo del 2% mensual y  en éste acto, me comprometo a pagar   en forma quincenal en la "
@@ -1606,10 +1622,10 @@ public class registrarPrestamo extends javax.swing.JFrame {
             String parrafo15 = ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::";
             String parrafo16 = "AUTORIZADO";
             String parrafo17 = "                                                         Lps.   " + pres.getCapitalinteres() + " -\n";
-            String parrafo18 = "                                               Saldo Anterior   ______________ -\n";
+            String parrafo18 = "                                               Saldo Anterior    " + verificarSiPrestamo() + "\n";
             String parrafo19 = "		                                     1ra. cuota     " + pres.getDeduccion() + "\n";
-            String parrafo20 = "	                                            ts. Papelería   " + 25.0 + "\n";
-            String parrafo21 = "					            Valor. Chk. L.  _____________";
+            String parrafo20 = "	                                            ts. Papelería   " + papeleria + "\n";
+            String parrafo21 = "					            Valor. Chk. L.  " + total;
 
             WordGenerator wg = new WordGenerator();
             wg.createWordIndesa(parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7, parrafo8, parrafo9,
@@ -1631,12 +1647,14 @@ public class registrarPrestamo extends javax.swing.JFrame {
             Clientes clie = service.findByIdClientes(pres.getIdCliente());
             NumberToLetterConverter nc = new NumberToLetterConverter();
             String prestamo = Float.toString(pres.getPrestamos());
+            float papeleria = (float) 25.0;
+            float total = pres.getCapitalinteres() - verificarSiPrestamo() - pres.getDeduccion() - papeleria;
 
             String parrafo1 = "Yo " + pres.getNombre() + ", con identidad Nº " + clie.getIdentidad()
                     + "Y residente en " + clie.getDireccion() + ", " + clie.getMunicipio() + ", " + clie.getDepartamento() + ","
                     + "; empleado de Compañía Agrícola olivo S. A. con Código Nº____________, prestando mis servicios para"
                     + " el área de " + clie.getProfesion() + "; acudo en SOLICITUD de un préstamo por valor de "
-                    + " Lps. " + pres.getPrestamos() + "("+nc.convertNumberToLetter(prestamo)+")" + ". Estoy entendido que de aprobarse mi  solicitud, el valor aprobado "
+                    + " Lps. " + pres.getPrestamos() + "(" + nc.convertNumberToLetter(prestamo) + ")" + ". Estoy entendido que de aprobarse mi  solicitud, el valor aprobado "
                     + "sufrirá un incremento por concepto de la tasa de interés aplicada al mismo, además; en éste acto,"
                     + " autorizo al departamento de Recurso Humano de mi empleadora, para que deduzca de mi pago "
                     + " " + Tipopagos() + " y traslade automáticamente a INDESA de C.V. el valor de Lps." + pres.getDeduccion() + ", "
@@ -1662,10 +1680,10 @@ public class registrarPrestamo extends javax.swing.JFrame {
             String parrafo14 = "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::";
             String parrafo15 = "AUTORIZADO";
             String parrafo16 = "                                                         Lps.   " + pres.getCapitalinteres() + " -\n";
-            String parrafo17 = "                                               Saldo Anterior   ______________ -\n";
+            String parrafo17 = "                                               Saldo Anterior    " + verificarSiPrestamo() + "\n";
             String parrafo18 = "		                                     1ra. cuota     " + pres.getDeduccion() + "\n";
-            String parrafo19 = "	                                            ts. Papelería   " + 25.0 + "\n";
-            String parrafo20 = "					            Valor. Chk. L.  _____________";
+            String parrafo19 = "	                                            ts. Papelería   " + papeleria + "\n";
+            String parrafo20 = "					            Valor. Chk. L.  " + total;
 
             WordGenerator wg = new WordGenerator();
             wg.createWordEmpleado(parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7, parrafo8, parrafo9,
@@ -1692,7 +1710,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
             String parrafo1 = "YO: " + pres.getNombre() + " Hondureño(a), Mayor de edad, con identidad Nº " + clie.getIdentidad()
                     + "de profesión /oficio " + clie.getProfesion() + " residente en " + clie.getDireccion() + ", " + clie.getMunicipio() + ", " + clie.getDepartamento()
                     + "; por este acto declaro que: DEBO Y PAGARE a la sociedad mercantil INDESA de C.V. la cantidad de:"
-                    + " L. " + pres.getPrestamos() + "("+nc.convertNumberToLetter(prestamo)+")" +" más los intereses correspondientes al " + pres.getInteresanual() + "% anual;"
+                    + " L. " + pres.getPrestamos() + "(" + nc.convertNumberToLetter(prestamo) + ")" + " más los intereses correspondientes al " + pres.getInteresanual() + "% anual;"
                     + " préstamo pagadero en " + pres.getPlazo() + " meses, a partir de la fecha.  Con el bien entendido que "
                     + "toda cuota/ letra atrasada, sufrirá un recargo del 2% mensual. Este préstamo  me ha sido concedido "
                     + "por INDESA de C.V. para resolver asuntos de carácter particular, como ser__________________________"
@@ -1721,4 +1739,39 @@ public class registrarPrestamo extends javax.swing.JFrame {
         }
     }
 
+    public float verificarSiPrestamo() {
+        float saldoDeudor = (float) 0.0;
+        String idCliente = jCodigo1.getText();
+        String idPrestamo = jCodigo.getText();
+        ServiciosDB service = new ServiciosDB();
+        ArrayList<Prestamos> depts;
+        depts = (ArrayList<Prestamos>) service.obtenerUltimoPrestamoByIdCliente(idCliente);
+        Prestamos pres = depts.get(0);
+        Deducciones ded = service.findByIdPrestamo(pres.getIdPrestamo());
+        if (ded == null) {
+            return saldoDeudor;
+        } else {
+            if (ded.getSaldoDeudor() == 0.0) {
+                return saldoDeudor;
+            } else {
+                saldoDeudor = ded.getSaldoDeudor();
+                return saldoDeudor;
+            }
+        }
+    }
+    
+    public float obtenerPrestamo(){
+        float prestamo = Float.parseFloat(jPrestamo.getText());
+        if(verificarSiPrestamo() == 0.0){
+            return prestamo;
+        }else {
+            prestamo =  prestamo - verificarSiPrestamo();
+            return prestamo;
+        }
+    }
+    
+    public void setPrestamo(){
+        String prestamo = Float.toString(obtenerPrestamo());
+        jPrestamo.setText(prestamo);
+    }
 }
