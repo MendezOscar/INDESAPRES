@@ -576,7 +576,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
         jLabel33.setText("TIPOS DE PAGO");
 
         tipoPago.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        tipoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mensuales", "Quicenales" }));
+        tipoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mensuales", "Quincenales" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -935,22 +935,22 @@ public class registrarPrestamo extends javax.swing.JFrame {
         int plazo = Integer.parseInt(jPlazo.getText());
         float prestamo = Float.parseFloat(jPrestamo.getText());
         if (plazo == 5) {
-            float interesanual = (float) 18;
-            jporAnual.setText(Float.toString(interesanual));
-        } else if (plazo == 15) {
             float interesanual = (float) 20;
             jporAnual.setText(Float.toString(interesanual));
-        } else if (plazo == 22) {
+        } else if (plazo == 15) {
             float interesanual = (float) 22;
             jporAnual.setText(Float.toString(interesanual));
-        } else if (plazo == 24 && (prestamo >= 50001 && prestamo <= 80000)) {
-            float interesanual = (float) 23;
+        } else if (plazo == 22) {
+            float interesanual = (float) 24;
             jporAnual.setText(Float.toString(interesanual));
-        } else if (plazo == 26 && (prestamo >= 80001 && prestamo <= 100000)) {
+        } else if (plazo == 24 && (prestamo >= 50001 && prestamo <= 80000)) {
             float interesanual = (float) 25;
             jporAnual.setText(Float.toString(interesanual));
+        } else if (plazo == 26 && (prestamo >= 80001 && prestamo <= 100000)) {
+            float interesanual = (float) 26;
+            jporAnual.setText(Float.toString(interesanual));
         } else if (plazo == 36 && (prestamo >= 100001 && prestamo <= 150000)) {
-            float interesanual = (float) 25.5;
+            float interesanual = (float) 27;
             jporAnual.setText(Float.toString(interesanual));
         } else {
             JOptionPane.showMessageDialog(null, "Sujeto a analisis");
@@ -1027,6 +1027,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
+        generarPagare();
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -1477,16 +1478,19 @@ public class registrarPrestamo extends javax.swing.JFrame {
             depts = (ArrayList<Prestamos>) service.obtenerUltimoPrestamoByIdCliente(idCleinte);
             Prestamos pres = depts.get(0);
             Clientes clie = service.findByIdClientes(pres.getIdCliente());
+            NumberToLetterConverter nc = new NumberToLetterConverter();
+            String prestamo = Float.toString(pres.getPrestamos());
+            
 
             String parrafo1 = "Yo " + pres.getNombre() + " con numero identidad N " + clie.getIdentidad() + " y risidente " + clie.getDireccion() + ""
                     + " Socio(a) activo(a) de Compañía Agrícola Olivo S. A. por este medio acudo a INDESA de "
-                    + "C.V. en SOLICITUD de un préstamo por valor de " + pres.getPrestamos() + " Estoy entendido que de aprobarse esta solicitud, el "
+                    + "C.V. en SOLICITUD de un préstamo por valor de " + pres.getPrestamos() + "("+nc.convertNumberToLetter(prestamo)+")" + " Estoy entendido que de aprobarse esta solicitud, el "
                     + "valor autorizado sufrirá un incremento por concepto de  la tasa de interés y otros gastos de administración "
                     + "aplicados al mismo; de interés y otros gastos de administración aplicados al mismo para que; periódicamente "
-                    + "de mis ingresos realice la deducción de 590 Del pago";
-            String parrafo2 = "por renta quincenal------------------- L.  " + pres.getDeduccion() + " \n"
-                    + "Del incentivo trimestral a la producción-----      ___________ \n"
-                    + "Del Bono Navideño -----------------------------    ___________  Suma L  __________";
+                    + "de mis ingresos realice la deducción de "+pres.getDeduccion()+" Del pago";
+            String parrafo2 = "por renta quincenal------------------------- L.  " + pres.getDeduccion()
+                    + "Del incentivo trimestral a la producción------------   ___________"
+                    + "Del Bono Navideño ----------------------------------   ___________  Suma L__________";
             String parrafo3 = "más los correspondientes intereses ganados y/o cargos por mora, y éste valor lo traslade automáticamente "
                     + "a INDESA de C.V. hasta cancelar el total del  préstamo autorizado.\n"
                     + "El Batey Santa Cruz de Yojoa, Cortes. 13 " + obtenerMes() + " del 10 dos mil diez y 17 \n";
@@ -1494,8 +1498,8 @@ public class registrarPrestamo extends javax.swing.JFrame {
                     + "          Nombre del solicitante                    Firma  del Solicitante";
             String parrafo5 = "Cel. /Tel. Nº " + clie.getTelefono();
             String parrafo6 = "CÁLCULOS / VALORES\n";
-            String parrafo7 = "Valor autorizado……………………………………………..  L " + pres.getPrestamos() + "      S U M A\n";
-            String parrafo8 = "+ Intereses  ganados……………………………………….    " + pres.getTotalinteres() + "   L " + pres.getCapitalinteres() + "\n";
+            String parrafo7 = "Valor autorizado……………………………………………..  L " + pres.getPrestamos() + "      S U M A";
+            String parrafo8 = "+ Intereses  ganados……………………………………….    " + pres.getTotalinteres() + "   L " + pres.getCapitalinteres();
             String parrafo9 = "Taza de interés " + pres.getInteresanual() + "%  anual, pagadero en  " + pres.getPlazo() + " "
                     + "meses; para realizar pagos " + Tipopagos() + ""
                     + " L " + pres.getDeduccion() + " (Capital L. " + pres.getAbonocapital() + " + intereses L." + pres.getInteresganado() + ") por pago/letra.\n";
@@ -1568,11 +1572,13 @@ public class registrarPrestamo extends javax.swing.JFrame {
             depts = (ArrayList<Prestamos>) service.obtenerUltimoPrestamoByIdCliente(idCleinte);
             Prestamos pres = depts.get(0);
             Clientes clie = service.findByIdClientes(pres.getIdCliente());
+            NumberToLetterConverter nc = new NumberToLetterConverter();
+            String prestamo = Float.toString(pres.getPrestamos());
 
             String parrafo1 = "Yo " + pres.getNombre() + ", con identidad Nº " + clie.getIdentidad()
                     + "Y residente en " + clie.getDireccion() + ", " + clie.getMunicipio() + ", " + clie.getDepartamento() + ","
                     + " Socio(a) activo(a) de INDESA de C. V. por éste medio acudo a ésta empresa, en SOLICITUD de un préstamo "
-                    + "por valor de L " + pres.getPrestamos() + ". Estoy entendido que de aprobarse esta solicitud, el valor "
+                    + "por valor de L " + pres.getPrestamos() + "("+nc.convertNumberToLetter(prestamo)+")" + ". Estoy entendido que de aprobarse esta solicitud, el valor "
                     + "autorizado sufrirá un incremento por concepto de  la tasa de interés que corresponda y otros gastos"
                     + " de administración aplicados al mismo, así también; estoy enterado que el valor de toda cuota atrasada,"
                     + " sufrirá un recargo del 2% mensual y  en éste acto, me comprometo a pagar   en forma quincenal en la "
@@ -1623,12 +1629,14 @@ public class registrarPrestamo extends javax.swing.JFrame {
             depts = (ArrayList<Prestamos>) service.obtenerUltimoPrestamoByIdCliente(idCleinte);
             Prestamos pres = depts.get(0);
             Clientes clie = service.findByIdClientes(pres.getIdCliente());
+            NumberToLetterConverter nc = new NumberToLetterConverter();
+            String prestamo = Float.toString(pres.getPrestamos());
 
             String parrafo1 = "Yo " + pres.getNombre() + ", con identidad Nº " + clie.getIdentidad()
                     + "Y residente en " + clie.getDireccion() + ", " + clie.getMunicipio() + ", " + clie.getDepartamento() + ","
                     + "; empleado de Compañía Agrícola olivo S. A. con Código Nº____________, prestando mis servicios para"
                     + " el área de " + clie.getProfesion() + "; acudo en SOLICITUD de un préstamo por valor de "
-                    + " Lps. " + pres.getPrestamos() + ". Estoy entendido que de aprobarse mi  solicitud, el valor aprobado "
+                    + " Lps. " + pres.getPrestamos() + "("+nc.convertNumberToLetter(prestamo)+")" + ". Estoy entendido que de aprobarse mi  solicitud, el valor aprobado "
                     + "sufrirá un incremento por concepto de la tasa de interés aplicada al mismo, además; en éste acto,"
                     + " autorizo al departamento de Recurso Humano de mi empleadora, para que deduzca de mi pago "
                     + " " + Tipopagos() + " y traslade automáticamente a INDESA de C.V. el valor de Lps." + pres.getDeduccion() + ", "
@@ -1641,9 +1649,9 @@ public class registrarPrestamo extends javax.swing.JFrame {
             String parrafo6 = "AVAL";
             String parrafo7 = "Nombre " + jAval.getText() + " Id.Nº " + jide.getText() + " Residente en " + jDireccion.getText()
                     + " Empleado de " + jLabora.getText() + " antigüedad  " + jAnio.getText() + " años, " + jmes.getText() + " meses, "
-                    + "cargo/labor " + jLabor.getText() + " Salario neto (con deducciones) L " + jSalario.getText() + "  Cel. Nº " + jTel.getText();
-            String parrafo8 = "_____________________________________                    _________________________________\n"
-                    + "               Nombre Completo (aval)                                     Firma (aval)";
+                    + "cargo/labor " + jLabor.getText() + " Salario neto (con deducciones) L " + jSalario.getText() + "  Cel. Nº " + jTel.getText() + "\n";
+            String parrafo8 = "_____________________________________                  _________________________________\n"
+                    + "               Nombre Completo (aval)                                 Firma (aval)";
             String parrafo9 = ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,";
             String parrafo10 = "CALCULOS/VALORES";
             String parrafo11 = "Valor autorizado……………………………………………..  L " + pres.getPrestamos() + "      S U M A\n";
@@ -1677,12 +1685,14 @@ public class registrarPrestamo extends javax.swing.JFrame {
             depts = (ArrayList<Prestamos>) service.obtenerUltimoPrestamoByIdCliente(idCleinte);
             Prestamos pres = depts.get(0);
             Clientes clie = service.findByIdClientes(pres.getIdCliente());
+            NumberToLetterConverter nc = new NumberToLetterConverter();
+            String prestamo = Float.toString(pres.getPrestamos());
 
             String titulo = "PAGARE";
             String parrafo1 = "YO: " + pres.getNombre() + " Hondureño(a), Mayor de edad, con identidad Nº " + clie.getIdentidad()
                     + "de profesión /oficio " + clie.getProfesion() + " residente en " + clie.getDireccion() + ", " + clie.getMunicipio() + ", " + clie.getDepartamento()
                     + "; por este acto declaro que: DEBO Y PAGARE a la sociedad mercantil INDESA de C.V. la cantidad de:"
-                    + " L. " + pres.getPrestamos() + " más los intereses correspondientes al " + pres.getInteresanual() + "% anual;"
+                    + " L. " + pres.getPrestamos() + "("+nc.convertNumberToLetter(prestamo)+")" +" más los intereses correspondientes al " + pres.getInteresanual() + "% anual;"
                     + " préstamo pagadero en " + pres.getPlazo() + " meses, a partir de la fecha.  Con el bien entendido que "
                     + "toda cuota/ letra atrasada, sufrirá un recargo del 2% mensual. Este préstamo  me ha sido concedido "
                     + "por INDESA de C.V. para resolver asuntos de carácter particular, como ser__________________________"

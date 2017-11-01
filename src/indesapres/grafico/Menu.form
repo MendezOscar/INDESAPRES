@@ -136,6 +136,38 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu6">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\date.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Proximas Deducciones"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu6ActionPerformed"/>
+          </Events>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\quicena.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Quincenales"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem8ActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\mes.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Mensuales"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>
@@ -168,7 +200,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="399" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="391" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
