@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
+import org.apache.poi.xwpf.usermodel.UnderlinePatterns;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -79,8 +80,9 @@ public class WordGenerator {
         XWPFParagraph paragraph6 = writedoc.createParagraph();
         XWPFRun run6 = paragraph6.createRun();
         run6.addBreak();
-        run6.setFontSize(12);
+        run6.setFontSize(14);
         run6.setFontFamily("Calibri");
+        run6.setUnderline(UnderlinePatterns.WAVE);
         run6.setText(parrafo6);
         paragraph6.setAlignment(ParagraphAlignment.CENTER);
 
@@ -118,7 +120,8 @@ public class WordGenerator {
         XWPFParagraph paragraph11 = writedoc.createParagraph();
         XWPFRun run11 = paragraph11.createRun();
         run11.addBreak();
-        run11.setFontSize(12);
+        run11.setFontSize(14);
+        run11.setUnderline(UnderlinePatterns.WAVE);
         run11.setFontFamily("Calibri");
         run11.setText(parrafo11);
         paragraph11.setAlignment(ParagraphAlignment.CENTER);
@@ -212,7 +215,8 @@ public class WordGenerator {
 
             XWPFParagraph paragraph6 = writedoc.createParagraph();
             XWPFRun run6 = paragraph6.createRun();
-            run6.setFontSize(12);
+            run6.setFontSize(14);
+            run6.setUnderline(UnderlinePatterns.WAVE);
             run6.setFontFamily("Calibri");
             run6.setText(parrafo6);
             paragraph6.setAlignment(ParagraphAlignment.CENTER);
@@ -247,7 +251,8 @@ public class WordGenerator {
 
             XWPFParagraph paragraph11 = writedoc.createParagraph();
             XWPFRun run11 = paragraph11.createRun();
-            run11.setFontSize(12);
+            run11.setFontSize(14);
+            run11.setUnderline(UnderlinePatterns.WAVE);
             run11.setFontFamily("Calibri");
             run11.setText(parrafo11);
             paragraph11.setAlignment(ParagraphAlignment.CENTER);
@@ -282,7 +287,8 @@ public class WordGenerator {
 
             XWPFParagraph paragraph16 = writedoc.createParagraph();
             XWPFRun run16 = paragraph16.createRun();
-            run16.setFontSize(12);
+            run16.setFontSize(14);
+            run16.setUnderline(UnderlinePatterns.WAVE);
             run16.setFontFamily("Calibri");
             run16.setText(parrafo16);
             paragraph16.setAlignment(ParagraphAlignment.CENTER);
@@ -378,7 +384,8 @@ public class WordGenerator {
 
             XWPFParagraph paragraph6 = writedoc.createParagraph();
             XWPFRun run6 = paragraph6.createRun();
-            run6.setFontSize(12);
+            run6.setFontSize(14);
+            run6.setUnderline(UnderlinePatterns.WAVE);
             run6.setFontFamily("Calibri");
             run6.setText(parrafo6);
             paragraph6.setAlignment(ParagraphAlignment.CENTER);
@@ -413,7 +420,8 @@ public class WordGenerator {
 
             XWPFParagraph paragraph11 = writedoc.createParagraph();
             XWPFRun run11 = paragraph11.createRun();
-            run11.setFontSize(12);
+            run11.setFontSize(14);
+            run6.setUnderline(UnderlinePatterns.WAVE);
             run11.setFontFamily("Calibri");
             run11.setText(parrafo11);
             paragraph11.setAlignment(ParagraphAlignment.CENTER);
@@ -501,7 +509,8 @@ public class WordGenerator {
 
             XWPFParagraph paragraph4 = writedoc.createParagraph();
             XWPFRun run4 = paragraph4.createRun();
-            run4.setFontSize(14);
+            run4.setFontSize(16);
+            run4.setUnderline(UnderlinePatterns.WAVE);
             run4.setFontFamily("Calibri");
             run4.setText(parrafo4);
             paragraph4.setAlignment(ParagraphAlignment.CENTER);
