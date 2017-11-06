@@ -4,13 +4,17 @@ import indesapres.logica.ServiciosDB;
 import indesapres.modelos.Clientes;
 import indesapres.modelos.Deducciones;
 import indesapres.modelos.Prestamos;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,10 +26,13 @@ public class registrarDeduccion extends javax.swing.JFrame {
 
     public DefaultTableModel tm;
     Date fechaActual;
+    public boolean active = false;
 
     public registrarDeduccion() {
         initComponents();
         setearFecha();
+        setIcon();
+        active = true;
     }
 
     public void setearFecha() {
@@ -226,6 +233,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jNombre = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -307,7 +315,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
         jToolBar1.add(jLabel33);
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\save.png")); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\save.png")); // NOI18N
         jButton1.setText("Guardar");
         jButton1.setToolTipText("");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -326,7 +334,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
         jToolBar1.add(jLabel14);
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\editar.png")); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\editar.png")); // NOI18N
         jButton2.setText("Modificar");
         jButton2.setToolTipText("");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -346,7 +354,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
         jToolBar1.add(jLabel15);
 
         jButton3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\eliminar.png")); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\eliminar.png")); // NOI18N
         jButton3.setText("Eliminar");
         jButton3.setToolTipText("");
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -366,7 +374,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
         jToolBar1.add(jLabel16);
 
         jButton4.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\nwe.png")); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\nwe.png")); // NOI18N
         jButton4.setText("Limpiar");
         jButton4.setToolTipText("");
         jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -386,7 +394,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
         jToolBar1.add(jLabel17);
 
         jButton5.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\buscar.png")); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\buscar.png")); // NOI18N
         jButton5.setText("Buscar");
         jButton5.setToolTipText("");
         jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -406,7 +414,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
         jToolBar1.add(jLabel18);
 
         jButton6.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\kista.png")); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\kista.png")); // NOI18N
         jButton6.setText("reporte");
         jButton6.setToolTipText("");
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -485,7 +493,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable2);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\deducciongrande.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\deducciongrande.png")); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel5.setText("CLIENTE");
@@ -502,6 +510,14 @@ public class registrarDeduccion extends javax.swing.JFrame {
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
+            }
+        });
+
+        jButton8.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton8.setText("Buscar");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
             }
         });
 
@@ -530,7 +546,9 @@ public class registrarDeduccion extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jidDeduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jidDeduccion, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton8))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -562,13 +580,15 @@ public class registrarDeduccion extends javax.swing.JFrame {
                             .addComponent(jNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jidDeduccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jidDeduccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton8))
                             .addComponent(jLabel2)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                 .addGap(23, 23, 23))
         );
 
@@ -695,7 +715,11 @@ public class registrarDeduccion extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             Deducciones ded = verificarPagos();
-            if (ded.getSaldoDeudor() == 0.0) {
+            if (ded == null) {
+                setearCodigo();
+                buscarPrestamo();
+                buscarCliente();
+            } else if (ded.getSaldoDeudor() == 0.0) {
                 JOptionPane.showMessageDialog(null, "El Prestamo: " + ded.getIdPrestamo() + " ya esta pagado");
             } else {
                 setearCodigo();
@@ -704,6 +728,12 @@ public class registrarDeduccion extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jidPrestamoKeyPressed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        vistaDeduccion vd = new vistaDeduccion();
+        vd.setVisible(true);
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -746,6 +776,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JTextField jFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
@@ -778,7 +809,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JTextField jidDeduccion;
+    public static javax.swing.JTextField jidDeduccion;
     public static javax.swing.JTextField jidPrestamo;
     // End of variables declaration//GEN-END:variables
 
@@ -822,5 +853,14 @@ public class registrarDeduccion extends javax.swing.JFrame {
         Prestamos pres = service.findByIdPrestamos(idPrestamo);
         Deducciones ded = service.findByIdPrestamo(pres.getIdPrestamo());
         return ded;
+    }
+
+    public void setIcon() {
+        try {
+            Image img = ImageIO.read(new File("Logo.png"));
+            this.setIconImage(img);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -1,23 +1,29 @@
 package indesapres.grafico;
 
 import indesapres.logica.ServiciosDB;
+import indesapres.modelos.Clientes;
 import indesapres.modelos.Deducciones;
 import indesapres.modelos.Prestamos;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author oscme
  */
-public final class deduccionesMensuales extends javax.swing.JFrame {
+public final class deduccionesSocios extends javax.swing.JFrame {
 
-    public deduccionesMensuales() {
+    public deduccionesSocios() {
         initComponents();
         setearDeduccion();
+        setIcon();
     }
 
     @SuppressWarnings("unchecked")
@@ -31,25 +37,16 @@ public final class deduccionesMensuales extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel1.setText("LISTADO DE DEDUCIONES MENSUALES");
+        jLabel1.setText("LISTADO DE DEDUCIONES SOCIOS");
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
                 {null, null, null, null, null}
             },
             new String [] {
                 "CODIGO", "EMPLEADO", "PRESTAMO", "DEDUCCION", "SALDO"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         jTable3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTable3KeyPressed(evt);
@@ -62,20 +59,20 @@ public final class deduccionesMensuales extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(247, 247, 247))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
+                .addComponent(jScrollPane5)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(276, 276, 276)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(287, 287, 287))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                 .addGap(32, 32, 32))
         );
@@ -104,19 +101,20 @@ public final class deduccionesMensuales extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(deduccionesMensuales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(deduccionesSocios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(deduccionesMensuales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(deduccionesSocios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(deduccionesMensuales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(deduccionesSocios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(deduccionesMensuales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(deduccionesSocios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new deduccionesMensuales().setVisible(true);
+            new deduccionesSocios().setVisible(true);
         });
     }
 
@@ -130,29 +128,31 @@ public final class deduccionesMensuales extends javax.swing.JFrame {
         try {
             ServiciosDB service = new ServiciosDB();
             Prestamos pres;
+            Clientes clie;
             Deducciones ded;
             ArrayList<Prestamos> depts;
             depts = (ArrayList<Prestamos>) service.findAllPrestamos();
             for (int x = 0; x < depts.size(); x++) {
                 pres = depts.get(x);
                 ded = service.findByIdPrestamo(pres.getIdPrestamo());
-                if ("Mensuales".equals(pres.getTipoPago()) && ded == null) {
+                clie = service.findByIdClientes(pres.getIdCliente());
+                agregarFilas();
+                if ("Socios Olivo".equals(clie.getTipo()) && ded == null) {
                     jTable3.setValueAt(pres.getIdCliente(), x, 0);
                     jTable3.setValueAt(pres.getNombre(), x, 1);
                     jTable3.setValueAt(pres.getCapitalinteres(), x, 2);
                     jTable3.setValueAt(pres.getDeduccion(), x, 3);
                     jTable3.setValueAt(pres.getCapitalinteres() - pres.getDeduccion(), x, 4);
-                } else if ("Mensuales".equals(pres.getTipoPago()) && ded.getSaldoDeudor() != 0.0) {
+                } else if ("Socios Olivo".equals(clie.getTipo()) && ded.getSaldoDeudor() != 0.0) {
                     jTable3.setValueAt(pres.getIdCliente(), x, 0);
                     jTable3.setValueAt(pres.getNombre(), x, 1);
                     jTable3.setValueAt(pres.getCapitalinteres(), x, 2);
                     jTable3.setValueAt(pres.getDeduccion(), x, 3);
                     jTable3.setValueAt(ded.getSaldoDeudor(), x, 4);
                 }
-                agregarFilas();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(deduccionesQuincenales.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(deduccionesEmpleadosTemporales.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -162,4 +162,12 @@ public final class deduccionesMensuales extends javax.swing.JFrame {
         temp.addRow(nuevo);
     }
 
+    public void setIcon() {
+        try {
+            Image img = ImageIO.read(new File("Logo.png"));
+            this.setIconImage(img);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

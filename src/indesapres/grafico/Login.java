@@ -6,6 +6,12 @@
 package indesapres.grafico;
 
 import indesapres.logica.ServiciosDB;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +25,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        setIcon();
     }
 
     /**
@@ -53,7 +60,7 @@ public class Login extends javax.swing.JFrame {
         clave.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\entrar.png")); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\entrar.png")); // NOI18N
         jButton2.setText("Entrar");
         jButton2.setToolTipText("");
         jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -67,7 +74,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\key.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\key.png")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,7 +107,7 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -119,10 +126,10 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if ("indesa".equals(usuario.getText()) && "emanuel17".equals(clave.getText())){
+        if ("indesa".equals(usuario.getText()) && "emanuel17".equals(clave.getText())) {
             Menu mn = new Menu();
             mn.setVisible(true);
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Conexion fallida");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -169,4 +176,14 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
+
+    public void setIcon() {
+        try {
+            Image img = ImageIO.read(new File("Logo.png"));
+            this.setIconImage(img);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

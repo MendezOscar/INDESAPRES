@@ -1,23 +1,29 @@
 package indesapres.grafico;
 
 import indesapres.logica.ServiciosDB;
+import indesapres.modelos.Clientes;
 import indesapres.modelos.Deducciones;
 import indesapres.modelos.Prestamos;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author oscme
  */
-public class deduccionesQuincenales extends javax.swing.JFrame {
+public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
 
-    public deduccionesQuincenales() {
+    public deduccionesEmpleadosPermanentes() {
         initComponents();
         setearDeduccion();
+        setIcon();
     }
 
     @SuppressWarnings("unchecked")
@@ -59,7 +65,6 @@ public class deduccionesQuincenales extends javax.swing.JFrame {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
                 {null, null, null, null, null}
             },
             new String [] {
@@ -82,7 +87,7 @@ public class deduccionesQuincenales extends javax.swing.JFrame {
         jScrollPane5.setViewportView(jTable3);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel1.setText("LISTADO DE DEDUCIONES QUINCENALES");
+        jLabel1.setText("LISTADO DE DEDUCIONES EMPLEADOS PERMANENTES");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,20 +95,20 @@ public class deduccionesQuincenales extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(244, 244, 244)
+                        .addGap(219, 219, 219)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel1)
-                .addGap(38, 38, 38)
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                 .addGap(28, 28, 28))
         );
@@ -124,7 +129,7 @@ public class deduccionesQuincenales extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new deduccionesQuincenales().setVisible(true);
+            new deduccionesEmpleadosPermanentes().setVisible(true);
         });
     }
 
@@ -140,29 +145,31 @@ public class deduccionesQuincenales extends javax.swing.JFrame {
         try {
             ServiciosDB service = new ServiciosDB();
             Prestamos pres;
+            Clientes clie;
             Deducciones ded;
             ArrayList<Prestamos> depts;
             depts = (ArrayList<Prestamos>) service.findAllPrestamos();
             for (int x = 0; x < depts.size(); x++) {
                 pres = depts.get(x);
                 ded = service.findByIdPrestamo(pres.getIdPrestamo());
-                if ("Mensuales".equals(pres.getTipoPago()) && ded == null) {
+                clie = service.findByIdClientes(pres.getIdCliente());
+                agregarFilas();
+                if ("Empleado Permanente".equals(clie.getTipo()) && ded == null) {
                     jTable3.setValueAt(pres.getIdCliente(), x, 0);
                     jTable3.setValueAt(pres.getNombre(), x, 1);
                     jTable3.setValueAt(pres.getCapitalinteres(), x, 2);
                     jTable3.setValueAt(pres.getDeduccion(), x, 3);
                     jTable3.setValueAt(pres.getCapitalinteres() - pres.getDeduccion(), x, 4);
-                } else if ("Mensuales".equals(pres.getTipoPago()) && ded.getSaldoDeudor() != 0.0) {
+                } else if ("Empleado Permanente".equals(clie.getTipo()) && ded.getSaldoDeudor() != 0.0) {
                     jTable3.setValueAt(pres.getIdCliente(), x, 0);
                     jTable3.setValueAt(pres.getNombre(), x, 1);
                     jTable3.setValueAt(pres.getCapitalinteres(), x, 2);
                     jTable3.setValueAt(pres.getDeduccion(), x, 3);
                     jTable3.setValueAt(ded.getSaldoDeudor(), x, 4);
                 }
-                agregarFilas();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(deduccionesQuincenales.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(deduccionesEmpleadosPermanentes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -170,5 +177,14 @@ public class deduccionesQuincenales extends javax.swing.JFrame {
         DefaultTableModel temp = (DefaultTableModel) jTable3.getModel();
         Object nuevo[] = {"", "", "", "", "", "", "", "", ""};
         temp.addRow(nuevo);
+    }
+
+    public void setIcon() {
+        try {
+            Image img = ImageIO.read(new File("Logo.png"));
+            this.setIconImage(img);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

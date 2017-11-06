@@ -71,6 +71,8 @@
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jidDeduccion" min="-2" pref="125" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jButton8" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -113,7 +115,10 @@
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jidDeduccion" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jidDeduccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButton8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -123,7 +128,7 @@
                   </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jScrollPane2" pref="194" max="32767" attributes="0"/>
+              <Component id="jScrollPane2" pref="140" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -266,7 +271,7 @@
               <Font name="Times New Roman" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\save.png"/>
+              <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\save.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Guardar"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -295,7 +300,7 @@
               <Font name="Times New Roman" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\editar.png"/>
+              <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\editar.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Modificar"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -325,7 +330,7 @@
               <Font name="Times New Roman" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\eliminar.png"/>
+              <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\eliminar.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -355,7 +360,7 @@
               <Font name="Times New Roman" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\nwe.png"/>
+              <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\nwe.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Limpiar"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -385,7 +390,7 @@
               <Font name="Times New Roman" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\buscar.png"/>
+              <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\buscar.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Buscar"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -415,7 +420,7 @@
               <Font name="Times New Roman" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\kista.png"/>
+              <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\kista.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="reporte"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -473,6 +478,9 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jidDeduccionActionPerformed"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jidDeduccionKeyPressed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -577,7 +585,7 @@
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\deducciongrande.png"/>
+          <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\deducciongrande.png"/>
         </Property>
       </Properties>
     </Component>
@@ -608,6 +616,17 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton8">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Buscar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

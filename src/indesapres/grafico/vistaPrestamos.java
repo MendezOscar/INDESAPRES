@@ -1,9 +1,12 @@
 package indesapres.grafico;
 
 import indesapres.logica.ServiciosDB;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -11,6 +14,7 @@ import java.sql.Statement;
 import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
@@ -29,6 +33,7 @@ public class vistaPrestamos extends javax.swing.JFrame {
     public vistaPrestamos() {
         initComponents();
         mostrarDatos();
+        setIcon();
     }
 
     public void mostrarDatos() {
@@ -220,11 +225,31 @@ public class vistaPrestamos extends javax.swing.JFrame {
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // TODO add your handling code here:
-        int row = jTable2.getSelectedRow();
-        String idPres = jTable2.getValueAt(row, 0).toString();
-        System.out.println("idPres: " + idPres);
-        registrarDeduccion.jidPrestamo.setText(idPres);
-        this.setVisible(false);
+        registrarDeduccion rd = null;
+        vistaDeduccionPorPrestamo vpp = new vistaDeduccionPorPrestamo();
+        registrarPrestamo vp = new registrarPrestamo();
+        if (rd.active) {
+            int row = jTable2.getSelectedRow();
+            String idPres = jTable2.getValueAt(row, 0).toString();
+            System.out.println("aaaaaaa");
+            registrarDeduccion.jidPrestamo.setText(idPres);
+            rd.active = false;
+            rd.setVisible(true);
+            this.setVisible(false);
+        } else if (vpp.isVisible()) {
+            int row = jTable2.getSelectedRow();
+            String idPres = jTable2.getValueAt(row, 0).toString();
+            System.out.println("aqui");
+            System.out.println(idPres);
+            vistaDeduccionPorPrestamo.txtFiltro.setText(idPres);
+            this.setVisible(false);
+        } else if (vp.isVisible()) {
+            int row = jTable2.getSelectedRow();
+            String idPres = jTable2.getValueAt(row, 0).toString();
+            System.out.println("aaa");
+            registrarPrestamo.jCodigo1.setText(idPres);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jTable2MouseClicked
 
     /**
@@ -295,6 +320,15 @@ public class vistaPrestamos extends javax.swing.JFrame {
                     "Print fail (Fallo de impresión): " + ex.getMessage(),
                     "Print result (Resultado de la impresión)",
                     JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void setIcon() {
+        try {
+            Image img = ImageIO.read(new File("Logo.png"));
+            this.setIconImage(img);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

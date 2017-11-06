@@ -88,11 +88,11 @@ public class NumberToLetterConverter {
                 + String.valueOf(getDigitAt(splitNumber[0], 7))
                 + String.valueOf(getDigitAt(splitNumber[0], 6)));
         if (millon == 1) {
-            converted.append("**UN MILLON ");
+            converted.append("Un Millon ");
         } else if (millon > 1) {
-            converted.append("**")
+            converted.append("")
                     .append(convertNumber(String.valueOf(millon)))
-                    .append("MILLONES ");
+                    .append("Millones ");
         }
 
         // Descompone el trio de miles
@@ -103,20 +103,20 @@ public class NumberToLetterConverter {
         if (millon >= 1) {
             if (miles == 1) {
                 converted.append(convertNumber(String.valueOf(miles)))
-                        .append("MIL ");
+                        .append("Mil ");
             } else if (miles > 1) {
                 converted.append(convertNumber(String.valueOf(miles)))
-                        .append("MIL ");
+                        .append("Mil ");
             }
         } else {
             if (miles == 1) {
-                converted.append("**UN MIL ");
+                converted.append("Un Mil ");
             }
 
             if (miles > 1) {
-                converted.append("**")
+                converted.append("")
                         .append(convertNumber(String.valueOf(miles)))
-                        .append("MIL ");
+                        .append("Mil ");
             }
         }
 
@@ -131,25 +131,25 @@ public class NumberToLetterConverter {
             }
         } else {
             if (cientos == 1) {
-                converted.append("**UN ");
+                converted.append("Un ");
             }
             if (cientos > 1) {
-                converted.append("**").append(convertNumber(String.valueOf(cientos)));
+                converted.append("").append(convertNumber(String.valueOf(cientos)));
             }
         }
 
         if (millon + miles + cientos == 0) {
-            converted.append("**CERO ");
+            converted.append("Cero ");
         }
 
         // Descompone los centavos
         String valor = splitNumber[1];
         if (valor.length() == 1) {
-            converted.append(splitNumber[1]).append("0").append("/100 ");
+            converted.append(splitNumber[1]).append("").append(" ");
         } else {
-            converted.append(splitNumber[1]).append("/100 ");
+            converted.append(splitNumber[1]).append("");
         }
-        converted.append("Lempiras Exactos**");
+        converted.append("");
         return converted.toString();
     }
 
@@ -169,7 +169,7 @@ public class NumberToLetterConverter {
 
         // Caso especial con el 100
         if (number.equals("100")) {
-            return "CIEN ";
+            return "Cien ";
         }
 
         StringBuilder output = new StringBuilder();
@@ -184,7 +184,7 @@ public class NumberToLetterConverter {
             output.append(UNIDADES[k]);
         } else if (k > 30 && getDigitAt(number, 0) != 0) {
             output.append(DECENAS[getDigitAt(number, 1) - 2])
-                    .append("Y ")
+                    .append("y ")
                     .append(UNIDADES[getDigitAt(number, 0)]);
         } else {
             output.append(DECENAS[getDigitAt(number, 1) - 2])

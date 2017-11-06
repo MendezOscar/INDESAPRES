@@ -3,12 +3,16 @@ package indesapres.grafico;
 import indesapres.logica.ServiciosDB;
 import indesapres.modelos.Deducciones;
 import indesapres.modelos.Prestamos;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
+import java.io.File;
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +30,7 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
 
     public vistaDeduccionPorPrestamo() {
         initComponents();
+        setIcon();
     }
 
     @SuppressWarnings("unchecked")
@@ -250,7 +255,7 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable2;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JTextField txtFiltro;
+    public static javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 
     public void buscarPrestamo() {
@@ -332,4 +337,12 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
         }
     }
     
+    public void setIcon() {
+        try {
+            Image img = ImageIO.read(new File("Logo.png"));
+            this.setIconImage(img);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

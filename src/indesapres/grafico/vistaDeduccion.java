@@ -1,9 +1,12 @@
 package indesapres.grafico;
 
 import indesapres.logica.ServiciosDB;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -11,6 +14,7 @@ import java.sql.Statement;
 import java.text.MessageFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
@@ -29,6 +33,7 @@ public class vistaDeduccion extends javax.swing.JFrame {
     public vistaDeduccion() {
         initComponents();
         mostrarDatos();
+        setIcon();
     }
 
     public void mostrarDatos() {
@@ -107,6 +112,11 @@ public class vistaDeduccion extends javax.swing.JFrame {
 
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jTable2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTable2KeyPressed(evt);
@@ -209,6 +219,14 @@ public class vistaDeduccion extends javax.swing.JFrame {
         imprimir();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+        int row = jTable2.getSelectedRow();
+        String idClient = jTable2.getValueAt(row, 0).toString();
+        registrarDeduccion.jidDeduccion.setText(idClient);
+        this.setVisible(false);
+    }//GEN-LAST:event_jTable2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -275,6 +293,15 @@ public class vistaDeduccion extends javax.swing.JFrame {
                     "Print fail (Fallo de impresión): " + ex.getMessage(),
                     "Print result (Resultado de la impresión)",
                     JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void setIcon() {
+        try {
+            Image img = ImageIO.read(new File("Logo.png"));
+            this.setIconImage(img);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

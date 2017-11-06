@@ -31,61 +31,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jToolBar1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jDireccion" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel5" min="-2" pref="137" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                              <Component id="jLabel25" min="-2" pref="136" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jIdentidad" min="-2" pref="177" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jApellido" alignment="0" pref="339" max="32767" attributes="0"/>
-                                      <Component id="jNombre" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="jidCliente" min="-2" pref="125" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jTipo" min="-2" pref="111" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jDepartamento" min="-2" pref="139" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jMunicipio" max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
@@ -96,36 +45,106 @@
                       <Component id="jTelefono" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                      <Component id="jEdad" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jEdad" min="-2" pref="71" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="268" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jGenero" min="-2" pref="97" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jProfesion" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jGenero" min="-2" pref="97" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jLabel29" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jProfesion" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jArea" min="-2" pref="240" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jDepto" min="-2" pref="183" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
                           <Group type="102" attributes="0">
-                              <Component id="jArea" min="-2" pref="240" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jDepto" min="-2" pref="219" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel25" pref="911" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLabel31" min="-2" pref="156" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                      <Component id="jIdentidad" min="-2" pref="177" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
+                                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                                              <Component id="jApellido" alignment="0" max="32767" attributes="0"/>
+                                                              <Component id="jNombre" alignment="0" min="-2" pref="339" max="-2" attributes="0"/>
+                                                          </Group>
+                                                          <Component id="jidCliente" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                      <Component id="jTipo" min="-2" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jDireccion" min="-2" pref="811" max="-2" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="jmuni" min="-2" pref="139" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="jMunicipio" min="-2" pref="276" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="jDepartamento1" min="-2" pref="139" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel5" min="-2" pref="137" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
-          <Component id="jToolBar1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -135,9 +154,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTipo" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="jLabel28" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -163,19 +183,22 @@
                           <Component id="jIdentidad" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel31" min="-2" pref="144" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jDepartamento" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jMunicipio" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jDireccion" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                  <Component id="jDireccion" min="-2" max="-2" attributes="0"/>
+                  <Component id="jmuni" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jMunicipio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jDepartamento1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -200,7 +223,7 @@
                   <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jDepto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -278,7 +301,7 @@
               <Font name="Times New Roman" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\save.png"/>
+              <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\save.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Guardar"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -312,7 +335,7 @@
               <Font name="Times New Roman" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\editar.png"/>
+              <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\editar.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Modificar"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -347,7 +370,7 @@
               <Font name="Times New Roman" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\eliminar.png"/>
+              <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\eliminar.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -382,7 +405,7 @@
               <Font name="Times New Roman" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\nwe.png"/>
+              <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\nwe.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Limpiar"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -417,7 +440,7 @@
               <Font name="Times New Roman" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\buscar.png"/>
+              <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\buscar.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Buscar"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -452,7 +475,7 @@
               <Font name="Times New Roman" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\kista.png"/>
+              <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\kista.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="reporte"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -561,31 +584,20 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jIdentidadActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jDepartamento">
+    <Component class="javax.swing.JComboBox" name="jmuni">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="14" style="0"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="18">
-            <StringItem index="0" value="Atlantidad"/>
-            <StringItem index="1" value="Colon"/>
-            <StringItem index="2" value="Comayagua"/>
-            <StringItem index="3" value="Copan"/>
-            <StringItem index="4" value="Cortes"/>
-            <StringItem index="5" value="Choluteca"/>
-            <StringItem index="6" value="El Paraiso"/>
-            <StringItem index="7" value="Francisco Morazan"/>
-            <StringItem index="8" value="Gracias a Dios"/>
-            <StringItem index="9" value="Intibuca"/>
-            <StringItem index="10" value="Islas de la Bahia"/>
-            <StringItem index="11" value="La Paz"/>
-            <StringItem index="12" value="Lempira"/>
-            <StringItem index="13" value="Ocotepeque"/>
-            <StringItem index="14" value="Olancho"/>
-            <StringItem index="15" value="Santa Barbara"/>
-            <StringItem index="16" value="Valle"/>
-            <StringItem index="17" value="Yoro"/>
+          <StringArray count="7">
+            <StringItem index="0" value="--"/>
+            <StringItem index="1" value="Sanra Cruz de Yojoa"/>
+            <StringItem index="2" value="Potrerillos"/>
+            <StringItem index="3" value="Santa Rita"/>
+            <StringItem index="4" value="Progreso"/>
+            <StringItem index="5" value="San Antonio"/>
+            <StringItem index="6" value="San Francisco"/>
           </StringArray>
         </Property>
       </Properties>
@@ -722,11 +734,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel25">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\oscme\OneDrive\Documents\NetBeansProjects\Prestamos\pictures\clientes.png"/>
-        </Property>
-      </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="jTipo">
       <Properties>
@@ -734,10 +741,11 @@
           <Font name="Times New Roman" size="14" style="0"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
+          <StringArray count="4">
             <StringItem index="0" value="Socio Olivo"/>
             <StringItem index="1" value="Socio Indesa"/>
-            <StringItem index="2" value="Empleado"/>
+            <StringItem index="2" value="Empleado Temporal"/>
+            <StringItem index="3" value="Empleado Permanante"/>
           </StringArray>
         </Property>
       </Properties>
@@ -758,7 +766,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="LABORA EN AREA"/>
+        <Property name="text" type="java.lang.String" value="LABOR / AREA"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jArea">
@@ -776,12 +784,68 @@
         <Property name="text" type="java.lang.String" value="DEPARTAMENTO"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jDepto">
+    <Component class="javax.swing.JLabel" name="jLabel31">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\clientes.png"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jDepartamento1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="14" style="0"/>
         </Property>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="19">
+            <StringItem index="0" value="Cortes"/>
+            <StringItem index="1" value="Yoro"/>
+            <StringItem index="2" value="EUA"/>
+            <StringItem index="3" value="Atlantidad"/>
+            <StringItem index="4" value="Colon"/>
+            <StringItem index="5" value="Comayagua"/>
+            <StringItem index="6" value="Copan"/>
+            <StringItem index="7" value="Choluteca"/>
+            <StringItem index="8" value="El Paraiso"/>
+            <StringItem index="9" value="Francisco Morazan"/>
+            <StringItem index="10" value="Gracias a Dios"/>
+            <StringItem index="11" value="Intibuca"/>
+            <StringItem index="12" value="Islas de la Bahia"/>
+            <StringItem index="13" value="La Paz"/>
+            <StringItem index="14" value="Lempira"/>
+            <StringItem index="15" value="Ocotepeque"/>
+            <StringItem index="16" value="Olancho"/>
+            <StringItem index="17" value="Santa Barbara"/>
+            <StringItem index="18" value="Valle"/>
+          </StringArray>
+        </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jDepto">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="14" style="0"/>
+        </Property>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="9">
+            <StringItem index="0" value="Agricultura"/>
+            <StringItem index="1" value="Control de pestes y enfermedades"/>
+            <StringItem index="2" value="Empaque"/>
+            <StringItem index="3" value="Materiales y suministros"/>
+            <StringItem index="4" value="Recurso Humano"/>
+            <StringItem index="5" value="Transporte maquinaria y equipo"/>
+            <StringItem index="6" value="Administracion de finanzas y presupuesto"/>
+            <StringItem index="7" value="Salud, higiene, seguridad laboral y ambiente"/>
+            <StringItem index="8" value=" "/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

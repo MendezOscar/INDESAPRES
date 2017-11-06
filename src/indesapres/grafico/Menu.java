@@ -5,6 +5,13 @@
  */
 package indesapres.grafico;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+
 /**
  *
  * @author oscme
@@ -17,6 +24,7 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
+        setIcon();
     }
 
     /**
@@ -44,16 +52,17 @@ public class Menu extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menu");
 
         jMenuBar1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
-        jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\Cliente.png")); // NOI18N
+        jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\Cliente.png")); // NOI18N
         jMenu1.setText("Clientes");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\registrocliente.png")); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\registrocliente.png")); // NOI18N
         jMenuItem1.setText("Registro Cliente");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,10 +73,10 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\prestamo.png")); // NOI18N
+        jMenu2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\prestamo.png")); // NOI18N
         jMenu2.setText("Prestamos");
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\registroprestamo.png")); // NOI18N
+        jMenuItem2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\registroprestamo.png")); // NOI18N
         jMenuItem2.setText("Registro de prestamo");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,10 +87,10 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\deduccion.png")); // NOI18N
+        jMenu3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\deduccion.png")); // NOI18N
         jMenu3.setText("Deduccion");
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\registrodeduccion.png")); // NOI18N
+        jMenuItem3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\registrodeduccion.png")); // NOI18N
         jMenuItem3.setText("Registro de deduccion");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,10 +101,10 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\reporte.png")); // NOI18N
+        jMenu4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\reporte.png")); // NOI18N
         jMenu4.setText("Reportes");
 
-        jMenuItem4.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\reporteCliente.png")); // NOI18N
+        jMenuItem4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\reporteCliente.png")); // NOI18N
         jMenuItem4.setText("Clientes");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,10 +113,9 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem4);
 
-        jMenu5.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\reporteDeducion.png")); // NOI18N
+        jMenu5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\reporteDeducion.png")); // NOI18N
         jMenu5.setText("Deducciones");
 
-        jMenuItem7.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\filter.png")); // NOI18N
         jMenuItem7.setText("Especifico");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +124,6 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem7);
 
-        jMenuItem5.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\todos.png")); // NOI18N
         jMenuItem5.setText("General");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +134,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu4.add(jMenu5);
 
-        jMenuItem6.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\reportePrestamo.png")); // NOI18N
+        jMenuItem6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\reportePrestamo.png")); // NOI18N
         jMenuItem6.setText("Prestamos");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,7 +145,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu6.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\date.png")); // NOI18N
+        jMenu6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\date.png")); // NOI18N
         jMenu6.setText("Proximas Deducciones");
         jMenu6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,8 +153,8 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem8.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\quicena.png")); // NOI18N
-        jMenuItem8.setText("Quincenales");
+        jMenuItem8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\quicena.png")); // NOI18N
+        jMenuItem8.setText("Empleados Permanentes");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem8ActionPerformed(evt);
@@ -155,14 +162,23 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu6.add(jMenuItem8);
 
-        jMenuItem9.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\mes.png")); // NOI18N
-        jMenuItem9.setText("Mensuales");
+        jMenuItem9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\mes.png")); // NOI18N
+        jMenuItem9.setText("Empleados Temporales");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
             }
         });
         jMenu6.add(jMenuItem9);
+
+        jMenuItem11.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\socio.png")); // NOI18N
+        jMenuItem11.setText("Socios");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem11);
 
         jMenuBar1.add(jMenu6);
 
@@ -176,7 +192,7 @@ public class Menu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 391, Short.MAX_VALUE)
+            .addGap(0, 338, Short.MAX_VALUE)
         );
 
         pack();
@@ -225,19 +241,27 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
         // TODO add your handling code here:
+        deduccionesSocios ds = new deduccionesSocios();
+        ds.setVisible(true);
     }//GEN-LAST:event_jMenu6ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
-        deduccionesQuincenales vd = new deduccionesQuincenales();
+        deduccionesEmpleadosPermanentes vd = new deduccionesEmpleadosPermanentes();
         vd.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         // TODO add your handling code here:
-        deduccionesMensuales dm = new deduccionesMensuales();
+        deduccionesEmpleadosTemporales dm = new deduccionesEmpleadosTemporales();
         dm.setVisible(true);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        // TODO add your handling code here:
+        deduccionesSocios ds = new deduccionesSocios();
+        ds.setVisible(true);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,6 +307,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -292,4 +317,14 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
+
+
+    public void setIcon() {
+        try {
+            Image img = ImageIO.read(new File("Logo.png"));
+            this.setIconImage(img);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
