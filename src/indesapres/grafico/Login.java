@@ -7,6 +7,7 @@ package indesapres.grafico;
 
 import indesapres.logica.ServiciosDB;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -58,6 +59,16 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Clave");
 
         clave.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        clave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                claveActionPerformed(evt);
+            }
+        });
+        clave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                claveKeyPressed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\entrar.png")); // NOI18N
@@ -133,6 +144,22 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Conexion fallida");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void claveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_claveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_claveActionPerformed
+
+    private void claveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_claveKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if ("indesa".equals(usuario.getText()) && "emanuel17".equals(clave.getText())) {
+                Menu mn = new Menu();
+                mn.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Conexion fallida");
+            }
+        }
+    }//GEN-LAST:event_claveKeyPressed
 
     /**
      * @param args the command line arguments

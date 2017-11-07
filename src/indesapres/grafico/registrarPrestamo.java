@@ -3,6 +3,7 @@ package indesapres.grafico;
 import indesapres.logica.NumberToLetterConverter;
 import indesapres.logica.ServiciosDB;
 import indesapres.logica.WordGenerator;
+import indesapres.modelos.Aval;
 import indesapres.modelos.Clientes;
 import indesapres.modelos.Deducciones;
 import indesapres.modelos.Prestamos;
@@ -35,7 +36,6 @@ public class registrarPrestamo extends javax.swing.JFrame {
     public registrarPrestamo() {
         initComponents();
         setearFecha();
-        ocultar();
         setIcon();
         active = true;
     }
@@ -83,35 +83,12 @@ public class registrarPrestamo extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jLabel9 = new javax.swing.JLabel();
-        jCheque = new javax.swing.JTextField();
-        jBanco = new javax.swing.JTextField();
-        jLabel32 = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-        jAval = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jide = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jDireccion = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jLabora = new javax.swing.JTextField();
-        jLabel27 = new javax.swing.JLabel();
-        jAnio = new javax.swing.JTextField();
-        jLabel28 = new javax.swing.JLabel();
-        jmes = new javax.swing.JTextField();
-        jLabel31 = new javax.swing.JLabel();
-        jTel = new javax.swing.JTextField();
-        jSalario = new javax.swing.JTextField();
-        jLabel30 = new javax.swing.JLabel();
-        jLabor = new javax.swing.JTextField();
-        jLabel29 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
         tipoPago = new javax.swing.JComboBox<>();
         jButton11 = new javax.swing.JButton();
-        jLabel34 = new javax.swing.JLabel();
-        jPro = new javax.swing.JTextField();
+        jButton12 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -406,36 +383,6 @@ public class registrarPrestamo extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable2);
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("NUMERO DE CHEQUE");
-
-        jCheque.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jCheque.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jChequeActionPerformed(evt);
-            }
-        });
-        jCheque.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jChequeKeyPressed(evt);
-            }
-        });
-
-        jBanco.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jBanco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBancoActionPerformed(evt);
-            }
-        });
-        jBanco.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jBancoKeyPressed(evt);
-            }
-        });
-
-        jLabel32.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel32.setText("BANCO");
-
         jButton10.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jButton10.setText("Generar Pagare");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -452,141 +399,6 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
-        jAval.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jAval.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jAvalActionPerformed(evt);
-            }
-        });
-        jAval.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jAvalKeyPressed(evt);
-            }
-        });
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("NOMBRE AVAL");
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("IDENTIDAD");
-
-        jide.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jide.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jideActionPerformed(evt);
-            }
-        });
-        jide.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jideKeyPressed(evt);
-            }
-        });
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setText("DIRECCION");
-
-        jDireccion.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jDireccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jDireccionActionPerformed(evt);
-            }
-        });
-        jDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jDireccionKeyPressed(evt);
-            }
-        });
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel13.setText("EMPRESA DONDE LABORA");
-
-        jLabora.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jLaboraActionPerformed(evt);
-            }
-        });
-        jLabora.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jLaboraKeyPressed(evt);
-            }
-        });
-
-        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel27.setText("AÑOS DE ANTIGUEDAD");
-
-        jAnio.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jAnio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jAnioActionPerformed(evt);
-            }
-        });
-        jAnio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jAnioKeyPressed(evt);
-            }
-        });
-
-        jLabel28.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel28.setText("MESES ");
-
-        jmes.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jmes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmesActionPerformed(evt);
-            }
-        });
-        jmes.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jmesKeyPressed(evt);
-            }
-        });
-
-        jLabel31.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel31.setText("TELEFONO");
-
-        jTel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTelActionPerformed(evt);
-            }
-        });
-        jTel.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTelKeyPressed(evt);
-            }
-        });
-
-        jSalario.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jSalario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jSalarioActionPerformed(evt);
-            }
-        });
-        jSalario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jSalarioKeyPressed(evt);
-            }
-        });
-
-        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel30.setText("SALARIO");
-
-        jLabor.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jLaborActionPerformed(evt);
-            }
-        });
-        jLabor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jLaborKeyPressed(evt);
-            }
-        });
-
-        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel29.setText("LABOR DESEMPEÑADA");
-
         jLabel33.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel33.setText("TIPOS DE PAGO");
 
@@ -601,18 +413,11 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
-        jLabel34.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel34.setText("PROFESION U OFICIO");
-
-        jPro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jPro.addActionListener(new java.awt.event.ActionListener() {
+        jButton12.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton12.setText("Registrar Aval");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jProActionPerformed(evt);
-            }
-        });
-        jPro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jProKeyPressed(evt);
+                jButton12ActionPerformed(evt);
             }
         });
 
@@ -637,112 +442,62 @@ public class registrarPrestamo extends javax.swing.JFrame {
                                 .addGap(494, 494, 494))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jCodigo2)
-                                        .addGap(299, 299, 299))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jCodigo1)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jCodigo1)
+                                                .addGap(206, 206, 206)
+                                                .addComponent(tipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(33, 33, 33))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jButton8)
-                                                .addGap(41, 41, 41)
+                                                .addGap(18, 18, 18)
                                                 .addComponent(jLabel3)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(196, 196, 196)
-                                                .addComponent(jporAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jLabel33)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(tipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(39, 39, 39)))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(155, 155, 155))))))
+                                                .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(155, 155, 155))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jCodigo2)
+                                        .addGap(432, 432, 432))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel32)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
-                                .addComponent(jButton10))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jAval, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton9))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(18, 18, 18)
-                                .addComponent(jide, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel34)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPro, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabora, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel27)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel28)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jmes, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(10, 10, 10)
-                                .addComponent(jPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(16, 16, 16)
-                                .addComponent(jLabel8)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jScrollPane2)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel29)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel30)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel31)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTel, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jporAnual, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel33))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton12)
+                                        .addGap(28, 28, 28)
+                                        .addComponent(jButton9)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton10)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -765,55 +520,21 @@ public class registrarPrestamo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(jporAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel33)
                     .addComponent(tipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7))
+                    .addComponent(jButton7)
+                    .addComponent(jLabel7)
+                    .addComponent(jPlazo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jCheque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton9)
                     .addComponent(jButton10)
-                    .addComponent(jLabel32)
-                    .addComponent(jBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jAval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton9))
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel34)
-                    .addComponent(jPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel27)
-                    .addComponent(jAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel28)
-                    .addComponent(jmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel29)
-                    .addComponent(jLabor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel30)
-                    .addComponent(jSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel31)
-                    .addComponent(jTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36))
+                    .addComponent(jButton12))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -900,7 +621,6 @@ public class registrarPrestamo extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             buscarCliente();
             setearCodigo();
-            verificarTipoCliente();
         }
     }//GEN-LAST:event_jCodigo1KeyPressed
 
@@ -982,7 +702,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
 
     private void jporAnualMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jporAnualMouseClicked
         // TODO add your handling code here:
-        int plazo = Integer.parseInt(jPlazo.getText());
+        float plazo = Integer.parseInt(jPlazo.getText());
         float prestamo = Float.parseFloat(jPrestamo.getText());
         if (plazo == 5) {
             float interesanual = (float) 20;
@@ -1059,22 +779,6 @@ public class registrarPrestamo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable2KeyPressed
 
-    private void jChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChequeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jChequeActionPerformed
-
-    private void jChequeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jChequeKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jChequeKeyPressed
-
-    private void jBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBancoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBancoActionPerformed
-
-    private void jBancoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBancoKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBancoKeyPressed
-
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
         generarPagare();
@@ -1101,6 +805,9 @@ public class registrarPrestamo extends javax.swing.JFrame {
                     case "Empleado Temporal":
                         generarDocumentoEmpleado();
                         break;
+                    case "Empleado Permanante":
+                        generarDocumentoEmpleado();
+                        break;
                     default:
                         JOptionPane.showMessageDialog(null, "No se especifico tipo de Cliente");
                         break;
@@ -1110,78 +817,6 @@ public class registrarPrestamo extends javax.swing.JFrame {
             Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jAvalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAvalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jAvalActionPerformed
-
-    private void jAvalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jAvalKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jAvalKeyPressed
-
-    private void jideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jideActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jideActionPerformed
-
-    private void jideKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jideKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jideKeyPressed
-
-    private void jDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDireccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jDireccionActionPerformed
-
-    private void jDireccionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDireccionKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jDireccionKeyPressed
-
-    private void jLaboraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLaboraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLaboraActionPerformed
-
-    private void jLaboraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLaboraKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLaboraKeyPressed
-
-    private void jAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAnioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jAnioActionPerformed
-
-    private void jAnioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jAnioKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jAnioKeyPressed
-
-    private void jmesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jmesActionPerformed
-
-    private void jmesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jmesKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jmesKeyPressed
-
-    private void jTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTelActionPerformed
-
-    private void jTelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTelKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTelKeyPressed
-
-    private void jSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jSalarioActionPerformed
-
-    private void jSalarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSalarioKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jSalarioKeyPressed
-
-    private void jLaborActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLaborActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLaborActionPerformed
-
-    private void jLaborKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLaborKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLaborKeyPressed
 
     private void jPrestamoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPrestamoKeyPressed
         // TODO add your handling code here:
@@ -1197,13 +832,11 @@ public class registrarPrestamo extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    private void jProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jProActionPerformed
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jProActionPerformed
-
-    private void jProKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jProKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jProKeyPressed
+        registrarAval ra = new registrarAval();
+        ra.setVisible(true);
+    }//GEN-LAST:event_jButton12ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1241,12 +874,10 @@ public class registrarPrestamo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField jAnio;
-    private javax.swing.JTextField jAval;
-    private javax.swing.JTextField jBanco;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1255,17 +886,11 @@ public class registrarPrestamo extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JTextField jCheque;
     public static javax.swing.JTextField jCodigo;
     public static javax.swing.JTextField jCodigo1;
     private javax.swing.JTextField jCodigo2;
     private javax.swing.JTextField jDate;
-    private javax.swing.JTextField jDireccion;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1280,33 +905,18 @@ public class registrarPrestamo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jLabor;
-    private javax.swing.JTextField jLabora;
     private javax.swing.JTextField jPlazo;
     private javax.swing.JTextField jPrestamo;
-    private javax.swing.JTextField jPro;
-    private javax.swing.JTextField jSalario;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTel;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JTextField jide;
-    private javax.swing.JTextField jmes;
     private javax.swing.JTextField jporAnual;
     private javax.swing.JComboBox<String> tipoPago;
     // End of variables declaration//GEN-END:variables
@@ -1402,7 +1012,6 @@ public class registrarPrestamo extends javax.swing.JFrame {
         BigDecimal number = new BigDecimal(interes);
         int iPart = number.intValue();
         BigDecimal fraccion = number.remainder(BigDecimal.ONE);
-        System.out.println("interes: " + interes);
         if (isFloat(cinteres)) {
             String montoEnLetras = fraccion.toString();
             String[] nums = montoEnLetras.split("\\.");
@@ -1455,87 +1064,6 @@ public class registrarPrestamo extends javax.swing.JFrame {
             int consecutivo = pres.getContador() + 1;
             String code = idCliente + "-" + consecutivo;
             jCodigo.setText(code);
-        }
-    }
-
-    public void ocultar() {
-        jCheque.setVisible(false);
-        jLabor.setVisible(false);
-        jSalario.setVisible(false);
-        jTel.setVisible(false);
-        jmes.setVisible(false);
-        jAnio.setVisible(false);
-        jLabora.setVisible(false);
-        jBanco.setVisible(false);
-        jDireccion.setVisible(false);
-        jide.setVisible(false);
-        jAval.setVisible(false);
-        jLabel10.setVisible(false);
-        jLabel11.setVisible(false);
-        jLabel12.setVisible(false);
-        jLabel9.setVisible(false);
-        jLabel32.setVisible(false);
-        jLabel13.setVisible(false);
-        jLabel29.setVisible(false);
-        jLabel27.setVisible(false);
-        jLabel28.setVisible(false);
-        jLabel30.setVisible(false);
-        jLabel31.setVisible(false);
-        jButton10.setVisible(false);
-
-    }
-
-    public void mostrar() {
-        jCheque.setVisible(true);
-        jLabor.setVisible(true);
-        jSalario.setVisible(true);
-        jTel.setVisible(true);
-        jmes.setVisible(true);
-        jAnio.setVisible(true);
-        jLabora.setVisible(true);
-        jBanco.setVisible(true);
-        jDireccion.setVisible(true);
-        jide.setVisible(true);
-        jAval.setVisible(true);
-        jLabel10.setVisible(true);
-        jLabel11.setVisible(true);
-        jLabel12.setVisible(true);
-        jLabel9.setVisible(true);
-        jLabel32.setVisible(true);
-        jLabel13.setVisible(true);
-        jLabel29.setVisible(true);
-        jLabel27.setVisible(true);
-        jLabel28.setVisible(true);
-        jLabel30.setVisible(true);
-        jLabel31.setVisible(true);
-        jButton10.setVisible(true);
-    }
-
-    public void verificarTipoCliente() {
-        try {
-            String id = jCodigo1.getText();
-            Clientes clie;
-            ServiciosDB service = new ServiciosDB();
-            clie = service.findByIdClientes(id);
-            if (null == clie.getTipo()) {
-                JOptionPane.showMessageDialog(null, "No se especifico tipo de Cliente");
-            } else {
-                switch (clie.getTipo()) {
-                    case "Socio Olivo":
-                        break;
-                    case "Socio Indesa":
-                        mostrar();
-                        break;
-                    case "Empleado Temporal":
-                        mostrar();
-                        break;
-                    default:
-                        JOptionPane.showMessageDialog(null, "No se especifico tipo de Cliente");
-                        break;
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -1663,6 +1191,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
             float total = pres.getPrestamos() - verificarSiPrestamo() - pres.getDeduccion() - papeleria;
             String dia = Integer.toString(obtenerDia());
             String anio = Integer.toString(obtenerAnio());
+            Aval aval = buscarAval(clie.getIdCliente());
 
             String parrafo1 = "Yo " + pres.getNombre() + ", con identidad Nº " + clie.getIdentidad()
                     + "Y residente en " + clie.getDireccion() + ", " + clie.getMunicipio() + ", " + clie.getDepartamento() + ","
@@ -1678,13 +1207,13 @@ public class registrarPrestamo extends javax.swing.JFrame {
             String parrafo4 = "Cel. /Tel. Nº" + clie.getTelefono() + "\n";
             String parrafo5 = "_________________________________________________________________________________________";
             String parrafo6 = "AVAL";
-            String parrafo7 = "Nombre " + jAval.getText() + " Id. " + jide.getText() + ", Residente en " + jDireccion.getText()
+            String parrafo7 = "Nombre " + aval.getNombre() + " Id. " + aval.getIdAval() + ", Residente en " + aval.getDireccion()
                     + " socio(a) de compañía Agrícola Olivo, por este acto acepto y con decisión propia  me convierto en "
                     + "Aval Solidario de " + pres.getNombre() + "; haciéndome responsable por la morosidad que en determinado "
                     + "momento, éste contrajera con INDESA.\n";
             String parrafo8 = "_____________________________                   __________________________\n"
                     + "          Nombre del Aval                                    Firma  del Aval \n";
-            String parrafo9 = "Cel. Nº " + jTel.getText() + " \n";
+            String parrafo9 = "Cel. Nº " + aval.getTelefono() + " \n";
             String parrafo10 = ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,";
             String parrafo11 = "CALCULOS/VALORES";
             String parrafo12 = "Valor autorizado……………………………………………..  L " + pres.getPrestamos() + "      S U M A\n";
@@ -1776,6 +1305,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
             String prestamo = Float.toString(pres.getPrestamos());
             String dia = Integer.toString(obtenerDia());
             String anio = Integer.toString(obtenerAnio());
+            Aval aval = buscarAval(clie.getIdCliente());
 
             String titulo = "PAGARE";
             String parrafo1 = "YO: " + pres.getNombre() + " Hondureño(a), Mayor de edad, con identidad Nº " + clie.getIdentidad()
@@ -1794,16 +1324,17 @@ public class registrarPrestamo extends javax.swing.JFrame {
             String parrafo3 = "Cel. Nº " + clie.getTelefono() + "\n";
             String parrafo4 = "_________________________________________________________________________________";
             String parrafo5 = "AVAL";
-            String parrafo6 = "YO: " + jAval.getText() + ", Hondureño, Mayor de edad, con identidad Nº " + jide.getText() + ""
-                    + " de profesión/oficio " + jPro.getText() + "  y residente en: " + jDireccion.getText() + ". Por este "
-                    + "acto y con pleno conocimiento he decidido avalar en forma solidaria a: " + pres.getNombre() + " en "
+            String parrafo6 = "YO: " + aval.getNombre() + ", Hondureño, Mayor de edad, con identidad Nº " + aval.getIdAval() + ","
+                    + " de profesión/oficio " + aval.getProfesion() + "  y residente en " + aval.getDireccion() + ". Por este "
+                    + "acto y con pleno conocimiento he decidido AVALAR en forma solidaria a: " + pres.getNombre() + " en "
                     + "caso de incumplimiento con su compromiso deudor contraído con INDESA de C.V.  En tal sentido "
-                    + "manifiesto que soy empleado de " + jLabora.getText() + "; en el Cargo/labor de " + jLabor.getText() + ".";
-            String parrafo7 = "A cobrar libre quincenal (promedio) Lps. " + jSalario.getText() + ", con antigüedad de " + jAnio.getText() + " Años, "
-                    + jmes.getText() + " Meses.";
+                    + "manifiesto que soy empleado de " + aval.getEmpresa() + "; en el Cargo/labor de " + aval.getLaborArea() + " Departamento de"
+                    + " " + aval.getDepartamento();
+            String parrafo7 = "A cobrar libre quincenal (promedio) Lps. " + aval.getSalario() + ", con antigüedad de " + aval.getAnios() + " Años, "
+                    + aval.getMeses() + " Meses.";
             String parrafo8 = "___________________________               __________________________\n"
                     + "              Nombre del Aval                            Firma del Aval   ";
-            String parrafo9 = "Cel. Nº " + jTel.getText();
+            String parrafo9 = "Cel. Nº " + aval.getTelefono();
 
             WordGenerator wg = new WordGenerator();
             wg.createWordPagare(titulo, parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7,
@@ -1860,5 +1391,21 @@ public class registrarPrestamo extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public Aval buscarAval(String idCliente) {
+        try {
+            Aval aval;
+            ServiciosDB service = new ServiciosDB();
+            aval = service.findByIdAval(idCliente);
+            if (aval == null) {
+                JOptionPane.showMessageDialog(null, "El Cliente " + idCliente + " no existe");
+            } else {
+                return aval;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }
