@@ -43,8 +43,9 @@ public final class registrarAval extends javax.swing.JFrame {
         String idAval = codigoAval();
         String idPrestamo = jidPrestamo.getText();
         int numero = setearnumero();
-        aval = new Aval(identidad, idCliente, Nombre, direccion, profesion, empresa, labor, depto, anios, Meses, Salario,
-                Telefono, numero, idAval, idPrestamo);
+        String responsabilidad = obtenerResponsable();
+        aval = new Aval(idAval, Nombre, direccion, profesion, empresa, labor, depto, anios, Meses, Salario,
+                Telefono, numero,  idCliente, idPrestamo, responsabilidad, identidad);
         return aval;
     }
 
@@ -136,6 +137,9 @@ public final class registrarAval extends javax.swing.JFrame {
         jidPrestamo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jidAval = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        jBueno = new javax.swing.JCheckBox();
+        jMalo = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro Clientes");
@@ -420,6 +424,25 @@ public final class registrarAval extends javax.swing.JFrame {
             }
         });
 
+        jLabel36.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel36.setText("RESPONSABILIDAD DE PAGO");
+
+        jBueno.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jBueno.setText("BUENO");
+        jBueno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBuenoActionPerformed(evt);
+            }
+        });
+
+        jMalo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jMalo.setText("MALO");
+        jMalo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMaloActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -503,6 +526,14 @@ public final class registrarAval extends javax.swing.JFrame {
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jMalo)
+                    .addComponent(jBueno))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -563,7 +594,16 @@ public final class registrarAval extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
                     .addComponent(jSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jBueno)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jMalo)))
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -711,6 +751,14 @@ public final class registrarAval extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jidAvalKeyPressed
 
+    private void jBuenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuenoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBuenoActionPerformed
+
+    private void jMaloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMaloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMaloActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -748,6 +796,7 @@ public final class registrarAval extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField jAnio;
     private javax.swing.JTextField jArea;
+    private javax.swing.JCheckBox jBueno;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -785,9 +834,11 @@ public final class registrarAval extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JCheckBox jMalo;
     private javax.swing.JTextField jMeses;
     private javax.swing.JTextField jNombre;
     private javax.swing.JTextField jProfesion;
@@ -854,5 +905,14 @@ public final class registrarAval extends javax.swing.JFrame {
             Logger.getLogger(registrarAval.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    private String obtenerResponsable() {
+        if (jBueno.isSelected()){
+            return "1";
+        }else if (jMalo.isSelected()){
+            return "0";
+        }
+        return "1";
     }
 }

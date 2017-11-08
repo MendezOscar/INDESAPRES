@@ -39,8 +39,8 @@ public class ServiciosDB {
     public void createCliente(Clientes clie) {
         String query = "INSERT INTO CLIENTES "
                 + "(IDCLIENTE, NOMBRE, APELLIDO, IDENTIDAD, DEPARTAMENTO, MUNICIPIO, DIRECCION, ESTADOCIVIL, "
-                + "TELEFONO, GENERO, EDAD, PROFESION, TIPO, CONTADOR, AREA, DEPTO) "
-                + "VALUES (? , ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "TELEFONO, GENERO, EDAD, PROFESION, TIPO, CONTADOR, AREA, DEPTO, RESPONSABILIDAD) "
+                + "VALUES (? , ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setString(1, clie.getIdCliente());
             stmt.setString(2, clie.getNombre());
@@ -58,6 +58,7 @@ public class ServiciosDB {
             stmt.setInt(14, clie.getNumero());
             stmt.setString(15, clie.getArea());
             stmt.setString(16, clie.getDepto());
+            stmt.setString(17, clie.getResponsabilidad());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, " El Cliente: " + clie.getIdCliente() + " se ha guardado Exitosamente.");
         } catch (SQLException se) {
@@ -69,8 +70,8 @@ public class ServiciosDB {
     public void updateCliente(String id, Clientes clie) throws SQLException {
         String query = "UPDATE CLIENTES "
                 + "SET NOMBRE= ?, APELLIDO= ?, IDENTIDAD= ?, DEPARTAMENTO= ?, MUNICIPIO= ?, DIRECCION= ?, ESTADOCIVIL= ?, "
-                + "TELEFONO= ?, GENERO= ?, EDAD= ?, PROFESION= ?, TIPO=?, CONTADOR=?, AREA=?, DEPTO=?"
-                + "WHERE IDCLIENTE= ?";
+                + "TELEFONO= ?, GENERO= ?, EDAD= ?, PROFESION= ?, TIPO=?, CONTADOR=?, AREA=?, DEPTO=?, RESPONSABILIDAD=?"
+                + "WHERE IDCLIENTE=?";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setString(1, clie.getNombre());
             stmt.setString(2, clie.getApellido());
@@ -87,7 +88,8 @@ public class ServiciosDB {
             stmt.setInt(13, clie.getNumero());
             stmt.setString(14, clie.getArea());
             stmt.setString(15, clie.getDepto());
-            stmt.setString(16, clie.getIdCliente());
+            stmt.setString(16, clie.getResponsabilidad());
+            stmt.setString(17, clie.getIdCliente());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "El Ciente: " + id + " se ha actualizado correctamente.");
         } catch (SQLException se) {
@@ -123,9 +125,28 @@ public class ServiciosDB {
                     rs.getString("IDENTIDAD"), rs.getString("DEPARTAMENTO"), rs.getString("MUNICIPIO"),
                     rs.getString("DIRECCION"), rs.getString("ESTADOCIVIL"), rs.getString("TELEFONO"),
                     rs.getString("GENERO"), rs.getInt("EDAD"), rs.getString("PROFESION"), rs.getString("TIPO"),
-                    rs.getInt("CONTADOR"), rs.getString("AREA"), rs.getString("DEPTO")));
+                    rs.getInt("CONTADOR"), rs.getString("AREA"), rs.getString("DEPTO"), rs.getString("RESPONSABILIDAD")));
         } catch (SQLException se) {
             JOptionPane.showMessageDialog(null, "ERROR Codigo de cliente: " + id + "no se ha encontrado.");
+        }
+        return null;
+    }
+
+    public Clientes findByIdentidadCliente(String identidad) throws SQLException {
+        String query = "SELECT * FROM CLIENTES WHERE IDENTIDAD = ?";
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setString(1, identidad);
+            ResultSet rs = stmt.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
+            return (new Clientes(rs.getString("IDCLIENTE"), rs.getString("NOMBRE"), rs.getString("APELLIDO"),
+                    rs.getString("IDENTIDAD"), rs.getString("DEPARTAMENTO"), rs.getString("MUNICIPIO"),
+                    rs.getString("DIRECCION"), rs.getString("ESTADOCIVIL"), rs.getString("TELEFONO"),
+                    rs.getString("GENERO"), rs.getInt("EDAD"), rs.getString("PROFESION"), rs.getString("TIPO"),
+                    rs.getInt("CONTADOR"), rs.getString("AREA"), rs.getString("DEPTO"), rs.getString("RESPONSABILIDAD")));
+        } catch (SQLException se) {
+            JOptionPane.showMessageDialog(null, "ERROR Codigo de cliente: " + identidad + "no se ha encontrado.");
         }
         return null;
     }
@@ -141,7 +162,7 @@ public class ServiciosDB {
                         rs.getString("IDENTIDAD"), rs.getString("DEPARTAMENTO"), rs.getString("MUNICIPIO"),
                         rs.getString("DIRECCION"), rs.getString("ESTADOCIVIL"), rs.getString("TELEFONO"),
                         rs.getString("GENERO"), rs.getInt("EDAD"), rs.getString("PROFESION"), rs.getString("TIPO"),
-                        rs.getInt("CONTADOR"), rs.getString("AREA"), rs.getString("DEPTO")));
+                        rs.getInt("CONTADOR"), rs.getString("AREA"), rs.getString("DEPTO"), rs.getString("RESPONSABILIDAD")));
             }
             return depts;
         } catch (SQLException ex) {
@@ -161,7 +182,7 @@ public class ServiciosDB {
                         rs.getString("IDENTIDAD"), rs.getString("DEPARTAMENTO"), rs.getString("MUNICIPIO"),
                         rs.getString("DIRECCION"), rs.getString("ESTADOCIVIL"), rs.getString("TELEFONO"),
                         rs.getString("GENERO"), rs.getInt("EDAD"), rs.getString("PROFESION"), rs.getString("TIPO"),
-                        rs.getInt("CONTADOR"), rs.getString("AREA"), rs.getString("DEPTO")));
+                        rs.getInt("CONTADOR"), rs.getString("AREA"), rs.getString("DEPTO"), rs.getString("RESPONSABILIDAD")));
             }
             return depts;
         } catch (SQLException ex) {
@@ -180,7 +201,7 @@ public class ServiciosDB {
                         rs.getString("IDENTIDAD"), rs.getString("DEPARTAMENTO"), rs.getString("MUNICIPIO"),
                         rs.getString("DIRECCION"), rs.getString("ESTADOCIVIL"), rs.getString("TELEFONO"),
                         rs.getString("GENERO"), rs.getInt("EDAD"), rs.getString("PROFESION"), rs.getString("TIPO"),
-                        rs.getInt("CONTADOR"), rs.getString("AREA"), rs.getString("DEPTO")));
+                        rs.getInt("CONTADOR"), rs.getString("AREA"), rs.getString("DEPTO"), rs.getString("RESPONSABILIDAD")));
             }
             return depts;
         } catch (SQLException se) {
@@ -508,25 +529,27 @@ public class ServiciosDB {
     //-------------------------------------------------------------------------------------------
     public void createAval(Aval aval) {
         String query = "INSERT INTO AVAL "
-                + "(IDENTIDAD, IDCLIENTE, NOMBRE, DIRECCION, "
-                + "PROFESION, EMPRESA, LABORAREA, DEPARTAMENTO, ANIOS, MESES, SALARIO, TELEFONO, CONTADOR, IDAVAL, IDPRESTAMO) "
-                + "VALUES (? , ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "(IDAVAL, NOMBRE, DIRECCION, "
+                + "PROFESION, EMPRESA, LABORAREA, DEPARTAMENTO, ANIOS, MESES, SALARIO, TELEFONO, CONTADOR, IDCLIENTE, "
+                + "IDPRESTAMO, RESPONSABILIDAD, IDENTIDAD) "
+                + "VALUES (? , ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
-            stmt.setString(1, aval.getIdentidad());
-            stmt.setString(2, aval.getIdCliente());
-            stmt.setString(3, aval.getNombre());
-            stmt.setString(4, aval.getDireccion());
-            stmt.setString(5, aval.getProfesion());
-            stmt.setString(6, aval.getEmpresa());
-            stmt.setString(7, aval.getLaborArea());
-            stmt.setString(8, aval.getDepartamento());
-            stmt.setString(9, aval.getAnios());
-            stmt.setString(10, aval.getMeses());
-            stmt.setFloat(11, aval.getSalario());
-            stmt.setString(12, aval.getTelefono());
-            stmt.setInt(13, aval.getContador());
-            stmt.setString(14, aval.getIdAval());
-            stmt.setString(15, aval.getIdPrestamo());
+            stmt.setString(1, aval.getIdAval());
+            stmt.setString(2, aval.getNombre());
+            stmt.setString(3, aval.getDireccion());
+            stmt.setString(4, aval.getProfesion());
+            stmt.setString(5, aval.getEmpresa());
+            stmt.setString(6, aval.getLaborArea());
+            stmt.setString(7, aval.getDepartamento());
+            stmt.setString(8, aval.getAnios());
+            stmt.setString(9, aval.getMeses());
+            stmt.setFloat(10, aval.getSalario());
+            stmt.setString(11, aval.getTelefono());
+            stmt.setInt(12, aval.getContador());
+            stmt.setString(13, aval.getIdCliente());
+            stmt.setString(14, aval.getIdPrestamo());
+            stmt.setString(15, aval.getResponsabilidad());
+            stmt.setString(16, aval.getIdentidad());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, " El Aval: " + aval.getIdAval() + " se ha guardado Exitosamente.");
         } catch (SQLException se) {
@@ -537,25 +560,27 @@ public class ServiciosDB {
 
     public void updateAval(String id, Aval aval) throws SQLException {
         String query = "UPDATE AVAL "
-                + "SET IDENTIDAD=?, IDCLIENTE= ?, NOMBRE= ?, DIRECCION= ?, PROFESION= ?, EMPRESA= ?, LABORAREA= ?, DEPARTAMENTO= ?, "
-                + "ANIOS= ?, MESES= ?, SALARIO= ?, TELEFONO= ?, CONTADOR=?, IDPRESTAMO=?"
+                + "SET  NOMBRE= ?, DIRECCION= ?, PROFESION= ?, EMPRESA= ?, LABORAREA= ?, DEPARTAMENTO= ?, "
+                + "ANIOS= ?, MESES= ?, SALARIO= ?, TELEFONO= ?, CONTADOR=?, IDCLIENTE= ?, IDPRESTAMO=?, "
+                + "RESPONSABILIDAD=?, IDENTIDAD=?"
                 + "WHERE IDAVAL= ?";
         try (PreparedStatement stmt = con.prepareStatement(query)) {
-            stmt.setString(1, aval.getIdentidad());
-            stmt.setString(2, aval.getIdCliente());
-            stmt.setString(3, aval.getNombre());
-            stmt.setString(4, aval.getDireccion());
-            stmt.setString(5, aval.getProfesion());
-            stmt.setString(6, aval.getEmpresa());
-            stmt.setString(7, aval.getLaborArea());
-            stmt.setString(8, aval.getDepartamento());
-            stmt.setString(9, aval.getAnios());
-            stmt.setString(10, aval.getMeses());
-            stmt.setFloat(11, aval.getSalario());
-            stmt.setString(12, aval.getTelefono());
-            stmt.setInt(13, aval.getContador());
-            stmt.setString(14, aval.getIdPrestamo());
-            stmt.setString(15, aval.getIdAval());
+            stmt.setString(1, aval.getNombre());
+            stmt.setString(2, aval.getDireccion());
+            stmt.setString(3, aval.getProfesion());
+            stmt.setString(4, aval.getEmpresa());
+            stmt.setString(5, aval.getLaborArea());
+            stmt.setString(6, aval.getDepartamento());
+            stmt.setString(7, aval.getAnios());
+            stmt.setString(8, aval.getMeses());
+            stmt.setFloat(9, aval.getSalario());
+            stmt.setString(10, aval.getTelefono());
+            stmt.setInt(11, aval.getContador());
+            stmt.setString(12, aval.getIdCliente());
+            stmt.setString(13, aval.getIdPrestamo());
+            stmt.setString(14, aval.getResponsabilidad());
+            stmt.setString(15, aval.getIdentidad());
+            stmt.setString(16, aval.getIdAval());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "El Aval: " + id + " se ha actualizado correctamente.");
         } catch (SQLException se) {
@@ -587,11 +612,30 @@ public class ServiciosDB {
             if (!rs.next()) {
                 return null;
             }
-            return (new Aval(rs.getString("IDENTIDAD"), rs.getString("IDCLIENTE"), rs.getString("NOMBRE"),
-                    rs.getString("DIRECCION"), rs.getString("PROFESION"), rs.getString("EMPRESA"),
-                    rs.getString("LABORAREA"), rs.getString("DEPARTAMENTO"), rs.getString("ANIOS"),
-                    rs.getString("MESES"), rs.getFloat("SALARIO"), rs.getString("TELEFONO"), rs.getInt("CONTADOR")
-                    , rs.getString("IDAVAL"),rs.getString("IDPRESTAMO")));
+            return (new Aval(rs.getString("IDAVAL"),rs.getString("NOMBRE"),rs.getString("DIRECCION"),
+                    rs.getString("PROFESION"), rs.getString("EMPRESA"),rs.getString("LABORAREA"), 
+                    rs.getString("DEPARTAMENTO"), rs.getString("ANIOS"),rs.getString("MESES"), rs.getFloat("SALARIO"), 
+                    rs.getString("TELEFONO"), rs.getInt("CONTADOR"),rs.getString("IDCLIENTE"),
+                    rs.getString("IDPRESTAMO"), rs.getString("RESPONSABILIDAD"), rs.getString("IDENTIDAD")));
+        } catch (SQLException se) {
+            System.out.println(se.toString());
+            JOptionPane.showMessageDialog(null, "ERROR Codigo de cliente: " + id + "no se ha encontrado.");
+        }
+        return null;
+    }
+
+    public Aval findByIdCliente(String id) throws SQLException {
+        String query = "SELECT * FROM AVAL WHERE IDCLIENTE = " + "'" + id + "'";
+        try (PreparedStatement stmt = con.prepareStatement(query)) {
+            ResultSet rs = stmt.executeQuery();
+            if (!rs.next()) {
+                return null;
+            }
+            return (new Aval(rs.getString("IDAVAL"),rs.getString("NOMBRE"),rs.getString("DIRECCION"),
+                    rs.getString("PROFESION"), rs.getString("EMPRESA"),rs.getString("LABORAREA"), 
+                    rs.getString("DEPARTAMENTO"), rs.getString("ANIOS"),rs.getString("MESES"), rs.getFloat("SALARIO"), 
+                    rs.getString("TELEFONO"), rs.getInt("CONTADOR"),rs.getString("IDCLIENTE"),
+                    rs.getString("IDPRESTAMO"), rs.getString("RESPONSABILIDAD"), rs.getString("IDENTIDAD")));
         } catch (SQLException se) {
             JOptionPane.showMessageDialog(null, "ERROR Codigo de cliente: " + id + "no se ha encontrado.");
         }
@@ -604,11 +648,11 @@ public class ServiciosDB {
             ResultSet rs = stmt.executeQuery(query);
             ArrayList<Aval> depts = new ArrayList<>();
             while (rs.next()) {
-                depts.add(new Aval(rs.getString("IDENTIDAD"), rs.getString("IDCLIENTE"), rs.getString("NOMBRE"),
-                    rs.getString("DIRECCION"), rs.getString("PROFESION"), rs.getString("EMPRESA"),
-                    rs.getString("LABORAREA"), rs.getString("DEPARTAMENTO"), rs.getString("ANIOS"),
-                    rs.getString("MESES"), rs.getFloat("SALARIO"), rs.getString("TELEFONO"), rs.getInt("CONTADOR")
-                    , rs.getString("IDAVAL"),rs.getString("IDPRESTAMO")));
+                depts.add(new Aval(rs.getString("IDAVAL"),rs.getString("NOMBRE"),rs.getString("DIRECCION"),
+                    rs.getString("PROFESION"), rs.getString("EMPRESA"),rs.getString("LABORAREA"), 
+                    rs.getString("DEPARTAMENTO"), rs.getString("ANIOS"),rs.getString("MESES"), rs.getFloat("SALARIO"), 
+                    rs.getString("TELEFONO"), rs.getInt("CONTADOR"),rs.getString("IDCLIENTE"),
+                    rs.getString("IDPRESTAMO"), rs.getString("RESPONSABILIDAD"), rs.getString("IDENTIDAD")));
             }
             return depts;
         } catch (SQLException se) {
@@ -616,5 +660,5 @@ public class ServiciosDB {
         }
         return null;
     }
-    
+
 }

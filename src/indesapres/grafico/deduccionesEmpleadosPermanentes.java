@@ -10,7 +10,9 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -40,6 +42,8 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
         jTable3 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jDate = new javax.swing.JTextField();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,12 +99,17 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
         jLabel1.setText("LISTADO DE DEDUCIONES EMPLEADOS PERMANENTES");
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton1.setText("IMPRIMIR");
+        jButton1.setText("GENERAR DOCUMENTO");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel2.setText("FECHA");
+
+        jDate.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,21 +121,36 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(219, 219, 219)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(375, 375, 375)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addComponent(jButton1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1))
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(14, 14, 14)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                 .addGap(28, 28, 28))
         );
 
@@ -143,7 +167,6 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        imprimir();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -157,7 +180,9 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JTextField jDate;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable2;
@@ -177,20 +202,19 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
                 ded = service.findByIdPrestamo(pres.getIdPrestamo());
                 clie = service.findByIdClientes(pres.getIdCliente());
                 if ("Empleado Permanente".equals(clie.getTipo()) && ded == null) {
-                    agregarFilas();
                     jTable3.setValueAt(pres.getIdCliente(), x, 0);
                     jTable3.setValueAt(pres.getNombre(), x, 1);
                     jTable3.setValueAt(pres.getCapitalinteres(), x, 2);
                     jTable3.setValueAt(pres.getDeduccion(), x, 3);
                     jTable3.setValueAt(pres.getCapitalinteres() - pres.getDeduccion(), x, 4);
                 } else if ("Empleado Permanente".equals(clie.getTipo()) && ded.getSaldoDeudor() != 0.0) {
-                    agregarFilas();
                     jTable3.setValueAt(pres.getIdCliente(), x, 0);
                     jTable3.setValueAt(pres.getNombre(), x, 1);
                     jTable3.setValueAt(pres.getCapitalinteres(), x, 2);
                     jTable3.setValueAt(pres.getDeduccion(), x, 3);
                     jTable3.setValueAt(ded.getSaldoDeudor(), x, 4);
                 }
+                agregarFilas();
             }
         } catch (SQLException ex) {
             Logger.getLogger(deduccionesEmpleadosPermanentes.class.getName()).log(Level.SEVERE, null, ex);
@@ -211,25 +235,12 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void imprimir() {
-        try {
-            boolean fitWidth = true;
-            boolean interactive = true;
-            JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
-            MessageFormat headerFormat = new MessageFormat(jLabel1.getText());
-            MessageFormat footerFormat = new MessageFormat("- Página {0} -");
-            jTable3.print(mode, headerFormat, footerFormat);
-            JOptionPane.showMessageDialog(jTable2,
-                    "Print complete (Impresión completa)",
-                    "Print result (Resultado de la impresión)",
-                    JOptionPane.INFORMATION_MESSAGE);
-        } catch (PrinterException ex) {
-            Logger.getLogger(vistaClientes.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(jTable3,
-                    "Print fail (Fallo de impresión): " + ex.getMessage(),
-                    "Print result (Resultado de la impresión)",
-                    JOptionPane.ERROR_MESSAGE);
-        }
+    
+    public void generarDocumento(){
+        Date fechaActual = new Date();
+        String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
+        String parrafo2 = "Srs. Contabilidad.";
+        String parrafo3 = "Remito listadode deducciones a personal por contrato correspondiente al period desde hasta " + jDate.getText();
+        
     }
 }

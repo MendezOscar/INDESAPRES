@@ -5,24 +5,32 @@ import indesapres.modelos.Clientes;
 import indesapres.modelos.Deducciones;
 import indesapres.modelos.Prestamos;
 import java.awt.Image;
-import java.awt.print.PrinterException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 /**
  *
  * @author oscme
  */
-public class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
+public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
+
+    public DefaultTableModel tm;
 
     public deduccionesEmpleadosTemporales() {
         initComponents();
@@ -40,6 +48,10 @@ public class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
         jTable3 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jDesde = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jHasta = new javax.swing.JTextField();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,39 +108,68 @@ public class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
         jLabel1.setText("LISTADO DE DEDUCIONES EMPLEADOS TEMPORALES");
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton1.setText("IMPRIMIR");
+        jButton1.setText("GENERAR DOCUMENTO");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel2.setText("DESDE");
+
+        jDesde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDesdeActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel3.setText("HASTA");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(244, 244, 244)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+                        .addGap(238, 238, 238)
                         .addComponent(jButton1)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(328, 328, 328)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jButton1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-                .addGap(36, 36, 36))
+                    .addComponent(jLabel2)
+                    .addComponent(jDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -144,8 +185,11 @@ public class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        imprimir();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jDesdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDesdeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDesdeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,7 +202,11 @@ public class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JTextField jDesde;
+    private javax.swing.JTextField jHasta;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable2;
@@ -178,13 +226,13 @@ public class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
                 pres = depts.get(x);
                 ded = service.findByIdPrestamo(pres.getIdPrestamo());
                 clie = service.findByIdClientes(pres.getIdCliente());
-                if ("Empleado Temporal".equals(clie.getTipo()) && ded == null) {
+                if (clie.getTipo().equals("Empleado Temporal") && ded == null) {
                     jTable3.setValueAt(pres.getIdCliente(), x, 0);
                     jTable3.setValueAt(pres.getNombre(), x, 1);
                     jTable3.setValueAt(pres.getCapitalinteres(), x, 2);
                     jTable3.setValueAt(pres.getDeduccion(), x, 3);
                     jTable3.setValueAt(pres.getCapitalinteres() - pres.getDeduccion(), x, 4);
-                } else if ("Empleado Temporal".equals(clie.getTipo()) && ded.getSaldoDeudor() != 0.0) {
+                } else if (clie.getTipo().equals("Empleado Temporal") && ded.getSaldoDeudor() != 0.0) {
                     jTable3.setValueAt(pres.getIdCliente(), x, 0);
                     jTable3.setValueAt(pres.getNombre(), x, 1);
                     jTable3.setValueAt(pres.getCapitalinteres(), x, 2);
@@ -212,24 +260,44 @@ public class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
         }
     }
 
-    public void imprimir() {
+    public void generarDocumentoDeduccionesTemporales() {
         try {
-            boolean fitWidth = true;
-            boolean interactive = true;
-            JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
-            MessageFormat headerFormat = new MessageFormat("Listado de Clientes");
-            MessageFormat footerFormat = new MessageFormat("- Página {0} -");
-            jTable3.print(mode, headerFormat, footerFormat);
-            JOptionPane.showMessageDialog(jTable3,
-                    "Print complete (Impresión completa)",
-                    "Print result (Resultado de la impresión)",
-                    JOptionPane.INFORMATION_MESSAGE);
-        } catch (PrinterException ex) {
-            Logger.getLogger(vistaClientes.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(jTable3,
-                    "Print fail (Fallo de impresión): " + ex.getMessage(),
-                    "Print result (Resultado de la impresión)",
-                    JOptionPane.ERROR_MESSAGE);
+            Date fechaActual = new Date();
+            String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
+            String parrafo2 = "Srs. Contabilidad.";
+            String parrafo3 = "Remito listadode deducciones a personal por contrato correspondiente al period desde " + jDesde.getText() + " hasta " + jHasta.getText();
+
+            String path = "Deducciones.docx";
+            XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
+
+            XWPFParagraph paragraph1 = writedoc.createParagraph();
+            XWPFRun run1 = paragraph1.createRun();
+            run1.setFontSize(12);
+            run1.setFontFamily("Calibri");
+            run1.setText(parrafo1);
+            paragraph1.setAlignment(ParagraphAlignment.LEFT);
+
+            XWPFParagraph paragraph2 = writedoc.createParagraph();
+            XWPFRun run2 = paragraph2.createRun();
+            run2.setFontSize(12);
+            run2.setBold(true);
+            run2.setFontFamily("Calibri");
+            run2.setText(parrafo2);
+            paragraph2.setAlignment(ParagraphAlignment.LEFT);
+
+            XWPFParagraph paragraph3 = writedoc.createParagraph();
+            XWPFRun run3 = paragraph3.createRun();
+            run3.setFontSize(12);
+            run3.setFontFamily("Calibri");
+            run3.setText(parrafo3);
+            paragraph3.setAlignment(ParagraphAlignment.DISTRIBUTE);
+            
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(deduccionesEmpleadosTemporales.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(deduccionesEmpleadosTemporales.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

@@ -2,7 +2,6 @@ package indesapres;
 
 import indesapres.grafico.Login;
 
-
 /**
  *
  * @author oscme

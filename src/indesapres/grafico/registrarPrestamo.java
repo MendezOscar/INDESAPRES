@@ -1191,7 +1191,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
             float total = pres.getPrestamos() - verificarSiPrestamo() - pres.getDeduccion() - papeleria;
             String dia = Integer.toString(obtenerDia());
             String anio = Integer.toString(obtenerAnio());
-            Aval aval = buscarAval(clie.getIdCliente());
+            Aval aval = buscarCliente(clie.getIdCliente());
 
             String parrafo1 = "Yo " + pres.getNombre() + ", con identidad Nº " + clie.getIdentidad()
                     + "Y residente en " + clie.getDireccion() + ", " + clie.getMunicipio() + ", " + clie.getDepartamento() + ","
@@ -1269,14 +1269,14 @@ public class registrarPrestamo extends javax.swing.JFrame {
             String parrafo3 = "______________________________               ______________________________\n"
                     + "             Nombre del solicitante                    Firma  del Solicitante\n";
             String parrafo4 = "Cel. Nº " + clie.getTelefono() + "\n";
-            String parrafo5 = ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,";
+            String parrafo5 = ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,";
             String parrafo6 = "CALCULOS/VALORES";
-            String parrafo7 = "Valor autorizado....................................  L " + pres.getPrestamos() + "      S U M A\n";
-            String parrafo8 = "+ Intereses  ganados.................................    " + pres.getTotalinteres() + "      L " + pres.getCapitalinteres();
+            String parrafo7 = "Valor autorizado..........................................  L " + pres.getPrestamos() + "      S U M A\n";
+            String parrafo8 = "+ Intereses  ganados......................................    " + pres.getTotalinteres() + "      L " + pres.getCapitalinteres();
             String parrafo9 = "Taza de interés " + pres.getInteresanual() + "%  anual, pagadero en  " + pres.getPlazo() + " "
                     + "meses; para realizar " + obtenerPlazo() + " pagos " + Tipopagos() + ""
                     + " L " + pres.getDeduccion() + " (Capital L. " + pres.getAbonocapital() + " + intereses L." + pres.getInteresganado() + ") por pago/letra.\n";
-            String parrafo10 = "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::";
+            String parrafo10 = ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::";
             String parrafo11 = "AUTORIZACION";
             String parrafo12 = "                                                Autorizado Lps.   " + pres.getPrestamos() + " -\n";
             String parrafo13 = "                                               Saldo Anterior    " + verificarSiPrestamo() + "\n";
@@ -1305,7 +1305,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
             String prestamo = Float.toString(pres.getPrestamos());
             String dia = Integer.toString(obtenerDia());
             String anio = Integer.toString(obtenerAnio());
-            Aval aval = buscarAval(clie.getIdCliente());
+            Aval aval = buscarCliente(clie.getIdCliente());
 
             String titulo = "PAGARE";
             String parrafo1 = "YO: " + pres.getNombre() + " Hondureño(a), Mayor de edad, con identidad Nº " + clie.getIdentidad()
@@ -1322,9 +1322,9 @@ public class registrarPrestamo extends javax.swing.JFrame {
             String parrafo2 = "____________________________                           _______________________ "
                     + "           Nombre del Deudor                                      Firma del  Deudor  ";
             String parrafo3 = "Cel. Nº " + clie.getTelefono() + "\n";
-            String parrafo4 = "_________________________________________________________________________________";
+            String parrafo4 = "________________________________________________________________________";
             String parrafo5 = "AVAL";
-            String parrafo6 = "YO: " + aval.getNombre() + ", Hondureño, Mayor de edad, con identidad Nº " + aval.getIdAval() + ","
+            String parrafo6 = "YO: " + aval.getNombre() + ", Hondureño, Mayor de edad, con identidad Nº " + aval.getIdentidad() + ","
                     + " de profesión/oficio " + aval.getProfesion() + "  y residente en " + aval.getDireccion() + ". Por este "
                     + "acto y con pleno conocimiento he decidido AVALAR en forma solidaria a: " + pres.getNombre() + " en "
                     + "caso de incumplimiento con su compromiso deudor contraído con INDESA de C.V.  En tal sentido "
@@ -1393,13 +1393,13 @@ public class registrarPrestamo extends javax.swing.JFrame {
         }
     }
 
-    public Aval buscarAval(String idCliente) {
+    public Aval buscarCliente(String idCliente) {
         try {
             Aval aval;
             ServiciosDB service = new ServiciosDB();
-            aval = service.findByIdAval(idCliente);
+            aval = service.findByIdCliente(idCliente);
             if (aval == null) {
-                JOptionPane.showMessageDialog(null, "El Cliente " + idCliente + " no existe");
+                JOptionPane.showMessageDialog(null, "El aval " + idCliente + " no existe");
             } else {
                 return aval;
             }
@@ -1408,4 +1408,5 @@ public class registrarPrestamo extends javax.swing.JFrame {
         }
         return null;
     }
+
 }

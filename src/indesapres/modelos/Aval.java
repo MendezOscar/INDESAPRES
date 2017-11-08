@@ -1,4 +1,3 @@
-
 package indesapres.modelos;
 
 /**
@@ -6,8 +5,8 @@ package indesapres.modelos;
  * @author Oscar Mendez
  */
 public class Aval {
-    String identidad;
-    String idCliente;
+
+    String idAval;
     String Nombre;
     String Direccion;
     String Profesion;
@@ -19,14 +18,15 @@ public class Aval {
     float Salario;
     String Telefono;
     int Contador;
-    String idAval;
+    String idCliente;
     String idPrestamo;
+    String Responsabilidad;
+    String identidad;
 
-    public Aval(String identidad, String idCliente, String Nombre, String Direccion, String Profesion, String Empresa, 
-            String LaborArea, String Departamento, String Anios, String Meses, Float Salario, String Telefono,
-            int Contador, String idAval, String idPrestamo) {
-        this.identidad = identidad;
-        this.idCliente = idCliente;
+    public Aval(String idAval, String Nombre, String Direccion, String Profesion, String Empresa, String LaborArea,
+            String Departamento, String Anios, String Meses, float Salario, String Telefono, int Contador, 
+            String idCliente, String idPrestamo, String Responsabilidad, String identidad) {
+        this.idAval = idAval;
         this.Nombre = Nombre;
         this.Direccion = Direccion;
         this.Profesion = Profesion;
@@ -38,9 +38,13 @@ public class Aval {
         this.Salario = Salario;
         this.Telefono = Telefono;
         this.Contador = Contador;
-        this.idAval = idAval;
+        this.idCliente = idCliente;
         this.idPrestamo = idPrestamo;
+        this.Responsabilidad = Responsabilidad;
+        this.identidad = identidad;
     }
+    
+    
 
     public String getIdAval() {
         return idAval;
@@ -69,7 +73,6 @@ public class Aval {
     public void setIdPrestamo(String idPrestamo) {
         this.idPrestamo = idPrestamo;
     }
-
 
     public String getDireccion() {
         return Direccion;
@@ -162,7 +165,13 @@ public class Aval {
     public void setContador(int Contador) {
         this.Contador = Contador;
     }
-    
-    
-    
+
+    public String getResponsabilidad() {
+        return Responsabilidad;
+    }
+
+    public void setResponsabilidad(String Responsabilidad) {
+        this.Responsabilidad = Responsabilidad;
+    }
+
 }

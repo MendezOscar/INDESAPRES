@@ -21,8 +21,11 @@ public class Clientes {
     private int Numero;
     private String area;
     private String depto;
+    private String Responsabilidad;
 
-    public Clientes(String idCliente, String Nombre, String Apellido, String Identidad, String Departamento, String Municipio, String Direccion, String Estadocivil, String Telefono, String Genero, int Edad, String Profesion, String Tipo, int Numero, String area, String depto) {
+    public Clientes(String idCliente, String Nombre, String Apellido, String Identidad, String Departamento, 
+            String Municipio, String Direccion, String Estadocivil, String Telefono, String Genero, int Edad, 
+            String Profesion, String Tipo, int Numero, String area, String depto, String Responsabilidad) {
         this.idCliente = idCliente;
         this.Nombre = Nombre;
         this.Apellido = Apellido;
@@ -39,6 +42,7 @@ public class Clientes {
         this.Numero = Numero;
         this.area = area;
         this.depto = depto;
+        this.Responsabilidad = Responsabilidad;
     }
 
     public String getArea() {
@@ -168,6 +172,13 @@ public class Clientes {
     public void setProfesion(String Profesion) {
         this.Profesion = Profesion;
     }
-    
+
+    public String getResponsabilidad() {
+        return Responsabilidad;
+    }
+
+    public void setResponsabilidad(String Responsabilidad) {
+        this.Responsabilidad = Responsabilidad;
+    }
     
 }

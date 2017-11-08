@@ -10,7 +10,9 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -38,6 +40,8 @@ public final class deduccionesSocios extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jDate = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -60,12 +64,17 @@ public final class deduccionesSocios extends javax.swing.JFrame {
         jScrollPane5.setViewportView(jTable3);
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton1.setText("IMPRIMIR");
+        jButton1.setText("GENERARA DOCUEMNTO");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel2.setText("FECHA");
+
+        jDate.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,24 +82,34 @@ public final class deduccionesSocios extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane5))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(276, 276, 276)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(204, 204, 204)
-                        .addComponent(jButton1)))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1))
-                .addGap(26, 26, 26)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                 .addGap(32, 32, 32))
         );
@@ -104,7 +123,6 @@ public final class deduccionesSocios extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        imprimir();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -143,7 +161,9 @@ public final class deduccionesSocios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JTextField jDate;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
@@ -194,25 +214,12 @@ public final class deduccionesSocios extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void imprimir() {
-        try {
-            boolean fitWidth = true;
-            boolean interactive = true;
-            JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
-            MessageFormat headerFormat = new MessageFormat("Listado de Clientes");
-            MessageFormat footerFormat = new MessageFormat("- Página {0} -");
-            jTable3.print(mode, headerFormat, footerFormat);
-            JOptionPane.showMessageDialog(jTable3,
-                    "Print complete (Impresión completa)",
-                    "Print result (Resultado de la impresión)",
-                    JOptionPane.INFORMATION_MESSAGE);
-        } catch (PrinterException ex) {
-            Logger.getLogger(vistaClientes.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(jTable3,
-                    "Print fail (Fallo de impresión): " + ex.getMessage(),
-                    "Print result (Resultado de la impresión)",
-                    JOptionPane.ERROR_MESSAGE);
-        }
+    
+    public void generarDocumento(){
+        Date fechaActual = new Date();
+        String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
+        String parrafo2 = "Srs. Contabilidad.";
+        String parrafo3 = "Remito listado de deducciones a socios correspondiente a fecha " + jDate.getText();
+        
     }
 }
