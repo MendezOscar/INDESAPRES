@@ -121,7 +121,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="57" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="67" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -302,7 +302,7 @@
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="12" style="0"/>
+              <Font name="Consolas" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\save.png"/>
@@ -336,7 +336,7 @@
         <Component class="javax.swing.JButton" name="jButton2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="12" style="0"/>
+              <Font name="Consolas" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\editar.png"/>
@@ -371,7 +371,7 @@
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="12" style="0"/>
+              <Font name="Consolas" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\eliminar.png"/>
@@ -406,7 +406,7 @@
         <Component class="javax.swing.JButton" name="jButton4">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="12" style="0"/>
+              <Font name="Consolas" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\nwe.png"/>
@@ -441,7 +441,7 @@
         <Component class="javax.swing.JButton" name="jButton5">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="12" style="0"/>
+              <Font name="Consolas" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\buscar.png"/>
@@ -476,7 +476,7 @@
         <Component class="javax.swing.JButton" name="jButton6">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="12" style="0"/>
+              <Font name="Consolas" size="12" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="2" name="C:\Users\Oscar Mendez\Documents\INDESAPRES\Prestamos\pictures\kista.png"/>
@@ -513,7 +513,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="CODIGO DE CLIENTE"/>
       </Properties>
@@ -521,7 +521,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="NOMBRE"/>
       </Properties>
@@ -531,7 +531,7 @@
     <Component class="javax.swing.JTextField" name="jidCliente">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
       </Properties>
       <Events>
@@ -543,14 +543,14 @@
     <Component class="javax.swing.JTextField" name="jNombre">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jIdentidad">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
       </Properties>
       <Events>
@@ -560,7 +560,7 @@
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="DIRECCION"/>
       </Properties>
@@ -568,14 +568,14 @@
     <Component class="javax.swing.JTextField" name="jDireccion">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="TELEFONO"/>
       </Properties>
@@ -583,14 +583,14 @@
     <Component class="javax.swing.JTextField" name="jTelefono">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel13">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="PROFESION U OFICIO"/>
       </Properties>
@@ -598,7 +598,7 @@
     <Component class="javax.swing.JTextField" name="jProfesion">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
       </Properties>
     </Component>
@@ -607,7 +607,7 @@
     <Component class="javax.swing.JLabel" name="jLabel28">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="IDENTIDAD"/>
       </Properties>
@@ -615,7 +615,7 @@
     <Component class="javax.swing.JLabel" name="jLabel29">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="LABOR / AREA"/>
       </Properties>
@@ -623,14 +623,14 @@
     <Component class="javax.swing.JTextField" name="jArea">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel30">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="DEPARTAMENTO"/>
       </Properties>
@@ -668,7 +668,7 @@
     <Component class="javax.swing.JLabel" name="jLabel32">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="EMPRESA"/>
       </Properties>
@@ -676,14 +676,14 @@
     <Component class="javax.swing.JTextField" name="jEmpresa">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel33">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="SALARIO NETO"/>
       </Properties>
@@ -691,14 +691,14 @@
     <Component class="javax.swing.JTextField" name="jSalario">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel34">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="A&#xd1;OS"/>
       </Properties>
@@ -706,14 +706,14 @@
     <Component class="javax.swing.JTextField" name="jAnio">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel35">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="MESES"/>
       </Properties>
@@ -721,14 +721,14 @@
     <Component class="javax.swing.JTextField" name="jMeses">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="CODIGO DEL PRESTAMO"/>
       </Properties>
@@ -736,7 +736,7 @@
     <Component class="javax.swing.JTextField" name="jidPrestamo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
       </Properties>
       <Events>
@@ -748,7 +748,7 @@
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="CODIGO DEL AVAL"/>
       </Properties>
@@ -756,7 +756,7 @@
     <Component class="javax.swing.JTextField" name="jidAval">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
       </Properties>
       <Events>
@@ -768,7 +768,7 @@
     <Component class="javax.swing.JLabel" name="jLabel36">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="RESPONSABILIDAD DE PAGO"/>
       </Properties>
@@ -776,7 +776,7 @@
     <Component class="javax.swing.JCheckBox" name="jBueno">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="BUENO"/>
       </Properties>
@@ -787,7 +787,7 @@
     <Component class="javax.swing.JCheckBox" name="jMalo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="14" style="0"/>
+          <Font name="Consolas" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="MALO"/>
       </Properties>

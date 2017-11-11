@@ -5,18 +5,25 @@ import indesapres.modelos.Clientes;
 import indesapres.modelos.Deducciones;
 import indesapres.modelos.Prestamos;
 import java.awt.Image;
+import java.awt.print.PrinterException;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -80,6 +87,7 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Proximas Deducciones");
 
+        jTable3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -104,10 +112,10 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(jTable3);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel1.setText("LISTADO DE DEDUCIONES EMPLEADOS TEMPORALES");
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton1.setText("GENERAR DOCUMENTO");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,17 +123,20 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel2.setText("DESDE");
 
+        jDesde.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jDesde.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jDesdeActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
         jLabel3.setText("HASTA");
+
+        jHasta.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,20 +147,19 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
                         .addGap(238, 238, 238)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(328, 328, 328)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,15 +171,15 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -220,7 +230,7 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
             Clientes clie;
             Deducciones ded;
             ArrayList<Prestamos> depts;
-            depts = (ArrayList<Prestamos>) service.findAllPrestamos();
+            depts = (ArrayList<Prestamos>) service.listEmpleadosTemporales("Empleado Temporal");
             for (int x = 0; x < depts.size(); x++) {
                 agregarFilas();
                 pres = depts.get(x);
@@ -261,42 +271,35 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
     }
 
     public void generarDocumentoDeduccionesTemporales() {
+
+        Date fechaActual = new Date();
+        String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
+        String parrafo2 = "Srs. Contabilidad.";
+        String parrafo3 = "Remito listadode deducciones a personal por contrato correspondiente al period desde " + jDesde.getText() + " hasta " + jHasta.getText();
+    }
+    
+     public void exportar() {
         try {
-            Date fechaActual = new Date();
-            String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
-            String parrafo2 = "Srs. Contabilidad.";
-            String parrafo3 = "Remito listadode deducciones a personal por contrato correspondiente al period desde " + jDesde.getText() + " hasta " + jHasta.getText();
+            Date date = new Date();
+            File file = new File("Deducciones Empleados temporales.xls");
+            TableModel model = jTable3.getModel();
+            try (FileWriter excel = new FileWriter(file)) {
+                for (int i = 0; i < model.getColumnCount(); i++) {
+                    excel.write(model.getColumnName(i) + "\t");
+                }
+                
+                excel.write("\n");
+                
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    for (int j = 0; j < model.getColumnCount(); j++) {
+                        excel.write(model.getValueAt(i, j).toString() + "\t");
+                    }
+                    excel.write("\n");
+                }
+            }
 
-            String path = "Deducciones.docx";
-            XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
-
-            XWPFParagraph paragraph1 = writedoc.createParagraph();
-            XWPFRun run1 = paragraph1.createRun();
-            run1.setFontSize(12);
-            run1.setFontFamily("Calibri");
-            run1.setText(parrafo1);
-            paragraph1.setAlignment(ParagraphAlignment.LEFT);
-
-            XWPFParagraph paragraph2 = writedoc.createParagraph();
-            XWPFRun run2 = paragraph2.createRun();
-            run2.setFontSize(12);
-            run2.setBold(true);
-            run2.setFontFamily("Calibri");
-            run2.setText(parrafo2);
-            paragraph2.setAlignment(ParagraphAlignment.LEFT);
-
-            XWPFParagraph paragraph3 = writedoc.createParagraph();
-            XWPFRun run3 = paragraph3.createRun();
-            run3.setFontSize(12);
-            run3.setFontFamily("Calibri");
-            run3.setText(parrafo3);
-            paragraph3.setAlignment(ParagraphAlignment.DISTRIBUTE);
-            
-
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(deduccionesEmpleadosTemporales.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(deduccionesEmpleadosTemporales.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 

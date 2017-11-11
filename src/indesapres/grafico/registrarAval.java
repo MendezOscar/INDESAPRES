@@ -2,7 +2,6 @@ package indesapres.grafico;
 
 import indesapres.logica.ServiciosDB;
 import indesapres.modelos.Aval;
-import indesapres.modelos.Clientes;
 import indesapres.modelos.Prestamos;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -45,7 +44,7 @@ public final class registrarAval extends javax.swing.JFrame {
         int numero = setearnumero();
         String responsabilidad = obtenerResponsable();
         aval = new Aval(idAval, Nombre, direccion, profesion, empresa, labor, depto, anios, Meses, Salario,
-                Telefono, numero,  idCliente, idPrestamo, responsabilidad, identidad);
+                Telefono, numero, idCliente, idPrestamo, responsabilidad, identidad);
         return aval;
     }
 
@@ -176,7 +175,7 @@ public final class registrarAval extends javax.swing.JFrame {
         jLabel27.setText("............");
         jToolBar1.add(jLabel27);
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\save.png")); // NOI18N
         jButton1.setText("Guardar");
         jButton1.setToolTipText("");
@@ -196,7 +195,7 @@ public final class registrarAval extends javax.swing.JFrame {
         jLabel14.setText(".......");
         jToolBar1.add(jLabel14);
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\editar.png")); // NOI18N
         jButton2.setText("Modificar");
         jButton2.setToolTipText("");
@@ -217,7 +216,7 @@ public final class registrarAval extends javax.swing.JFrame {
         jLabel15.setText(".......");
         jToolBar1.add(jLabel15);
 
-        jButton3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\eliminar.png")); // NOI18N
         jButton3.setText("Eliminar");
         jButton3.setToolTipText("");
@@ -238,7 +237,7 @@ public final class registrarAval extends javax.swing.JFrame {
         jLabel16.setText(".......");
         jToolBar1.add(jLabel16);
 
-        jButton4.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\nwe.png")); // NOI18N
         jButton4.setText("Limpiar");
         jButton4.setToolTipText("");
@@ -259,7 +258,7 @@ public final class registrarAval extends javax.swing.JFrame {
         jLabel17.setText(".......");
         jToolBar1.add(jLabel17);
 
-        jButton5.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\buscar.png")); // NOI18N
         jButton5.setText("Buscar");
         jButton5.setToolTipText("");
@@ -280,7 +279,7 @@ public final class registrarAval extends javax.swing.JFrame {
         jLabel18.setText(".......");
         jToolBar1.add(jLabel18);
 
-        jButton6.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton6.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\kista.png")); // NOI18N
         jButton6.setText("reporte");
         jButton6.setToolTipText("");
@@ -301,13 +300,13 @@ public final class registrarAval extends javax.swing.JFrame {
         jLabel26.setText("......");
         jToolBar1.add(jLabel26);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel1.setText("CODIGO DE CLIENTE");
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel2.setText("NOMBRE");
 
-        jidCliente.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jidCliente.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jidCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jidClienteMouseClicked(evt);
@@ -324,39 +323,39 @@ public final class registrarAval extends javax.swing.JFrame {
             }
         });
 
-        jNombre.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jNombre.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
-        jIdentidad.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jIdentidad.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jIdentidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jIdentidadActionPerformed(evt);
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel8.setText("DIRECCION");
 
-        jDireccion.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jDireccion.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
-        jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel10.setText("TELEFONO");
 
-        jTelefono.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTelefono.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
-        jLabel13.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel13.setText("PROFESION U OFICIO");
 
-        jProfesion.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jProfesion.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
-        jLabel28.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel28.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel28.setText("IDENTIDAD");
 
-        jLabel29.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel29.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel29.setText("LABOR / AREA");
 
-        jArea.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jArea.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
-        jLabel30.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel30.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel30.setText("DEPARTAMENTO");
 
         jLabel31.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\aval.png")); // NOI18N
@@ -364,30 +363,30 @@ public final class registrarAval extends javax.swing.JFrame {
         jDepto.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jDepto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agricultura", "Control de pestes y enfermedades", "Empaque", "Materiales y suministros", "Recurso Humano", "Transporte maquinaria y equipo", "Administracion de finanzas y presupuesto", "Salud, higiene, seguridad laboral y ambiente", " " }));
 
-        jLabel32.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel32.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel32.setText("EMPRESA");
 
-        jEmpresa.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jEmpresa.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
-        jLabel33.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel33.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel33.setText("SALARIO NETO");
 
-        jSalario.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jSalario.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
-        jLabel34.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel34.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel34.setText("AÑOS");
 
-        jAnio.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jAnio.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
-        jLabel35.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel35.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel35.setText("MESES");
 
-        jMeses.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jMeses.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel3.setText("CODIGO DEL PRESTAMO");
 
-        jidPrestamo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jidPrestamo.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jidPrestamo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jidPrestamoMouseClicked(evt);
@@ -404,10 +403,10 @@ public final class registrarAval extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel4.setText("CODIGO DEL AVAL");
 
-        jidAval.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jidAval.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jidAval.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jidAvalMouseClicked(evt);
@@ -424,10 +423,10 @@ public final class registrarAval extends javax.swing.JFrame {
             }
         });
 
-        jLabel36.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel36.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel36.setText("RESPONSABILIDAD DE PAGO");
 
-        jBueno.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jBueno.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jBueno.setText("BUENO");
         jBueno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -435,7 +434,7 @@ public final class registrarAval extends javax.swing.JFrame {
             }
         });
 
-        jMalo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jMalo.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jMalo.setText("MALO");
         jMalo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -521,7 +520,7 @@ public final class registrarAval extends javax.swing.JFrame {
                                                 .addComponent(jLabel35)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jMeses, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGap(0, 57, Short.MAX_VALUE))))
+                                .addGap(0, 67, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))

@@ -111,7 +111,7 @@ public class vistaPrestamos extends javax.swing.JFrame {
         jToolBar1.setBackground(new java.awt.Color(204, 204, 255));
         jToolBar1.setRollover(true);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel1.setText("Buscar por");
         jToolBar1.add(jLabel1);
 
@@ -119,7 +119,7 @@ public class vistaPrestamos extends javax.swing.JFrame {
         jLabel19.setText("......");
         jToolBar1.add(jLabel19);
 
-        comboFiltro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        comboFiltro.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         comboFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CODIGO", "FECHA", "PRESTAMO" }));
         jToolBar1.add(comboFiltro);
 
@@ -127,7 +127,7 @@ public class vistaPrestamos extends javax.swing.JFrame {
         jLabel20.setText(".....");
         jToolBar1.add(jLabel20);
 
-        txtFiltro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txtFiltro.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtFiltroKeyPressed(evt);
@@ -139,7 +139,7 @@ public class vistaPrestamos extends javax.swing.JFrame {
         jLabel21.setText("......");
         jToolBar1.add(jLabel21);
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButton1.setText("Imprimir");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -158,6 +158,7 @@ public class vistaPrestamos extends javax.swing.JFrame {
         jLabel18.setForeground(new java.awt.Color(204, 204, 255));
         jToolBar1.add(jLabel18);
 
+        jTable2.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {}
@@ -193,8 +194,8 @@ public class vistaPrestamos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -330,6 +331,10 @@ public class vistaPrestamos extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void exportar() {
+       
     }
 
 }

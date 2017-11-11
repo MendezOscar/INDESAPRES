@@ -111,7 +111,6 @@ public class vistaClientes extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
 
         jButton5.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\oscme\\OneDrive\\Documents\\NetBeansProjects\\Prestamos\\pictures\\buscar.png")); // NOI18N
         jButton5.setText("Buscar");
         jButton5.setToolTipText("");
         jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -131,7 +130,7 @@ public class vistaClientes extends javax.swing.JFrame {
         jToolBar1.setBackground(new java.awt.Color(204, 204, 255));
         jToolBar1.setRollover(true);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel1.setText("Buscar por");
         jToolBar1.add(jLabel1);
 
@@ -139,7 +138,7 @@ public class vistaClientes extends javax.swing.JFrame {
         jLabel19.setText("......");
         jToolBar1.add(jLabel19);
 
-        comboFiltro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        comboFiltro.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         comboFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CODIGO", "NOMBRE", "IDENTIDAD", "TIPO" }));
         jToolBar1.add(comboFiltro);
 
@@ -147,7 +146,7 @@ public class vistaClientes extends javax.swing.JFrame {
         jLabel20.setText(".....");
         jToolBar1.add(jLabel20);
 
-        txtFiltro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txtFiltro.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtFiltroKeyPressed(evt);
@@ -159,7 +158,7 @@ public class vistaClientes extends javax.swing.JFrame {
         jLabel21.setText("......");
         jToolBar1.add(jLabel21);
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButton1.setText("Imprimir");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -178,6 +177,7 @@ public class vistaClientes extends javax.swing.JFrame {
         jLabel18.setForeground(new java.awt.Color(204, 204, 255));
         jToolBar1.add(jLabel18);
 
+        jTable2.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {}

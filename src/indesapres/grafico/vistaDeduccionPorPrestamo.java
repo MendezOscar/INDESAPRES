@@ -63,7 +63,7 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
         jToolBar1.setBackground(new java.awt.Color(204, 204, 255));
         jToolBar1.setRollover(true);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel1.setText("Ingrese el codigo del prestamo");
         jToolBar1.add(jLabel1);
 
@@ -75,7 +75,7 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
         jLabel20.setText(".....");
         jToolBar1.add(jLabel20);
 
-        txtFiltro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txtFiltro.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtFiltroKeyPressed(evt);
@@ -87,7 +87,7 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
         jLabel21.setText("......");
         jToolBar1.add(jLabel21);
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButton1.setText("Buscar prestamo");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -106,7 +106,7 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
         jLabel18.setForeground(new java.awt.Color(204, 204, 255));
         jToolBar1.add(jLabel18);
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButton2.setText("Imprimir");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -122,6 +122,7 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
         jLabel23.setText("...........................................");
         jToolBar1.add(jLabel23);
 
+        jTable2.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null},
@@ -146,20 +147,20 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(jTable2);
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel2.setText("Prestamo a Favor");
 
-        jNombre.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jNombre.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel3.setText("Plazo");
 
-        jPlazo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jPlazo.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel4.setText("Interes");
 
-        jInteres.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jInteres.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

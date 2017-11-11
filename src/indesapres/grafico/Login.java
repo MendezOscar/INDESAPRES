@@ -50,15 +50,15 @@ public class Login extends javax.swing.JFrame {
         setTitle("Login");
         setFont(new java.awt.Font("Microsoft YaHei", 0, 12)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel2.setText("Usuario");
 
-        usuario.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        usuario.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel3.setText("Clave");
 
-        clave.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        clave.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         clave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 claveActionPerformed(evt);
@@ -70,7 +70,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\entrar.png")); // NOI18N
         jButton2.setText("Entrar");
         jButton2.setToolTipText("");

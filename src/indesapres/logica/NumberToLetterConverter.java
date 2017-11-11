@@ -145,9 +145,9 @@ public class NumberToLetterConverter {
         // Descompone los centavos
         String valor = splitNumber[1];
         if (valor.length() == 1) {
-            converted.append(splitNumber[1]).append("").append(" ");
+            converted.append(splitNumber[1]).append("0").append("/100");
         } else {
-            converted.append(splitNumber[1]).append("");
+            converted.append(splitNumber[1]).append("/100");
         }
         converted.append("");
         return converted.toString();

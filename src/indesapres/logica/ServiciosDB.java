@@ -25,13 +25,14 @@ public class ServiciosDB {
     public Connection con = null;
     Statement st;
     String url = "jdbc:oracle:thin:@localhost:1521/xe";
-    String username = "indesapres";
+    String username = "INDESAPRES";
     String password = "emanuel17";
 
     public ServiciosDB() {
         try {
             con = DriverManager.getConnection(url, username, password);
         } catch (SQLException se) {
+            System.out.println(se.toString());
             JOptionPane.showMessageDialog(null, "Error al conectar");
         }
     }
@@ -326,6 +327,69 @@ public class ServiciosDB {
     public List<Prestamos> obtenerUltimoPrestamoByIdCliente(String idCliente) {
         try {
             String query = "SELECT * FROM PRESTAMOS WHERE IDCLIENTE = " + "'" + idCliente + "'" + " ORDER BY CONTADOR DESC";
+            PreparedStatement stmt = con.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<Prestamos> depts = new ArrayList<>();
+            while (rs.next()) {
+                depts.add(new Prestamos(rs.getString("IDPRESTAMO"), rs.getString("FECHA"), rs.getString("IDCLIENTE"),
+                        rs.getString("NOMBRE"), rs.getFloat("PRESTAMO"), rs.getFloat("PLAZO"), rs.getFloat("INTERESANUAL"),
+                        rs.getFloat("INTERESACUMULADO"), rs.getFloat("TOTALINTERESES"),
+                        rs.getFloat("CAPITALINTERES"), rs.getFloat("DEDUCCION"), rs.getFloat("ABONOCAPITAL"),
+                        rs.getFloat("INTERESGANADO"), rs.getInt("CONTADOR"), rs.getString("TIPOPAGO")));
+            }
+            return depts;
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiciosDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public List<Prestamos> listEmpleadosTemporales(String tipoEmpleado) {
+        try {
+            String query = "SELECT * FROM PRESTAMOS LEFT JOIN CLIENTES ON PRESTAMOS.IDCLIENTE = CLIENTES.IDCLIENTE "
+                    + "WHERE CLIENTES.TIPO = " + "'" + tipoEmpleado + "'";
+            PreparedStatement stmt = con.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<Prestamos> depts = new ArrayList<>();
+            while (rs.next()) {
+                depts.add(new Prestamos(rs.getString("IDPRESTAMO"), rs.getString("FECHA"), rs.getString("IDCLIENTE"),
+                        rs.getString("NOMBRE"), rs.getFloat("PRESTAMO"), rs.getFloat("PLAZO"), rs.getFloat("INTERESANUAL"),
+                        rs.getFloat("INTERESACUMULADO"), rs.getFloat("TOTALINTERESES"),
+                        rs.getFloat("CAPITALINTERES"), rs.getFloat("DEDUCCION"), rs.getFloat("ABONOCAPITAL"),
+                        rs.getFloat("INTERESGANADO"), rs.getInt("CONTADOR"), rs.getString("TIPOPAGO")));
+            }
+            return depts;
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiciosDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+     public List<Prestamos> listEmpleadosPermanentes(String tipoEmpleado) {
+        try {
+            String query = "SELECT * FROM PRESTAMOS LEFT JOIN CLIENTES ON PRESTAMOS.IDCLIENTE = CLIENTES.IDCLIENTE "
+                    + "WHERE CLIENTES.TIPO = " + "'" + tipoEmpleado + "'";
+            PreparedStatement stmt = con.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            ArrayList<Prestamos> depts = new ArrayList<>();
+            while (rs.next()) {
+                depts.add(new Prestamos(rs.getString("IDPRESTAMO"), rs.getString("FECHA"), rs.getString("IDCLIENTE"),
+                        rs.getString("NOMBRE"), rs.getFloat("PRESTAMO"), rs.getFloat("PLAZO"), rs.getFloat("INTERESANUAL"),
+                        rs.getFloat("INTERESACUMULADO"), rs.getFloat("TOTALINTERESES"),
+                        rs.getFloat("CAPITALINTERES"), rs.getFloat("DEDUCCION"), rs.getFloat("ABONOCAPITAL"),
+                        rs.getFloat("INTERESGANADO"), rs.getInt("CONTADOR"), rs.getString("TIPOPAGO")));
+            }
+            return depts;
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiciosDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+     
+     public List<Prestamos> listEmpleadosSocios(String tipoEmpleado) {
+        try {
+            String query = "SELECT * FROM PRESTAMOS LEFT JOIN CLIENTES ON PRESTAMOS.IDCLIENTE = CLIENTES.IDCLIENTE "
+                    + "WHERE CLIENTES.TIPO = " + "'" + tipoEmpleado + "'";
             PreparedStatement stmt = con.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             ArrayList<Prestamos> depts = new ArrayList<>();

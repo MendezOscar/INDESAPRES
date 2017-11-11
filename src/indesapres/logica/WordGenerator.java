@@ -566,15 +566,15 @@ public class WordGenerator {
             XWPFParagraph paragraph8 = writedoc.createParagraph();
             XWPFRun run8 = paragraph8.createRun();
             run8.setFontSize(13);
+            run8.addBreak();
+            run8.addBreak();
+            run8.addBreak();
             run8.setFontFamily("Calibri");
             run8.setText(parrafo8);
             paragraph8.setAlignment(ParagraphAlignment.CENTER);
             
             XWPFParagraph paragraph9 = writedoc.createParagraph();
             XWPFRun run9 = paragraph9.createRun();
-            run9.addBreak();
-            run9.addBreak();
-            run9.addBreak();
             run9.setFontSize(13);
             run9.setFontFamily("Calibri");
             run9.setText(parrafo9);

@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author oscme
  */
-public class registrarPrestamo extends javax.swing.JFrame {
+public final class registrarPrestamo extends javax.swing.JFrame {
 
     public DefaultTableModel tm;
     Date fechaActual;
@@ -127,7 +127,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
         jLabel24.setText("......");
         jToolBar1.add(jLabel24);
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\save.png")); // NOI18N
         jButton1.setText("Guardar");
         jButton1.setToolTipText("");
@@ -146,7 +146,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
         jLabel14.setText(".......");
         jToolBar1.add(jLabel14);
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\editar.png")); // NOI18N
         jButton2.setText("Modificar");
         jButton2.setToolTipText("");
@@ -166,7 +166,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
         jLabel15.setText(".......");
         jToolBar1.add(jLabel15);
 
-        jButton3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\eliminar.png")); // NOI18N
         jButton3.setText("Eliminar");
         jButton3.setToolTipText("");
@@ -186,7 +186,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
         jLabel16.setText(".......");
         jToolBar1.add(jLabel16);
 
-        jButton4.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\nwe.png")); // NOI18N
         jButton4.setText("Limpiar");
         jButton4.setToolTipText("");
@@ -206,7 +206,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
         jLabel17.setText(".......");
         jToolBar1.add(jLabel17);
 
-        jButton5.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\buscar.png")); // NOI18N
         jButton5.setText("Buscar");
         jButton5.setToolTipText("");
@@ -226,7 +226,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
         jLabel18.setText(".......");
         jToolBar1.add(jLabel18);
 
-        jButton6.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton6.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\kista.png")); // NOI18N
         jButton6.setText("reporte");
         jButton6.setToolTipText("");
@@ -244,10 +244,10 @@ public class registrarPrestamo extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\PrestamoGrande.png")); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel4.setText("CODIGO CLIENTE");
 
-        jCodigo1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jCodigo1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCodigo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCodigo1ActionPerformed(evt);
@@ -259,7 +259,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton8.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButton8.setText("Buscar");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,10 +267,10 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel3.setText("FECHA");
 
-        jDate.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jDate.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jDate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jDateMouseClicked(evt);
@@ -282,20 +282,20 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel5.setText("NOMBRE CLIENTE");
 
-        jCodigo2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jCodigo2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCodigo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCodigo2ActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel1.setText("CODIGO DEL PRESTAMO");
 
-        jCodigo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jCodigo.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCodigoActionPerformed(evt);
@@ -307,7 +307,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel6.setText("PRESTAMO");
 
         jPrestamo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -322,7 +322,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel7.setText("PLAZO");
 
         jPlazo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -337,7 +337,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel8.setText("% INTERES ANUAL");
 
         jporAnual.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -352,7 +352,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton7.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButton7.setText("Calcular");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -360,6 +360,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
+        jTable2.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null}
@@ -383,7 +384,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable2);
 
-        jButton10.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton10.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButton10.setText("Generar Pagare");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -391,7 +392,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
-        jButton9.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton9.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButton9.setText("Generar Solicitud de Prestamo");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -399,13 +400,13 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
-        jLabel33.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel33.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel33.setText("TIPOS DE PAGO");
 
-        tipoPago.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        tipoPago.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         tipoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mensuales", "Quincenales" }));
 
-        jButton11.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton11.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButton11.setText("Buscar prestamo");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -413,7 +414,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
             }
         });
 
-        jButton12.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton12.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButton12.setText("Registrar Aval");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -448,18 +449,18 @@ public class registrarPrestamo extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jCodigo1)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(206, 206, 206)
-                                                .addComponent(tipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(33, 33, 33))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jButton8)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(jLabel3)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(206, 206, 206)
+                                                .addComponent(tipoPago, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(155, 155, 155))
                                     .addGroup(layout.createSequentialGroup()
@@ -805,7 +806,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
                     case "Empleado Temporal":
                         generarDocumentoEmpleado();
                         break;
-                    case "Empleado Permanante":
+                    case "Empleado Permanente":
                         generarDocumentoEmpleado();
                         break;
                     default:
@@ -1207,7 +1208,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
             String parrafo4 = "Cel. /Tel. Nº" + clie.getTelefono() + "\n";
             String parrafo5 = "_________________________________________________________________________________________";
             String parrafo6 = "AVAL";
-            String parrafo7 = "Nombre " + aval.getNombre() + " Id. " + aval.getIdAval() + ", Residente en " + aval.getDireccion()
+            String parrafo7 = "Nombre " + aval.getNombre() + " Id. " + aval.getIdentidad() + ", Residente en " + aval.getDireccion()
                     + " socio(a) de compañía Agrícola Olivo, por este acto acepto y con decisión propia  me convierto en "
                     + "Aval Solidario de " + pres.getNombre() + "; haciéndome responsable por la morosidad que en determinado "
                     + "momento, éste contrajera con INDESA.\n";
@@ -1255,9 +1256,9 @@ public class registrarPrestamo extends javax.swing.JFrame {
             String anio = Integer.toString(obtenerAnio());
 
             String parrafo1 = "Yo " + pres.getNombre() + ", con identidad Nº " + clie.getIdentidad()
-                    + "Y residente en " + clie.getDireccion() + ", " + clie.getMunicipio() + ", " + clie.getDepartamento() + ","
+                    + " Y residente en " + clie.getDireccion() + ", " + clie.getMunicipio() + ", " + clie.getDepartamento() + ","
                     + "; empleado de Compañía Agrícola olivo S. A. con Código Nº " + clie.getIdCliente() + ", prestando mis servicios para"
-                    + " el área de " + clie.getArea() + " Departamento de" + clie.getDepto() + "; acudo en SOLICITUD de un préstamo por valor de "
+                    + " el área de " + clie.getArea() + " Departamento de " + clie.getDepto() + "; acudo en SOLICITUD de un préstamo por valor de "
                     + " Lps. " + pres.getPrestamos() + "(" + nc.convertNumberToLetter(prestamo) + " lempiras exactos" + ")"
                     + ". Estoy entendido que de aprobarse mi  solicitud, el valor aprobado "
                     + "sufrirá un incremento por concepto de la tasa de interés aplicada al mismo, "
@@ -1328,7 +1329,7 @@ public class registrarPrestamo extends javax.swing.JFrame {
                     + " de profesión/oficio " + aval.getProfesion() + "  y residente en " + aval.getDireccion() + ". Por este "
                     + "acto y con pleno conocimiento he decidido AVALAR en forma solidaria a: " + pres.getNombre() + " en "
                     + "caso de incumplimiento con su compromiso deudor contraído con INDESA de C.V.  En tal sentido "
-                    + "manifiesto que soy empleado de " + aval.getEmpresa() + "; en el Cargo/labor de " + aval.getLaborArea() + " Departamento de"
+                    + "manifiesto que soy empleado de " + aval.getEmpresa() + "; en el labor/area de " + aval.getLaborArea() + " Departamento de"
                     + " " + aval.getDepartamento();
             String parrafo7 = "A cobrar libre quincenal (promedio) Lps. " + aval.getSalario() + ", con antigüedad de " + aval.getAnios() + " Años, "
                     + aval.getMeses() + " Meses.";

@@ -49,6 +49,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -63,7 +64,9 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\Cliente.png")); // NOI18N
         jMenu1.setText("Clientes");
+        jMenu1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
 
+        jMenuItem1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jMenuItem1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\registrocliente.png")); // NOI18N
         jMenuItem1.setText("Registro Cliente");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -77,7 +80,9 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\prestamo.png")); // NOI18N
         jMenu2.setText("Prestamos");
+        jMenu2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
 
+        jMenuItem2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jMenuItem2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\registroprestamo.png")); // NOI18N
         jMenuItem2.setText("Registro de prestamo");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -91,7 +96,9 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\deduccion.png")); // NOI18N
         jMenu3.setText("Deduccion");
+        jMenu3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
 
+        jMenuItem3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jMenuItem3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\registrodeduccion.png")); // NOI18N
         jMenuItem3.setText("Registro de deduccion");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +112,9 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\reporte.png")); // NOI18N
         jMenu4.setText("Reportes");
+        jMenu4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
 
+        jMenuItem4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jMenuItem4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\reporteCliente.png")); // NOI18N
         jMenuItem4.setText("Clientes");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +127,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\reporteDeducion.png")); // NOI18N
         jMenu5.setText("Deducciones");
 
+        jMenuItem7.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jMenuItem7.setText("Especifico");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,6 +136,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem7);
 
+        jMenuItem5.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jMenuItem5.setText("General");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,6 +147,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu4.add(jMenu5);
 
+        jMenuItem6.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jMenuItem6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\reportePrestamo.png")); // NOI18N
         jMenuItem6.setText("Prestamos");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
@@ -145,16 +157,28 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem6);
 
+        jMenuItem12.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jMenuItem12.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\balance.png")); // NOI18N
+        jMenuItem12.setText("Balance General");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem12);
+
         jMenuBar1.add(jMenu4);
 
         jMenu6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\date.png")); // NOI18N
         jMenu6.setText("Proximas Deducciones");
+        jMenu6.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jMenu6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu6ActionPerformed(evt);
             }
         });
 
+        jMenuItem8.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jMenuItem8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\quicena.png")); // NOI18N
         jMenuItem8.setText("Empleados Permanentes");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
@@ -164,6 +188,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu6.add(jMenuItem8);
 
+        jMenuItem9.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jMenuItem9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\mes.png")); // NOI18N
         jMenuItem9.setText("Empleados Temporales");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
@@ -173,6 +198,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu6.add(jMenuItem9);
 
+        jMenuItem11.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jMenuItem11.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\socio.png")); // NOI18N
         jMenuItem11.setText("Socios");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
@@ -186,12 +212,14 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\estadocuentas.png")); // NOI18N
         jMenu7.setText("Estado de Cuentas");
+        jMenu7.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jMenu7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu7ActionPerformed(evt);
             }
         });
 
+        jMenuItem10.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jMenuItem10.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\estadodecuentaspe.png")); // NOI18N
         jMenuItem10.setText("Ver estado de cuentas ");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
@@ -292,8 +320,14 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenu7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu7ActionPerformed
         // TODO add your handling code here:
-
+        
     }//GEN-LAST:event_jMenu7ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        // TODO add your handling code here:
+        BalanceGeneral bg = new BalanceGeneral();
+        bg.setVisible(true);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,6 +376,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

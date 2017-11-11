@@ -314,7 +314,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
         jLabel33.setText("......");
         jToolBar1.add(jLabel33);
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\save.png")); // NOI18N
         jButton1.setText("Guardar");
         jButton1.setToolTipText("");
@@ -333,7 +333,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
         jLabel14.setText(".......");
         jToolBar1.add(jLabel14);
 
-        jButton2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\editar.png")); // NOI18N
         jButton2.setText("Modificar");
         jButton2.setToolTipText("");
@@ -353,7 +353,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
         jLabel15.setText(".......");
         jToolBar1.add(jLabel15);
 
-        jButton3.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\eliminar.png")); // NOI18N
         jButton3.setText("Eliminar");
         jButton3.setToolTipText("");
@@ -373,7 +373,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
         jLabel16.setText(".......");
         jToolBar1.add(jLabel16);
 
-        jButton4.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\nwe.png")); // NOI18N
         jButton4.setText("Limpiar");
         jButton4.setToolTipText("");
@@ -393,7 +393,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
         jLabel17.setText(".......");
         jToolBar1.add(jLabel17);
 
-        jButton5.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\buscar.png")); // NOI18N
         jButton5.setText("Buscar");
         jButton5.setToolTipText("");
@@ -413,7 +413,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
         jLabel18.setText(".......");
         jToolBar1.add(jLabel18);
 
-        jButton6.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jButton6.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\kista.png")); // NOI18N
         jButton6.setText("reporte");
         jButton6.setToolTipText("");
@@ -429,10 +429,10 @@ public class registrarDeduccion extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton6);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel1.setText("CODIGO DEL PRESTAMO");
 
-        jidPrestamo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jidPrestamo.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jidPrestamo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jidPrestamoActionPerformed(evt);
@@ -444,10 +444,10 @@ public class registrarDeduccion extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel2.setText("CODIGO DEL DEDUCCION");
 
-        jidDeduccion.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jidDeduccion.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jidDeduccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jidDeduccionActionPerformed(evt);
@@ -459,10 +459,10 @@ public class registrarDeduccion extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel3.setText("FECHA");
 
-        jFecha.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jFecha.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jFecha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jFechaMouseClicked(evt);
@@ -474,7 +474,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jTable2.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null}
@@ -495,17 +495,17 @@ public class registrarDeduccion extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\pictures\\deducciongrande.png")); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel5.setText("CLIENTE");
 
-        jNombre.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jNombre.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jNombreActionPerformed(evt);
             }
         });
 
-        jButton7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton7.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButton7.setText("Buscar");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -513,7 +513,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton8.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButton8.setText("Buscar");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -559,7 +559,7 @@ public class registrarDeduccion extends javax.swing.JFrame {
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(358, Short.MAX_VALUE))))))
+                                .addContainerGap(360, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

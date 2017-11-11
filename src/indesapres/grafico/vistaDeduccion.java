@@ -104,6 +104,7 @@ public class vistaDeduccion extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vista de Deducciones");
 
+        jTable2.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {}
@@ -127,7 +128,7 @@ public class vistaDeduccion extends javax.swing.JFrame {
         jToolBar1.setBackground(new java.awt.Color(204, 204, 255));
         jToolBar1.setRollover(true);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel1.setText("Buscar por");
         jToolBar1.add(jLabel1);
 
@@ -135,7 +136,7 @@ public class vistaDeduccion extends javax.swing.JFrame {
         jLabel19.setText("......");
         jToolBar1.add(jLabel19);
 
-        comboFiltro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        comboFiltro.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         comboFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CODIGO DEDUCCION", "CODIGO PRESTAMO", "FECHA" }));
         jToolBar1.add(comboFiltro);
 
@@ -143,7 +144,7 @@ public class vistaDeduccion extends javax.swing.JFrame {
         jLabel20.setText(".....");
         jToolBar1.add(jLabel20);
 
-        txtFiltro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txtFiltro.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtFiltroKeyPressed(evt);
@@ -155,7 +156,7 @@ public class vistaDeduccion extends javax.swing.JFrame {
         jLabel21.setText("......");
         jToolBar1.add(jLabel21);
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButton1.setText("Imprimir");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

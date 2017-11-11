@@ -7,6 +7,7 @@ import indesapres.modelos.Prestamos;
 import java.awt.Image;
 import java.awt.print.PrinterException;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.MessageFormat;
@@ -19,6 +20,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -43,7 +45,9 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jDate = new javax.swing.JTextField();
+        jQuincena = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jMes = new javax.swing.JComboBox<>();
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,6 +76,7 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Proximas Deducciones");
 
+        jTable3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
@@ -95,10 +100,10 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(jTable3);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel1.setText("LISTADO DE DEDUCIONES EMPLEADOS PERMANENTES");
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButton1.setText("GENERAR DOCUMENTO");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,32 +111,39 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel2.setText("FECHA");
+        jLabel2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel2.setText("QUINCENA");
 
-        jDate.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jQuincena.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jQuincena.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Primera quincena", "Segunda quincena" }));
+
+        jLabel3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel3.setText("MES");
+
+        jMes.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "novienbre", "diciembre" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(375, 375, 375)
                                 .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jQuincena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)))
                 .addContainerGap())
         );
@@ -145,11 +157,13 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)
-                        .addGap(19, 19, 19)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(14, 14, 14)
+                            .addComponent(jQuincena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                 .addGap(28, 28, 28))
         );
@@ -180,9 +194,11 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JTextField jDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JComboBox<String> jMes;
+    private javax.swing.JComboBox<String> jQuincena;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable2;
@@ -196,7 +212,7 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
             Clientes clie;
             Deducciones ded;
             ArrayList<Prestamos> depts;
-            depts = (ArrayList<Prestamos>) service.findAllPrestamos();
+            depts = (ArrayList<Prestamos>) service.listEmpleadosPermanentes("Empleado Permanente");
             for (int x = 0; x < depts.size(); x++) {
                 pres = depts.get(x);
                 ded = service.findByIdPrestamo(pres.getIdPrestamo());
@@ -236,11 +252,29 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
         }
     }
     
-    public void generarDocumento(){
-        Date fechaActual = new Date();
-        String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
-        String parrafo2 = "Srs. Contabilidad.";
-        String parrafo3 = "Remito listadode deducciones a personal por contrato correspondiente al period desde hasta " + jDate.getText();
-        
+     public void exportar() {
+        try {
+            Date date = new Date();
+            File file = new File("Deducciones Permanantes "+jQuincena.getSelectedItem().toString() +
+                    "de" + jMes.getSelectedItem().toString()+".xls");
+            TableModel model = jTable3.getModel();
+            try (FileWriter excel = new FileWriter(file)) {
+                for (int i = 0; i < model.getColumnCount(); i++) {
+                    excel.write(model.getColumnName(i) + "\t");
+                }
+                
+                excel.write("\n");
+                
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    for (int j = 0; j < model.getColumnCount(); j++) {
+                        excel.write(model.getValueAt(i, j).toString() + "\t");
+                    }
+                    excel.write("\n");
+                }
+            }
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 }
