@@ -195,6 +195,7 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        exportar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jDesdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDesdeActionPerformed
@@ -275,7 +276,7 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
         Date fechaActual = new Date();
         String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
         String parrafo2 = "Srs. Contabilidad.";
-        String parrafo3 = "Remito listadode deducciones a personal por contrato correspondiente al period desde " + jDesde.getText() + " hasta " + jHasta.getText();
+        String parrafo3 = "Remito listado de deducciones a personal por contrato correspondiente al periodo desde " + jDesde.getText() + " hasta " + jHasta.getText();
     }
     
      public void exportar() {
