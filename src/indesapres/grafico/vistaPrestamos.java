@@ -6,12 +6,14 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.MessageFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -19,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -99,6 +102,7 @@ public class vistaPrestamos extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         txtFiltro = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -137,6 +141,18 @@ public class vistaPrestamos extends javax.swing.JFrame {
         jLabel21.setForeground(new java.awt.Color(204, 204, 255));
         jLabel21.setText("......");
         jToolBar1.add(jLabel21);
+
+        jButton1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jButton1.setText("Exportar");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton1);
 
         jLabel22.setForeground(new java.awt.Color(204, 204, 255));
         jLabel22.setText("................................................................................");
@@ -235,6 +251,11 @@ public class vistaPrestamos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTable2MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        exportar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -272,6 +293,7 @@ public class vistaPrestamos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboFiltro;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -295,7 +317,28 @@ public class vistaPrestamos extends javax.swing.JFrame {
     }
 
     public void exportar() {
-       
+        try {
+            Date date = new Date();
+            File file = new File("Prestamos.xls");
+            TableModel model = jTable2.getModel();
+            try (FileWriter excel = new FileWriter(file)) {
+                for (int i = 0; i < model.getColumnCount(); i++) {
+                    excel.write(model.getColumnName(i) + "\t");
+                }
+                
+                excel.write("\n");
+                
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    for (int j = 0; j < model.getColumnCount(); j++) {
+                        excel.write(model.getValueAt(i, j).toString() + "\t");
+                    }
+                    excel.write("\n");
+                }
+            }
+
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
 }

@@ -9,6 +9,7 @@ import indesapres.modelos.Prestamos;
 import java.awt.Image;
 import java.awt.print.PrinterException;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,6 +35,12 @@ import javax.swing.table.TableModel;
 import org.apache.poi.sl.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 /**
  *
@@ -59,8 +66,6 @@ public final class deduccionesSocios extends javax.swing.JFrame {
         jQuincena = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jMes = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -101,13 +106,7 @@ public final class deduccionesSocios extends javax.swing.JFrame {
         jLabel3.setText("MES");
 
         jMes.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "novienbre", "diciembre" }));
-
-        jLabel4.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jLabel4.setText("TRIMESTRE");
-
-        jComboBox3.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "primer trimiestre", "segundo trimestre", "tercer trimestre", "cuarto trimestre" }));
+        jMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "novienbre", "diciembre", "Primer Trimestre", "Segundo Trimestre", "Tercer Trimestre", "Cuarto Trimestre" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -128,10 +127,6 @@ public final class deduccionesSocios extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton1)))))
                 .addContainerGap())
@@ -151,9 +146,7 @@ public final class deduccionesSocios extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jQuincena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
-                            .addComponent(jMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                 .addGap(32, 32, 32))
@@ -167,7 +160,7 @@ public final class deduccionesSocios extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable3KeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        exportar();
+        crearTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -206,11 +199,9 @@ public final class deduccionesSocios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JComboBox<String> jMes;
     private javax.swing.JComboBox<String> jQuincena;
     private javax.swing.JScrollPane jScrollPane5;
@@ -268,24 +259,23 @@ public final class deduccionesSocios extends javax.swing.JFrame {
         Date fechaActual = new Date();
         String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
         String parrafo2 = "Srs. Contabilidad.";
-        String parrafo3 = "Remito listado de deducciones a socios correspondiente a fecha " ;
+        String parrafo3 = "Remito listado de deducciones a socios correspondiente a fecha ";
 
     }
-
 
     public void exportar() {
         try {
             Date date = new Date();
-            File file = new File("Deducciones Socios "+jQuincena.getSelectedItem().toString() +
-                    "de" + jMes.getSelectedItem().toString()+".xls");
+            File file = new File("Deducciones Socios " + jQuincena.getSelectedItem().toString()
+                    + "de" + jMes.getSelectedItem().toString() + ".xls");
             TableModel model = jTable3.getModel();
             try (FileWriter excel = new FileWriter(file)) {
                 for (int i = 0; i < model.getColumnCount(); i++) {
                     excel.write(model.getColumnName(i) + "\t");
                 }
-                
+
                 excel.write("\n");
-                
+
                 for (int i = 0; i < model.getRowCount(); i++) {
                     for (int j = 0; j < model.getColumnCount(); j++) {
                         excel.write(model.getValueAt(i, j).toString() + "\t");
@@ -296,6 +286,61 @@ public final class deduccionesSocios extends javax.swing.JFrame {
 
         } catch (IOException e) {
             System.out.println(e);
+        }
+    }
+
+    public void crearTable() {
+        try {
+            Date fechaActual = new Date();
+            String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
+            String parrafo2 = "Srs. Contabilidad.";
+            String parrafo3 = "Remito listado de deducciones a socios correspondiente a  " + jQuincena.getSelectedItem().toString()
+                    + "de" + jMes.getSelectedItem().toString();
+
+            String path = "template.docx";
+            XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
+
+            XWPFParagraph paragraph1 = writedoc.createParagraph();
+            XWPFRun run1 = paragraph1.createRun();
+            run1.setFontSize(12);
+            run1.setFontFamily("Calibri");
+            run1.setText(parrafo1);
+            paragraph1.setAlignment(ParagraphAlignment.LEFT);
+
+            XWPFParagraph paragraph2 = writedoc.createParagraph();
+            XWPFRun run2 = paragraph2.createRun();
+            run2.setFontSize(12);
+            run2.setBold(true);
+            run2.setFontFamily("Calibri");
+            run2.setText(parrafo2);
+            paragraph2.setAlignment(ParagraphAlignment.LEFT);
+
+            XWPFParagraph paragraph3 = writedoc.createParagraph();
+            XWPFRun run3 = paragraph3.createRun();
+            run3.setFontSize(12);
+            run3.setBold(true);
+            run3.setFontFamily("Calibri");
+            run3.setText(parrafo3);
+            paragraph3.setAlignment(ParagraphAlignment.DISTRIBUTE);
+
+            XWPFTable tableOne = writedoc.createTable();
+            XWPFTableRow tableOneRowOne = tableOne.getRow(0);
+            tableOneRowOne.getCell(0).setText("CODIGO");
+            tableOneRowOne.addNewTableCell().setText("EMPLEADO");
+            tableOneRowOne.addNewTableCell().setText("PRESTAMO");
+            tableOneRowOne.addNewTableCell().setText("DEDUCCION");
+            tableOneRowOne.addNewTableCell().setText("SALDO");
+
+            for (int x = 0; x <= jTable3.getRowCount(); x++) {
+                XWPFTableRow tableRow1 = tableOne.createRow();
+                tableRow1.getCell(x).setText(String.valueOf(jTable3.getValueAt(x, x)));
+            }
+            try (FileOutputStream outStream = new FileOutputStream("Deducciones Socios " + jQuincena.getSelectedItem().toString()
+                    + " de " + jMes.getSelectedItem().toString() + ".docx")) {
+                writedoc.write(outStream);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(deduccionesSocios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
