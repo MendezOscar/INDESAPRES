@@ -5,16 +5,13 @@ import indesapres.modelos.Deducciones;
 import indesapres.modelos.Prestamos;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
-import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -43,7 +40,6 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         txtFiltro = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -86,18 +82,6 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
         jLabel21.setForeground(new java.awt.Color(204, 204, 255));
         jLabel21.setText("......");
         jToolBar1.add(jLabel21);
-
-        jButton1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jButton1.setText("Buscar prestamo");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton1);
 
         jLabel22.setForeground(new java.awt.Color(204, 204, 255));
         jLabel22.setText("..............");
@@ -220,15 +204,8 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable2KeyPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        vistaPrestamos vp = new vistaPrestamos();
-        vp.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        imprimir();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
@@ -238,7 +215,6 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jInteres;
     private javax.swing.JLabel jLabel1;
@@ -297,7 +273,6 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
     }
 
     public void obtenerDeducciones() {
-        int fila = 0;
         String idPrestamo = txtFiltro.getText();
         ServiciosDB service = new ServiciosDB();
         Prestamos pres = service.findByIdPrestamos(idPrestamo);
@@ -314,27 +289,6 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
             jTable2.setValueAt(ded.getDeduccion(), x + 1, 9);
             jTable2.setValueAt(ded.getSaldoDeudor(), x + 1, 10);
 
-        }
-    }
-
-    public void imprimir() {
-        try {
-            boolean fitWidth = true;
-            boolean interactive = true;
-            JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
-            MessageFormat headerFormat = new MessageFormat("Listado de Clientes");
-            MessageFormat footerFormat = new MessageFormat("- Página {0} -");
-            jTable2.print(mode, headerFormat, footerFormat);
-            JOptionPane.showMessageDialog(jTable2,
-                        "Print complete (Impresión completa)",
-                        "Print result (Resultado de la impresión)",
-                        JOptionPane.INFORMATION_MESSAGE);
-        } catch (PrinterException ex) {
-            Logger.getLogger(vistaClientes.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(jTable2,
-                    "Print fail (Fallo de impresión): " + ex.getMessage(),
-                    "Print result (Resultado de la impresión)",
-                    JOptionPane.ERROR_MESSAGE);
         }
     }
     

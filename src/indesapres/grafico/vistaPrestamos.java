@@ -99,7 +99,6 @@ public class vistaPrestamos extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         txtFiltro = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -138,18 +137,6 @@ public class vistaPrestamos extends javax.swing.JFrame {
         jLabel21.setForeground(new java.awt.Color(204, 204, 255));
         jLabel21.setText("......");
         jToolBar1.add(jLabel21);
-
-        jButton1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jButton1.setText("Imprimir");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton1);
 
         jLabel22.setForeground(new java.awt.Color(204, 204, 255));
         jLabel22.setText("................................................................................");
@@ -200,11 +187,6 @@ public class vistaPrestamos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        imprimir();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyPressed
         // TODO add your handling code here:
@@ -290,7 +272,6 @@ public class vistaPrestamos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboFiltro;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -303,27 +284,7 @@ public class vistaPrestamos extends javax.swing.JFrame {
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 
-    public void imprimir() {
-        try {
-            boolean fitWidth = true;
-            boolean interactive = true;
-            JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
-            MessageFormat headerFormat = new MessageFormat("Listado de Prestmos");
-            MessageFormat footerFormat = new MessageFormat("- Página {0} -");
-            jTable2.print(mode, headerFormat, footerFormat);
-            JOptionPane.showMessageDialog(jTable2,
-                    "Print complete (Impresión completa)",
-                    "Print result (Resultado de la impresión)",
-                    JOptionPane.INFORMATION_MESSAGE);
-        } catch (PrinterException ex) {
-            Logger.getLogger(vistaClientes.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(jTable2,
-                    "Print fail (Fallo de impresión): " + ex.getMessage(),
-                    "Print result (Resultado de la impresión)",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
+   
     public void setIcon() {
         try {
             Image img = ImageIO.read(new File("Logo.png"));

@@ -1,20 +1,25 @@
 package indesapres.grafico;
 
 import indesapres.logica.ServiciosDB;
+import indesapres.modelos.Clientes;
 import indesapres.modelos.Deducciones;
 import indesapres.modelos.Prestamos;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
-import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.IOException;
-import java.text.MessageFormat;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -43,7 +48,6 @@ public class EstadoCuentas extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         txtFiltro = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -56,6 +60,8 @@ public class EstadoCuentas extends javax.swing.JFrame {
         jPlazo = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jInteres = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jDate = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vista especifica de deduccion por prestamo");
@@ -87,18 +93,6 @@ public class EstadoCuentas extends javax.swing.JFrame {
         jLabel21.setText("......");
         jToolBar1.add(jLabel21);
 
-        jButton1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jButton1.setText("Buscar prestamo");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton1);
-
         jLabel22.setForeground(new java.awt.Color(204, 204, 255));
         jLabel22.setText("..............");
         jToolBar1.add(jLabel22);
@@ -107,7 +101,7 @@ public class EstadoCuentas extends javax.swing.JFrame {
         jToolBar1.add(jLabel18);
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton2.setText("Imprimir");
+        jButton2.setText("Exportar");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -162,18 +156,30 @@ public class EstadoCuentas extends javax.swing.JFrame {
 
         jInteres.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
+        jLabel5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel5.setText("Fecha");
+
+        jDate.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1095, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1075, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1075, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(366, 366, 366)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(133, 133, 133)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -196,14 +202,17 @@ public class EstadoCuentas extends javax.swing.JFrame {
                     .addComponent(jNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPlazo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPlazo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jInteres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jInteres, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -220,16 +229,13 @@ public class EstadoCuentas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable2KeyPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        vistaPrestamos vp = new vistaPrestamos();
-        vp.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        imprimir();
+
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDateActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
@@ -238,8 +244,8 @@ public class EstadoCuentas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JTextField jDate;
     private javax.swing.JLabel jInteres;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel18;
@@ -251,6 +257,7 @@ public class EstadoCuentas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jNombre;
     private javax.swing.JLabel jPlazo;
     private javax.swing.JScrollPane jScrollPane4;
@@ -286,7 +293,69 @@ public class EstadoCuentas extends javax.swing.JFrame {
         jTable2.setValueAt(pres.getTotalinteres(), 0, 5);
         jTable2.setValueAt(pres.getCapitalinteres(), 0, 6);
         jTable2.setValueAt(pres.getCapitalinteres(), 0, 10);
-        obtenerDeducciones();
+        desglose();
+    }
+
+    public void desglose() {
+        String fecha = jDate.getText();
+        String idPrestamo = txtFiltro.getText();
+        ServiciosDB service = new ServiciosDB();
+        Prestamos pres = service.findByIdPrestamos(idPrestamo);
+        for (int x = 0; x < pres.getPlazo() * 2; x++) {
+            agregarFilas();
+            if (x == 0) {
+                jTable2.setValueAt(fecha, x + 1, 1);
+                jTable2.setValueAt(pres.getAbonocapital(), x + 1, 7);
+                jTable2.setValueAt(pres.getInteresganado(), x + 1, 8);
+                jTable2.setValueAt(pres.getDeduccion(), x + 1, 9);
+                jTable2.setValueAt(pres.getCapitalinteres() - pres.getDeduccion(), x + 1, 10);
+            } else {
+                String dat = (String) jTable2.getValueAt(x, 1);
+                jTable2.setValueAt(sumarDiasFecha(dat, obtenerdias(pres.getIdCliente())), x + 1, 1);
+                jTable2.setValueAt(pres.getAbonocapital(), x + 1, 7);
+                jTable2.setValueAt(pres.getInteresganado(), x + 1, 8);
+                jTable2.setValueAt(pres.getDeduccion(), x + 1, 9);
+                float saldo = (float) jTable2.getValueAt(x, 10);
+                jTable2.setValueAt(saldo - pres.getDeduccion(), x + 1, 10);
+            }
+
+        }
+
+    }
+    
+    public int obtenerdias(String idCliente){
+        try {
+            ServiciosDB service = new ServiciosDB();
+            Clientes clie = service.findByIdClientes(idCliente);
+            if("Empleado Temporal".equals(clie.getTipo())){
+                return 14;
+            }else {
+                return 15;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(EstadoCuentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public String sumarDiasFecha(String fecha, int dias) {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            Date d = format.parse(fecha);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(d);
+            calendar.add(Calendar.DAY_OF_YEAR, dias);
+            String dat = calendar.getTime().toString();
+            DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+            Date date = (Date) formatter.parse(dat);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            String formatedDate = cal.get(Calendar.DATE) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.YEAR);
+            return formatedDate;
+        } catch (ParseException ex) {
+            Logger.getLogger(EstadoCuentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public void agregarFilas() {
@@ -295,45 +364,6 @@ public class EstadoCuentas extends javax.swing.JFrame {
         temp.addRow(nuevo);
     }
 
-    public void obtenerDeducciones() {
-        String idPrestamo = txtFiltro.getText();
-        ServiciosDB service = new ServiciosDB();
-        Prestamos pres = service.findByIdPrestamos(idPrestamo);
-        Deducciones ded;
-        ArrayList<Deducciones> depts;
-        depts = (ArrayList<Deducciones>) service.obtenerUltimaDeduccionByIdPrestamoAcs(idPrestamo);
-        for (int x = 0; x < pres.getPlazo(); x++) {
-            ded = depts.get(x);
-            agregarFilas();
-            jTable2.setValueAt(x, x + 1, 0);
-            jTable2.setValueAt(pres.getAbonocapital(), x + 1, 7);
-            jTable2.setValueAt(pres.getInteresganado(), x + 1, 8);
-            jTable2.setValueAt(pres.getDeduccion(), x + 1, 9);
-            jTable2.setValueAt(ded.getSaldoDeudor(), x + 1, 10);
-        }
-    }
-
-    public void imprimir() {
-        try {
-            boolean fitWidth = true;
-            boolean interactive = true;
-            JTable.PrintMode mode = fitWidth ? JTable.PrintMode.FIT_WIDTH : JTable.PrintMode.NORMAL;
-            MessageFormat headerFormat = new MessageFormat("Listado de Clientes");
-            MessageFormat footerFormat = new MessageFormat("- Página {0} -");
-            jTable2.print(mode, headerFormat, footerFormat);
-            JOptionPane.showMessageDialog(jTable2,
-                        "Print complete (Impresión completa)",
-                        "Print result (Resultado de la impresión)",
-                        JOptionPane.INFORMATION_MESSAGE);
-        } catch (PrinterException ex) {
-            Logger.getLogger(vistaClientes.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(jTable2,
-                    "Print fail (Fallo de impresión): " + ex.getMessage(),
-                    "Print result (Resultado de la impresión)",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
-    
     public void setIcon() {
         try {
             Image img = ImageIO.read(new File("Logo.png"));
