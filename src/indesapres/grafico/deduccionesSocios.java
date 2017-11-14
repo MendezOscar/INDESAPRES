@@ -13,11 +13,14 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -40,7 +43,17 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTHeight;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTShd;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTString;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblPr;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTcPr;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTrPr;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTVerticalJc;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.STShd;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.STVerticalJc;
 
 /**
  *
@@ -292,10 +305,12 @@ public final class deduccionesSocios extends javax.swing.JFrame {
     public void crearTable() {
         try {
             Date fechaActual = new Date();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fechaActual);
             String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
             String parrafo2 = "Srs. Contabilidad.";
-            String parrafo3 = "Remito listado de deducciones a socios correspondiente a  " + jQuincena.getSelectedItem().toString()
-                    + "de" + jMes.getSelectedItem().toString();
+            String parrafo3 = "Remito listado de deducciones a socios, correspondiente a la " + jQuincena.getSelectedItem().toString()
+                    + " de " + jMes.getSelectedItem().toString() + " del año " + calendar.get(Calendar.YEAR);
 
             String path = "template.docx";
             XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
@@ -303,7 +318,7 @@ public final class deduccionesSocios extends javax.swing.JFrame {
             XWPFParagraph paragraph1 = writedoc.createParagraph();
             XWPFRun run1 = paragraph1.createRun();
             run1.setFontSize(12);
-            run1.setFontFamily("Calibri");
+            run1.setFontFamily("Consolas");
             run1.setText(parrafo1);
             paragraph1.setAlignment(ParagraphAlignment.LEFT);
 
@@ -311,36 +326,63 @@ public final class deduccionesSocios extends javax.swing.JFrame {
             XWPFRun run2 = paragraph2.createRun();
             run2.setFontSize(12);
             run2.setBold(true);
-            run2.setFontFamily("Calibri");
+            run2.setFontFamily("Consolas");
             run2.setText(parrafo2);
             paragraph2.setAlignment(ParagraphAlignment.LEFT);
 
             XWPFParagraph paragraph3 = writedoc.createParagraph();
             XWPFRun run3 = paragraph3.createRun();
             run3.setFontSize(12);
-            run3.setBold(true);
-            run3.setFontFamily("Calibri");
+            run3.setFontFamily("Consolas");
             run3.setText(parrafo3);
-            paragraph3.setAlignment(ParagraphAlignment.DISTRIBUTE);
+            paragraph3.setAlignment(ParagraphAlignment.LEFT);
 
-            XWPFTable tableOne = writedoc.createTable();
+            int nRows = jTable3.getRowCount();
+            int nCols = jTable3.getColumnCount();
+            XWPFTable tableOne = writedoc.createTable(nRows, nCols);
             XWPFTableRow tableOneRowOne = tableOne.getRow(0);
             tableOneRowOne.getCell(0).setText("CODIGO");
-            tableOneRowOne.addNewTableCell().setText("EMPLEADO");
-            tableOneRowOne.addNewTableCell().setText("PRESTAMO");
-            tableOneRowOne.addNewTableCell().setText("DEDUCCION");
-            tableOneRowOne.addNewTableCell().setText("SALDO");
+            tableOneRowOne.getCell(1).setText("SOCIO");
+            tableOneRowOne.getCell(2).setText("PRESTAMO");
+            tableOneRowOne.getCell(3).setText("DEDUCCION");
+            tableOneRowOne.getCell(4).setText("SALDO");
 
-            for (int x = 0; x <= jTable3.getRowCount(); x++) {
-                XWPFTableRow tableRow1 = tableOne.createRow();
-                tableRow1.getCell(x).setText(String.valueOf(jTable3.getValueAt(x, x)));
+            ServiciosDB service = new ServiciosDB();
+            Prestamos pres;
+            Clientes clie;
+            Deducciones ded;
+            int rowNr = 1;
+            ArrayList<Prestamos> depts;
+            depts = (ArrayList<Prestamos>) service.listEmpleadosSocios("Socio Olivo");
+            for (int x = 0; x < depts.size(); x++) {
+                pres = depts.get(x);
+                ded = service.findByIdPrestamo(pres.getIdPrestamo());
+                if (ded == null) {
+                    XWPFTableRow row = tableOne.getRow(rowNr++);
+                    row.getCell(0).setText(pres.getIdCliente());
+                    row.getCell(1).setText(pres.getNombre());
+                    row.getCell(2).setText(Float.toString(pres.getCapitalinteres()));
+                    row.getCell(3).setText(Float.toString(pres.getDeduccion()));
+                    row.getCell(4).setText(Float.toString(pres.getCapitalinteres() - pres.getDeduccion()));
+                } else {
+                    XWPFTableRow row = tableOne.getRow(rowNr++);
+                    row.getCell(0).setText(pres.getIdCliente());
+                    row.getCell(1).setText(pres.getNombre());
+                    row.getCell(2).setText(Float.toString(pres.getCapitalinteres()));
+                    row.getCell(3).setText(Float.toString(pres.getDeduccion()));
+                    row.getCell(4).setText(Float.toString(ded.getSaldoDeudor()));
+                }
+
             }
+
             try (FileOutputStream outStream = new FileOutputStream("Deducciones Socios " + jQuincena.getSelectedItem().toString()
                     + " de " + jMes.getSelectedItem().toString() + ".docx")) {
                 writedoc.write(outStream);
             }
+
         } catch (IOException ex) {
             Logger.getLogger(deduccionesSocios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

@@ -270,7 +270,6 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
 
     public void agregarFilas() {
         DefaultTableModel temp = (DefaultTableModel) jTable2.getModel();
-        //Object nuevo[] = {"", "", 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
         Object nuevo[] = {"", "", "", "", "", "", "", "", "", "", ""};
         temp.addRow(nuevo);
     }

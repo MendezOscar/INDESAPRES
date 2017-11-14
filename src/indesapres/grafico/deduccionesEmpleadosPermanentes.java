@@ -7,12 +7,15 @@ import indesapres.modelos.Prestamos;
 import java.awt.Image;
 import java.awt.print.PrinterException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +24,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 /**
  *
@@ -181,7 +190,7 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        exportar();
+        crearTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -252,30 +261,88 @@ public class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-     public void exportar() {
+
+    public void crearTable() {
         try {
-            Date date = new Date();
-            File file = new File("Deducciones Permanantes "+jQuincena.getSelectedItem().toString() +
-                    "de" + jMes.getSelectedItem().toString()+".xls");
-            TableModel model = jTable3.getModel();
-            try (FileWriter excel = new FileWriter(file)) {
-                for (int i = 0; i < model.getColumnCount(); i++) {
-                    excel.write(model.getColumnName(i) + "\t");
-                }
-                
-                excel.write("\n");
-                
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    for (int j = 0; j < model.getColumnCount(); j++) {
-                        excel.write(model.getValueAt(i, j).toString() + "\t");
-                    }
-                    excel.write("\n");
+            Date fechaActual = new Date();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fechaActual);
+            String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
+            String parrafo2 = "Srs. Contabilidad.";
+            String parrafo3 = "Remito listado de deducciones a empleados permanentes, correspondiente a la " + jQuincena.getSelectedItem().toString()
+                    + "de" + jMes.getSelectedItem().toString() + "del año " + calendar.get(Calendar.YEAR);
+            
+            String path = "template.docx";
+            XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
+            
+            XWPFParagraph paragraph1 = writedoc.createParagraph();
+            XWPFRun run1 = paragraph1.createRun();
+            run1.setFontSize(12);
+            run1.setFontFamily("Consolas");
+            run1.setText(parrafo1);
+            paragraph1.setAlignment(ParagraphAlignment.LEFT);
+            
+            XWPFParagraph paragraph2 = writedoc.createParagraph();
+            XWPFRun run2 = paragraph2.createRun();
+            run2.setFontSize(12);
+            run2.setBold(true);
+            run2.setFontFamily("Consolas");
+            run2.setText(parrafo2);
+            paragraph2.setAlignment(ParagraphAlignment.LEFT);
+            
+            XWPFParagraph paragraph3 = writedoc.createParagraph();
+            XWPFRun run3 = paragraph3.createRun();
+            run3.setFontSize(12);
+            
+            run3.setBold(true);
+            run3.setFontFamily("Consolas");
+            run3.setText(parrafo3);
+            paragraph3.setAlignment(ParagraphAlignment.DISTRIBUTE);
+            
+            int nRows = jTable3.getRowCount();
+            int nCols = jTable3.getColumnCount();
+            XWPFTable tableOne = writedoc.createTable(nRows, nCols);
+            XWPFTableRow tableOneRowOne = tableOne.getRow(0);
+            tableOneRowOne.getCell(0).setText("CODIGO");
+            tableOneRowOne.getCell(1).setText("EMPLEADO");
+            tableOneRowOne.getCell(2).setText("PRESTAMO");
+            tableOneRowOne.getCell(3).setText("DEDUCCION");
+            tableOneRowOne.getCell(4).setText("SALDO");
+            
+            ServiciosDB service = new ServiciosDB();
+            Prestamos pres;
+            Clientes clie;
+            Deducciones ded;
+            int rowNr = 1;
+            ArrayList<Prestamos> depts;
+            depts = (ArrayList<Prestamos>) service.listEmpleadosSocios("Empleado Permanente");
+            for (int x = 0; x < depts.size(); x++) {
+                pres = depts.get(x);
+                ded = service.findByIdPrestamo(pres.getIdPrestamo());
+                if (ded == null) {
+                    XWPFTableRow row = tableOne.getRow(rowNr++);
+                    row.getCell(0).setText(pres.getIdCliente());
+                    row.getCell(1).setText(pres.getNombre());
+                    row.getCell(2).setText(Float.toString(pres.getCapitalinteres()));
+                    row.getCell(3).setText(Float.toString(pres.getDeduccion()));
+                    row.getCell(4).setText(Float.toString(pres.getCapitalinteres() - pres.getDeduccion()));
+                } else {
+                    XWPFTableRow row = tableOne.getRow(rowNr++);
+                    row.getCell(0).setText(pres.getIdCliente());
+                    row.getCell(1).setText(pres.getNombre());
+                    row.getCell(2).setText(Float.toString(pres.getCapitalinteres()));
+                    row.getCell(3).setText(Float.toString(pres.getDeduccion()));
+                    row.getCell(4).setText(Float.toString(ded.getSaldoDeudor()));
                 }
             }
-
-        } catch (IOException e) {
-            System.out.println(e);
+            
+            try (FileOutputStream outStream = new FileOutputStream("Deducciones Empleados Permanentes " + jQuincena.getSelectedItem().toString()
+                    + " de " + jMes.getSelectedItem().toString() + ".docx")) {
+                writedoc.write(outStream);
+            }
+            
+        } catch (IOException ex) {
+            Logger.getLogger(deduccionesEmpleadosPermanentes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
