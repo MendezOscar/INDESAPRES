@@ -7,6 +7,8 @@ import indesapres.modelos.Prestamos;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -23,6 +25,12 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 /**
  *
@@ -103,7 +111,7 @@ public class EstadoCuentas extends javax.swing.JFrame {
         jToolBar1.add(jLabel18);
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jButton2.setText("Exportar");
+        jButton2.setText("Generar Documento");
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -231,7 +239,7 @@ public class EstadoCuentas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyPressed
-        
+
     }//GEN-LAST:event_txtFiltroKeyPressed
 
     private void jTable2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable2KeyPressed
@@ -239,7 +247,7 @@ public class EstadoCuentas extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable2KeyPressed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        exportar();
+        crearTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDateActionPerformed
@@ -321,6 +329,12 @@ public class EstadoCuentas extends javax.swing.JFrame {
         for (int x = 0; x < pres.getPlazo() * 2; x++) {
             agregarFilas();
             if (x == 0) {
+                jTable2.setValueAt(pres.getFecha(), x + 1, 1);
+                jTable2.setValueAt(pres.getAbonocapital(), x + 1, 7);
+                jTable2.setValueAt(pres.getInteresganado(), x + 1, 8);
+                jTable2.setValueAt(pres.getDeduccion(), x + 1, 9);
+                jTable2.setValueAt(pres.getCapitalinteres() - pres.getDeduccion(), x + 1, 10);
+            } else if (x == 1 ) {
                 jTable2.setValueAt(fecha, x + 1, 1);
                 jTable2.setValueAt(pres.getAbonocapital(), x + 1, 7);
                 jTable2.setValueAt(pres.getInteresganado(), x + 1, 8);
@@ -339,14 +353,14 @@ public class EstadoCuentas extends javax.swing.JFrame {
         }
 
     }
-    
-    public int obtenerdias(String idCliente){
+
+    public int obtenerdias(String idCliente) {
         try {
             ServiciosDB service = new ServiciosDB();
             Clientes clie = service.findByIdClientes(idCliente);
-            if("Empleado Temporal".equals(clie.getTipo())){
+            if ("Empleado Temporal".equals(clie.getTipo())) {
                 return 14;
-            }else {
+            } else {
                 return 15;
             }
         } catch (SQLException ex) {
@@ -389,29 +403,116 @@ public class EstadoCuentas extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void exportar() {
+
+    public void crearTable() {
+
         try {
-            Date date = new Date();
-            File file = new File("Estado de Ceuntas de" + jNombre.getText() + ".xls");
-            TableModel model = jTable2.getModel();
-            try (FileWriter excel = new FileWriter(file)) {
-                for (int i = 0; i < model.getColumnCount(); i++) {
-                    excel.write(model.getColumnName(i) + "\t");
-                }
-                
-                excel.write("\n");
-                
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    for (int j = 0; j < model.getColumnCount(); j++) {
-                        excel.write(model.getValueAt(i, j).toString() + "\t");
-                    }
-                    excel.write("\n");
+            String idPrestamo = txtFiltro.getText();
+            ServiciosDB service = new ServiciosDB();
+            Prestamos pres = service.findByIdPrestamos(idPrestamo);
+
+            String parrafo1 = "PRESTAMO";
+            String parrafo2 = "Desglose de Prestamo ";
+            String parrafo3 = "Otorgado a: " + pres.getNombre();
+            String parrafo4 = "Pagadero en " + pres.getPlazo() + " Meses / " + pres.getPlazo() * 2 + " pagos quincenales";
+
+            String path = "template.docx";
+            XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
+
+            XWPFParagraph paragraph1 = writedoc.createParagraph();
+            XWPFRun run1 = paragraph1.createRun();
+            run1.setFontSize(14);
+            run1.setBold(true);
+            run1.setFontFamily("Consolas");
+            run1.setText(parrafo1);
+            paragraph1.setAlignment(ParagraphAlignment.CENTER);
+
+            XWPFParagraph paragraph2 = writedoc.createParagraph();
+            XWPFRun run2 = paragraph2.createRun();
+            run2.setFontSize(12);
+            run2.setBold(true);
+            run2.setFontFamily("Consolas");
+            run2.setText(parrafo2);
+            paragraph2.setAlignment(ParagraphAlignment.CENTER);
+
+            XWPFParagraph paragraph3 = writedoc.createParagraph();
+            XWPFRun run3 = paragraph3.createRun();
+            run3.setFontSize(12);
+            run3.setFontFamily("Consolas");
+            run3.setText(parrafo3);
+            paragraph3.setAlignment(ParagraphAlignment.CENTER);
+
+            XWPFParagraph paragraph4 = writedoc.createParagraph();
+            XWPFRun run4 = paragraph4.createRun();
+            run4.setFontSize(12);
+            run4.setFontFamily("Consolas");
+            run4.setText(parrafo4);
+            paragraph4.setAlignment(ParagraphAlignment.CENTER);
+
+            int nRows = jTable2.getRowCount();
+            int nCols = jTable2.getColumnCount();
+            XWPFTable tableOne = writedoc.createTable(nRows, nCols);
+            XWPFTableRow tableOneRowOne = tableOne.getRow(0);
+            tableOneRowOne.getCell(0).setText("DEDUCCION");
+            tableOneRowOne.getCell(1).setText("FECHA");
+            tableOneRowOne.getCell(2).setText("PRESTAMO");
+            tableOneRowOne.getCell(3).setText("%");
+            tableOneRowOne.getCell(4).setText("ACUM.");
+            tableOneRowOne.getCell(5).setText("INT. GANADO");
+            tableOneRowOne.getCell(6).setText("CAP + INT");
+            tableOneRowOne.getCell(7).setText("OBONO CAP");
+            tableOneRowOne.getCell(8).setText("INTERES");
+            tableOneRowOne.getCell(9).setText("CUOTA");
+            tableOneRowOne.getCell(10).setText("S. DEUDOR");
+
+            for (int x = 0; x < 1; x++) {
+                XWPFTableRow tableRowTwo = tableOne.getRow(1);
+                tableRowTwo.getCell(1).setText(pres.getFecha());
+                tableRowTwo.getCell(2).setText(Float.toString(pres.getPrestamos()));
+                tableRowTwo.getCell(3).setText(Float.toString(pres.getInteresanual()));
+                tableRowTwo.getCell(5).setText(Float.toString(pres.getTotalinteres()));
+                tableRowTwo.getCell(6).setText(Float.toString(pres.getCapitalinteres()));
+                tableRowTwo.getCell(10).setText(Float.toString(pres.getCapitalinteres()));
+            }
+            int rowNr = 2;
+            String fecha = jDate.getText();
+            for (int x = 0; x < pres.getPlazo() * 2; x++) {
+                if (x == 0) {
+                    XWPFTableRow row = tableOne.getRow(rowNr++);
+                    row.getCell(0).setText(Integer.toString(x + 1));
+                    row.getCell(1).setText(pres.getFecha());
+                    row.getCell(7).setText(Float.toString(pres.getAbonocapital()));
+                    row.getCell(8).setText(Float.toString(pres.getInteresganado()));
+                    row.getCell(9).setText(Float.toString(pres.getDeduccion()));
+                    row.getCell(10).setText(Float.toString(pres.getCapitalinteres() - pres.getDeduccion()));
+                } else if (x == 1) {
+                    XWPFTableRow row = tableOne.getRow(rowNr++);
+                    row.getCell(0).setText(Integer.toString(x + 1));
+                    row.getCell(1).setText(fecha);
+                    row.getCell(7).setText(Float.toString(pres.getAbonocapital()));
+                    row.getCell(8).setText(Float.toString(pres.getInteresganado()));
+                    row.getCell(9).setText(Float.toString(pres.getDeduccion()));
+                    row.getCell(10).setText(Float.toString(pres.getCapitalinteres() - pres.getDeduccion()));
+                } else {
+                    String dat = (String) jTable2.getValueAt(x, 1);
+                    System.out.println(dat);
+                    XWPFTableRow row = tableOne.getRow(rowNr++);
+                    row.getCell(0).setText(Integer.toString(x + 1));
+                    row.getCell(1).setText(sumarDiasFecha(dat, obtenerdias(pres.getIdCliente())));
+                    row.getCell(7).setText(Float.toString(pres.getAbonocapital()));
+                    row.getCell(8).setText(Float.toString(pres.getInteresganado()));
+                    row.getCell(9).setText(Float.toString(pres.getDeduccion()));
+                    float saldo = (float) jTable2.getValueAt(x, 10);
+                    row.getCell(10).setText(Float.toString(saldo - pres.getDeduccion()));
                 }
             }
 
-        } catch (IOException e) {
-            System.out.println(e);
+            try (FileOutputStream outStream = new FileOutputStream("Desglose de prestamo de " + pres.getNombre() + ".docx")) {
+                writedoc.write(outStream);
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(EstadoCuentas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -1,59 +1,31 @@
 package indesapres.grafico;
 
-import com.lowagie.text.Cell;
-import com.lowagie.text.Row;
+
 import indesapres.logica.ServiciosDB;
 import indesapres.modelos.Clientes;
 import indesapres.modelos.Deducciones;
 import indesapres.modelos.Prestamos;
 import java.awt.Image;
-import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.sql.SQLException;
-import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.print.Doc;
-import javax.print.DocFlavor;
-import javax.print.DocPrintJob;
-import javax.print.PrintException;
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
-import javax.print.SimpleDoc;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import org.apache.poi.sl.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
-import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTHeight;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTShd;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTString;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblPr;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTcPr;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTrPr;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTVerticalJc;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.STShd;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.STVerticalJc;
+
 
 /**
  *
@@ -88,12 +60,20 @@ public final class deduccionesSocios extends javax.swing.JFrame {
         jTable3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "CODIGO", "EMPLEADO", "PRESTAMO", "DEDUCCION", "SALDO"
+                "Nº", "CODIGO", "EMPLEADO", "PRESTAMO", "DEDUCCION", "SALDO"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jTable3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTable3KeyPressed(evt);
@@ -235,17 +215,19 @@ public final class deduccionesSocios extends javax.swing.JFrame {
                 ded = service.findByIdPrestamo(pres.getIdPrestamo());
                 clie = service.findByIdClientes(pres.getIdCliente());
                 if ("Socio Olivo".equals(clie.getTipo()) && ded == null) {
-                    jTable3.setValueAt(pres.getIdCliente(), x, 0);
-                    jTable3.setValueAt(pres.getNombre(), x, 1);
-                    jTable3.setValueAt(pres.getCapitalinteres(), x, 2);
-                    jTable3.setValueAt(pres.getDeduccion(), x, 3);
-                    jTable3.setValueAt(pres.getCapitalinteres() - pres.getDeduccion(), x, 4);
+                    jTable3.setValueAt(x+1, x, 0);
+                    jTable3.setValueAt(pres.getIdCliente(), x, 1);
+                    jTable3.setValueAt(pres.getNombre(), x, 2);
+                    jTable3.setValueAt(pres.getCapitalinteres(), x, 3);
+                    jTable3.setValueAt(pres.getDeduccion(), x, 4);
+                    jTable3.setValueAt(pres.getCapitalinteres() - pres.getDeduccion(), x, 5);
                 } else if ("Socio Olivo".equals(clie.getTipo()) && ded.getSaldoDeudor() != 0.0) {
-                    jTable3.setValueAt(pres.getIdCliente(), x, 0);
-                    jTable3.setValueAt(pres.getNombre(), x, 1);
-                    jTable3.setValueAt(pres.getCapitalinteres(), x, 2);
-                    jTable3.setValueAt(pres.getDeduccion(), x, 3);
-                    jTable3.setValueAt(ded.getSaldoDeudor(), x, 4);
+                    jTable3.setValueAt(x+1, x, 0);
+                    jTable3.setValueAt(pres.getIdCliente(), x, 1);
+                    jTable3.setValueAt(pres.getNombre(), x, 2);
+                    jTable3.setValueAt(pres.getCapitalinteres(), x, 3);
+                    jTable3.setValueAt(pres.getDeduccion(), x, 4);
+                    jTable3.setValueAt(ded.getSaldoDeudor(), x, 5);
                 }
             }
         } catch (SQLException ex) {
@@ -268,49 +250,15 @@ public final class deduccionesSocios extends javax.swing.JFrame {
         }
     }
 
-    public void generarDocumento() {
-        Date fechaActual = new Date();
-        String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
-        String parrafo2 = "Srs. Contabilidad.";
-        String parrafo3 = "Remito listado de deducciones a socios correspondiente a fecha ";
-
-    }
-
-    public void exportar() {
-        try {
-            Date date = new Date();
-            File file = new File("Deducciones Socios " + jQuincena.getSelectedItem().toString()
-                    + "de" + jMes.getSelectedItem().toString() + ".xls");
-            TableModel model = jTable3.getModel();
-            try (FileWriter excel = new FileWriter(file)) {
-                for (int i = 0; i < model.getColumnCount(); i++) {
-                    excel.write(model.getColumnName(i) + "\t");
-                }
-
-                excel.write("\n");
-
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    for (int j = 0; j < model.getColumnCount(); j++) {
-                        excel.write(model.getValueAt(i, j).toString() + "\t");
-                    }
-                    excel.write("\n");
-                }
-            }
-
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
-
     public void crearTable() {
         try {
             Date fechaActual = new Date();
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(fechaActual);
             String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
-            String parrafo2 = "Srs. Contabilidad.";
-            String parrafo3 = "Remito listado de deducciones a socios, correspondiente a la " + jQuincena.getSelectedItem().toString()
-                    + " de " + jMes.getSelectedItem().toString() + " del año " + calendar.get(Calendar.YEAR);
+            String parrafo2 = "Atencion: Srs. Contabilidad.";
+            String parrafo3 = "Remito listado de dedlucciones a socios, correspondiente a la " + jQuincena.getSelectedItem().toString()
+                    + " de " + jMes.getSelectedItem().toString() + " del año " + calendar.get(Calendar.YEAR) + ".";
 
             String path = "template.docx";
             XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
@@ -341,11 +289,12 @@ public final class deduccionesSocios extends javax.swing.JFrame {
             int nCols = jTable3.getColumnCount();
             XWPFTable tableOne = writedoc.createTable(nRows, nCols);
             XWPFTableRow tableOneRowOne = tableOne.getRow(0);
-            tableOneRowOne.getCell(0).setText("CODIGO");
-            tableOneRowOne.getCell(1).setText("SOCIO");
-            tableOneRowOne.getCell(2).setText("PRESTAMO");
-            tableOneRowOne.getCell(3).setText("DEDUCCION");
-            tableOneRowOne.getCell(4).setText("SALDO");
+            tableOneRowOne.getCell(0).setText("Nº");
+            tableOneRowOne.getCell(1).setText("CODIGO");
+            tableOneRowOne.getCell(2).setText("SOCIO");
+            tableOneRowOne.getCell(3).setText("S. ANTERIOR");
+            tableOneRowOne.getCell(4).setText("DEDUCCION");
+            tableOneRowOne.getCell(5).setText("SALDO");
 
             ServiciosDB service = new ServiciosDB();
             Prestamos pres;
@@ -359,18 +308,20 @@ public final class deduccionesSocios extends javax.swing.JFrame {
                 ded = service.findByIdPrestamo(pres.getIdPrestamo());
                 if (ded == null) {
                     XWPFTableRow row = tableOne.getRow(rowNr++);
-                    row.getCell(0).setText(pres.getIdCliente());
-                    row.getCell(1).setText(pres.getNombre());
-                    row.getCell(2).setText(Float.toString(pres.getCapitalinteres()));
-                    row.getCell(3).setText(Float.toString(pres.getDeduccion()));
-                    row.getCell(4).setText(Float.toString(pres.getCapitalinteres() - pres.getDeduccion()));
+                    row.getCell(0).setText(Integer.toString(x+1));
+                    row.getCell(1).setText(pres.getIdCliente());
+                    row.getCell(2).setText(pres.getNombre());
+                    row.getCell(3).setText(Float.toString(pres.getCapitalinteres()));
+                    row.getCell(4).setText(Float.toString(pres.getDeduccion()));
+                    row.getCell(5).setText(Float.toString(pres.getCapitalinteres() - pres.getDeduccion()));
                 } else {
                     XWPFTableRow row = tableOne.getRow(rowNr++);
-                    row.getCell(0).setText(pres.getIdCliente());
-                    row.getCell(1).setText(pres.getNombre());
-                    row.getCell(2).setText(Float.toString(pres.getCapitalinteres()));
-                    row.getCell(3).setText(Float.toString(pres.getDeduccion()));
-                    row.getCell(4).setText(Float.toString(ded.getSaldoDeudor()));
+                    row.getCell(0).setText(Integer.toString(x+1));
+                    row.getCell(1).setText(pres.getIdCliente());
+                    row.getCell(2).setText(pres.getNombre());
+                    row.getCell(3).setText(Float.toString(pres.getCapitalinteres()));
+                    row.getCell(4).setText(Float.toString(pres.getDeduccion()));
+                    row.getCell(5).setText(Float.toString(ded.getSaldoDeudor()));
                 }
 
             }
