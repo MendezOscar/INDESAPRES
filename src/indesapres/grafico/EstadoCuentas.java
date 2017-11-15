@@ -495,7 +495,6 @@ public class EstadoCuentas extends javax.swing.JFrame {
                     row.getCell(10).setText(Float.toString(pres.getCapitalinteres() - pres.getDeduccion()));
                 } else {
                     String dat = (String) jTable2.getValueAt(x, 1);
-                    System.out.println(dat);
                     XWPFTableRow row = tableOne.getRow(rowNr++);
                     row.getCell(0).setText(Integer.toString(x + 1));
                     row.getCell(1).setText(sumarDiasFecha(dat, obtenerdias(pres.getIdCliente())));
