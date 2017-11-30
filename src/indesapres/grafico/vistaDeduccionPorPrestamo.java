@@ -1,6 +1,5 @@
 package indesapres.grafico;
 
-import static indesapres.grafico.EstadoCuentas.txtFiltro;
 import indesapres.logica.ServiciosDB;
 import indesapres.modelos.Deducciones;
 import indesapres.modelos.Prestamos;
@@ -9,16 +8,13 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -30,7 +26,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
  *
  * @author oscme
  */
-public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
+public final class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
 
     /**
      * Creates new form vistaDeduccionPorPrestamo
@@ -398,7 +394,7 @@ public class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
                 row.getCell(10).setText(Float.toString(ded.getSaldoDeudor()));
             }
             
-            try (FileOutputStream outStream = new FileOutputStream("Estado de cuentas" + pres.getNombre() + ".docx")) {
+            try (FileOutputStream outStream = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\Estado de cuentas" + pres.getNombre() + ".docx")) {
                 writedoc.write(outStream);
             }
 

@@ -2,20 +2,18 @@ package indesapres.grafico;
 
 import indesapres.logica.ServiciosDB;
 import indesapres.modelos.Clientes;
-import indesapres.modelos.Deducciones;
 import indesapres.modelos.Prestamos;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -24,7 +22,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -36,7 +33,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
  *
  * @author oscme
  */
-public class EstadoCuentas extends javax.swing.JFrame {
+public final class EstadoCuentas extends javax.swing.JFrame {
 
     /**
      * Creates new form vistaDeduccionPorPrestamo
@@ -334,12 +331,13 @@ public class EstadoCuentas extends javax.swing.JFrame {
                 jTable2.setValueAt(pres.getInteresganado(), x + 1, 8);
                 jTable2.setValueAt(pres.getDeduccion(), x + 1, 9);
                 jTable2.setValueAt(pres.getCapitalinteres() - pres.getDeduccion(), x + 1, 10);
-            } else if (x == 1 ) {
+            } else if (x == 1) {
                 jTable2.setValueAt(fecha, x + 1, 1);
                 jTable2.setValueAt(pres.getAbonocapital(), x + 1, 7);
                 jTable2.setValueAt(pres.getInteresganado(), x + 1, 8);
                 jTable2.setValueAt(pres.getDeduccion(), x + 1, 9);
-                jTable2.setValueAt(pres.getCapitalinteres() - pres.getDeduccion(), x + 1, 10);
+                float saldo = (float) jTable2.getValueAt(x, 10);
+                jTable2.setValueAt(saldo - pres.getDeduccion(), x + 1, 10);
             } else {
                 String dat = (String) jTable2.getValueAt(x, 1);
                 jTable2.setValueAt(sumarDiasFecha(dat, obtenerdias(pres.getIdCliente())), x + 1, 1);
@@ -377,7 +375,8 @@ public class EstadoCuentas extends javax.swing.JFrame {
             calendar.setTime(d);
             calendar.add(Calendar.DAY_OF_YEAR, dias);
             String dat = calendar.getTime().toString();
-            DateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+            DateFormat formatter = new SimpleDateFormat(
+            "EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
             Date date = (Date) formatter.parse(dat);
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
@@ -492,7 +491,8 @@ public class EstadoCuentas extends javax.swing.JFrame {
                     row.getCell(7).setText(Float.toString(pres.getAbonocapital()));
                     row.getCell(8).setText(Float.toString(pres.getInteresganado()));
                     row.getCell(9).setText(Float.toString(pres.getDeduccion()));
-                    row.getCell(10).setText(Float.toString(pres.getCapitalinteres() - pres.getDeduccion()));
+                    float saldo = (float) jTable2.getValueAt(x, 10);
+                    row.getCell(10).setText(Float.toString(saldo - pres.getDeduccion()));
                 } else {
                     String dat = (String) jTable2.getValueAt(x, 1);
                     XWPFTableRow row = tableOne.getRow(rowNr++);
@@ -506,12 +506,19 @@ public class EstadoCuentas extends javax.swing.JFrame {
                 }
             }
 
-            try (FileOutputStream outStream = new FileOutputStream("Desglose de prestamo de " + pres.getNombre() + ".docx")) {
+            try (FileOutputStream outStream = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\Desglose de prestamo de " + pres.getNombre() + ".docx")) {
                 writedoc.write(outStream);
             }
 
         } catch (IOException ex) {
             Logger.getLogger(EstadoCuentas.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public String formatNumber(float cantidad){
+        String res;
+        DecimalFormat formateador = new DecimalFormat("##,###.##");
+        res = formateador.format(cantidad);
+        return res;
     }
 }

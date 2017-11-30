@@ -1,11 +1,14 @@
 package indesapres.grafico;
 
 import indesapres.logica.ServiciosDB;
+import indesapres.modelos.Prestamos;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -13,6 +16,9 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,12 +29,18 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 /**
  *
  * @author oscme
  */
-public class vistaPrestamos extends javax.swing.JFrame {
+public final class vistaPrestamos extends javax.swing.JFrame {
 
     DefaultTableModel modelo = new DefaultTableModel();
     public TableRowSorter trsFiltro;
@@ -143,7 +155,7 @@ public class vistaPrestamos extends javax.swing.JFrame {
         jToolBar1.add(jLabel21);
 
         jButton1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
-        jButton1.setText("Exportar");
+        jButton1.setText("Generar Documento");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -224,36 +236,12 @@ public class vistaPrestamos extends javax.swing.JFrame {
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // TODO add your handling code here:
-        registrarDeduccion rd = null;
-        vistaDeduccionPorPrestamo vpp = new vistaDeduccionPorPrestamo();
-        registrarPrestamo vp = new registrarPrestamo();
-        if (rd.active) {
-            int row = jTable2.getSelectedRow();
-            String idPres = jTable2.getValueAt(row, 0).toString();
-            System.out.println("aaaaaaa");
-            registrarDeduccion.jidPrestamo.setText(idPres);
-            rd.active = false;
-            rd.setVisible(true);
-            this.setVisible(false);
-        } else if (vpp.isVisible()) {
-            int row = jTable2.getSelectedRow();
-            String idPres = jTable2.getValueAt(row, 0).toString();
-            System.out.println("aqui");
-            System.out.println(idPres);
-            vistaDeduccionPorPrestamo.txtFiltro.setText(idPres);
-            this.setVisible(false);
-        } else if (vp.isVisible()) {
-            int row = jTable2.getSelectedRow();
-            String idPres = jTable2.getValueAt(row, 0).toString();
-            System.out.println("aaa");
-            registrarPrestamo.jCodigo1.setText(idPres);
-            this.setVisible(false);
-        }
+        
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        exportar();
+        crearTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -284,10 +272,8 @@ public class vistaPrestamos extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new vistaPrestamos().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new vistaPrestamos().setVisible(true);
         });
     }
 
@@ -306,7 +292,6 @@ public class vistaPrestamos extends javax.swing.JFrame {
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 
-   
     public void setIcon() {
         try {
             Image img = ImageIO.read(new File("Logo.png"));
@@ -316,29 +301,79 @@ public class vistaPrestamos extends javax.swing.JFrame {
         }
     }
 
-    public void exportar() {
+    public void crearTable() {
         try {
-            Date date = new Date();
-            File file = new File("Prestamos.xls");
-            TableModel model = jTable2.getModel();
-            try (FileWriter excel = new FileWriter(file)) {
-                for (int i = 0; i < model.getColumnCount(); i++) {
-                    excel.write(model.getColumnName(i) + "\t");
-                }
-                
-                excel.write("\n");
-                
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    for (int j = 0; j < model.getColumnCount(); j++) {
-                        excel.write(model.getValueAt(i, j).toString() + "\t");
-                    }
-                    excel.write("\n");
-                }
+            ServiciosDB service = new ServiciosDB();
+            Prestamos pres;
+            int rowNr = 1;
+            ArrayList<Prestamos> depts;
+            depts = (ArrayList<Prestamos>) service.findAllPrestamos();
+            Date fechaActual = new Date();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fechaActual);
+            String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
+            String parrafo2 = "Listado de prestamos";
+
+            String path = "templateOrizontal.docx";
+            XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
+
+            XWPFParagraph paragraph1 = writedoc.createParagraph();
+            XWPFRun run1 = paragraph1.createRun();
+            run1.setFontSize(12);
+            run1.setFontFamily("Consolas");
+            run1.setText(parrafo1);
+            paragraph1.setAlignment(ParagraphAlignment.LEFT);
+
+            XWPFParagraph paragraph2 = writedoc.createParagraph();
+            XWPFRun run2 = paragraph2.createRun();
+            run2.setFontSize(12);
+            run2.setBold(true);
+            run2.setFontFamily("Consolas");
+            run2.setText(parrafo2);
+            paragraph2.setAlignment(ParagraphAlignment.LEFT);
+
+            int nRows = depts.size() + 1;
+            int nCols = 13;
+            XWPFTable tableOne = writedoc.createTable(nRows, nCols);
+            XWPFTableRow tableOneRowOne = tableOne.getRow(0);
+            tableOneRowOne.getCell(0).setText("CODIGO");
+            tableOneRowOne.getCell(1).setText("FECHA");
+            tableOneRowOne.getCell(2).setText("IDCLIENTE");
+            tableOneRowOne.getCell(3).setText("NOMBRE");
+            tableOneRowOne.getCell(4).setText("PRESTAMO");
+            tableOneRowOne.getCell(5).setText("PLAZO");
+            tableOneRowOne.getCell(6).setText("% INTERES ANUAL");
+            tableOneRowOne.getCell(7).setText("% INTERES ACUMULADO");
+            tableOneRowOne.getCell(8).setText("TOTAL INTERESES");
+            tableOneRowOne.getCell(9).setText("CAPITAL + INTERES");
+            tableOneRowOne.getCell(10).setText("DEDUCCION");
+            tableOneRowOne.getCell(11).setText("ABONO A CAPITAL");
+            tableOneRowOne.getCell(12).setText("INTERES GANADO");
+
+            for (int x = 0; x < depts.size(); x++) {
+                pres = depts.get(x);
+                XWPFTableRow row = tableOne.getRow(rowNr++);
+                row.getCell(0).setText(pres.getIdPrestamo());
+                row.getCell(1).setText(pres.getFecha());
+                row.getCell(2).setText(pres.getIdCliente());
+                row.getCell(3).setText(pres.getNombre());
+                row.getCell(4).setText(Float.toString(pres.getPrestamos()));
+                row.getCell(5).setText(Float.toString(pres.getPlazo()));
+                row.getCell(6).setText(Float.toString(pres.getInteresanual()));
+                row.getCell(7).setText(Float.toString(pres.getInteresAcumulado()));
+                row.getCell(8).setText(Float.toString(pres.getTotalinteres()));
+                row.getCell(9).setText(Float.toString(pres.getCapitalinteres()));
+                row.getCell(10).setText(Float.toString(pres.getDeduccion()));
+                row.getCell(11).setText(Float.toString(pres.getAbonocapital()));
+                row.getCell(12).setText(Float.toString(pres.getInteresganado()));
             }
 
-        } catch (IOException e) {
-            System.out.println(e);
+            try (FileOutputStream outStream = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\Listado de prestamos.docx")) {
+                writedoc.write(outStream);
+            }
+
+        } catch (IOException | SQLException ex) {
+            Logger.getLogger(vistaPrestamos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }

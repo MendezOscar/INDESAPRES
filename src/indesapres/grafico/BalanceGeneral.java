@@ -14,7 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,7 +32,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
  *
  * @author Oscar Mendez
  */
-public class BalanceGeneral extends javax.swing.JFrame {
+public final class BalanceGeneral extends javax.swing.JFrame {
 
     /**
      * Creates new form BalanceGeneral
@@ -63,14 +63,14 @@ public class BalanceGeneral extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Prestamos", "Capital + interes", "Deducciones"
+                "Prestamos", "Capital + interes", "Deducciones", "Abono Capital", "Interes ganado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -79,7 +79,8 @@ public class BalanceGeneral extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("jButton1");
+        jButton1.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
+        jButton1.setText("Generar Documento");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -90,19 +91,19 @@ public class BalanceGeneral extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)))
                 .addGap(29, 29, 29))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(92, 92, 92))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,9 +112,9 @@ public class BalanceGeneral extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap())
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -152,10 +153,8 @@ public class BalanceGeneral extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new BalanceGeneral().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new BalanceGeneral().setVisible(true);
         });
     }
 
@@ -173,6 +172,8 @@ public class BalanceGeneral extends javax.swing.JFrame {
             float sumaPrestamos = (float) 0.0;
             float sumaDeducciones = (float) 0.0;
             float sumaCapital = (float) 0.0;
+            float sumaCapitalded = (float) 0.0;
+            float sumaInteresded = (float) 0.0;
             Deducciones ded;
             ArrayList<Prestamos> depts;
             depts = (ArrayList<Prestamos>) service.findAllPrestamos();
@@ -187,10 +188,18 @@ public class BalanceGeneral extends javax.swing.JFrame {
             for (int x = 0; x < deptsd.size(); x++) {
                 float deducciones = deptsd.get(x).getDeduccion();
                 sumaDeducciones = sumaDeducciones + deducciones;
+                String idPrestamo = deptsd.get(x).getIdPrestamo();
+                pres = service.findByIdPrestamos(idPrestamo);
+                float capitalded = pres.getPrestamos() / (pres.getPlazo() * 2);
+                float interesded = pres.getTotalinteres() / (pres.getPlazo() * 2);
+                sumaCapitalded = sumaCapitalded + capitalded;
+                sumaInteresded = sumaInteresded + interesded;
             }
-            jTable1.setValueAt(sumaPrestamos, 0, 0);
-            jTable1.setValueAt(sumaDeducciones, 0, 2);
-            jTable1.setValueAt(sumaCapital, 0, 1);
+            jTable1.setValueAt(formatNumber(sumaPrestamos), 0, 0);
+            jTable1.setValueAt(formatNumber(sumaDeducciones), 0, 2);
+            jTable1.setValueAt(formatNumber(sumaCapital), 0, 1);
+            jTable1.setValueAt(formatNumber(sumaCapitalded), 0, 3);
+            jTable1.setValueAt(formatNumber(sumaInteresded), 0, 4);
 
         } catch (SQLException ex) {
             Logger.getLogger(BalanceGeneral.class.getName()).log(Level.SEVERE, null, ex);
@@ -211,7 +220,7 @@ public class BalanceGeneral extends javax.swing.JFrame {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");;
             String path = "template.docx";
             XWPFDocument document = new XWPFDocument(new FileInputStream(new File(path)));
-            String parrafo1 = "Balance General a la Fecha" + format.format(date);
+            String parrafo1 = "Balance General a la Fecha " + format.format(date);
 
             XWPFParagraph paragraph1 = document.createParagraph();
             XWPFRun run1 = paragraph1.createRun();
@@ -219,33 +228,40 @@ public class BalanceGeneral extends javax.swing.JFrame {
             run1.setFontFamily("Calibri");
             run1.setText(parrafo1);
             paragraph1.setAlignment(ParagraphAlignment.LEFT);
-            
+
             XWPFTable tableOne = document.createTable();
             XWPFTableRow tableOneRowOne = tableOne.getRow(0);
             tableOneRowOne.getCell(0).setText("Prestamos");
             tableOneRowOne.addNewTableCell().setText("Capital + interes");
-            tableOneRowOne.addNewTableCell().setText("Deducciones");
+            tableOneRowOne.addNewTableCell().setText("Recuperado");
+            tableOneRowOne.addNewTableCell().setText("Abono Capital");
+            tableOneRowOne.addNewTableCell().setText("Interes Ganado");
             XWPFTableRow tableRow1 = tableOne.createRow();
             String prestamo = String.valueOf(jTable1.getValueAt(0, 0));
             String capitalinteres = String.valueOf(jTable1.getValueAt(0, 1));
             String deducciones = String.valueOf(jTable1.getValueAt(0, 2));
+            String capital = String.valueOf(jTable1.getValueAt(0, 3));
+            String interes = String.valueOf(jTable1.getValueAt(0, 4));
             tableRow1.getCell(0).setText(prestamo);
             tableRow1.getCell(1).setText(capitalinteres);
             tableRow1.getCell(2).setText(deducciones);
-            outStream = new FileOutputStream("Balace General.docx");
+            tableRow1.getCell(3).setText(capital);
+            tableRow1.getCell(4).setText(interes);
+            outStream = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\Balance General.docx");
             document.write(outStream);
             outStream.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(BalanceGeneral.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(BalanceGeneral.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                outStream.close();
-            } catch (IOException ex) {
-                Logger.getLogger(BalanceGeneral.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
+    }
+    
+    public String formatNumber(float cantidad){
+        String res;
+        DecimalFormat formateador = new DecimalFormat("###,###.##");
+        res = formateador.format(cantidad);
+        return res;
     }
 
 }

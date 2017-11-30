@@ -689,8 +689,11 @@ public final class registrarAval extends javax.swing.JFrame {
 
     private void jidClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jidClienteKeyPressed
         // TODO add your handling code here:
-        setearPrestamo();
-        setearCodigoAval();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            setearPrestamo();
+            setearCodigoAval();
+        }
+
     }//GEN-LAST:event_jidClienteKeyPressed
 
     private void jIdentidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jIdentidadActionPerformed
@@ -905,11 +908,11 @@ public final class registrarAval extends javax.swing.JFrame {
         }
         return null;
     }
-    
+
     private String obtenerResponsable() {
-        if (jBueno.isSelected()){
+        if (jBueno.isSelected()) {
             return "1";
-        }else if (jMalo.isSelected()){
+        } else if (jMalo.isSelected()) {
             return "0";
         }
         return "1";

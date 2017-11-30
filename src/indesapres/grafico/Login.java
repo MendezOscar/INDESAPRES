@@ -5,7 +5,6 @@
  */
 package indesapres.grafico;
 
-import indesapres.logica.ServiciosDB;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -19,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author oscme
  */
-public class Login extends javax.swing.JFrame {
+public final class Login extends javax.swing.JFrame {
 
     /**
      * Creates new form Login

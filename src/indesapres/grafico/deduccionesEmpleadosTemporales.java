@@ -5,16 +5,12 @@ import indesapres.modelos.Clientes;
 import indesapres.modelos.Deducciones;
 import indesapres.modelos.Prestamos;
 import java.awt.Image;
-import java.awt.print.PrinterException;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.MessageFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,10 +18,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
@@ -228,6 +221,7 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
 
     public void setearDeduccion() {
         try {
+            float sumaded = (float) 0.0;
             ServiciosDB service = new ServiciosDB();
             Prestamos pres;
             Clientes clie;
@@ -237,24 +231,35 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
             for (int x = 0; x < depts.size(); x++) {
                 agregarFilas();
                 pres = depts.get(x);
-                ded = service.findByIdPrestamo(pres.getIdPrestamo());
+                ArrayList<Deducciones> deptsded;
+                deptsded = (ArrayList<Deducciones>) service.obtenerUltimaDeduccionByIdPrestamo(pres.getIdPrestamo());
+                if (deptsded.isEmpty()) {
+                    ded = service.findByIdPrestamo(pres.getIdPrestamo());
+                } else {
+                    ded = deptsded.get(0);
+                }
                 clie = service.findByIdClientes(pres.getIdCliente());
                 if (clie.getTipo().equals("Empleado Temporal") && ded == null) {
-                    jTable3.setValueAt(x+1, x, 0);
+                    jTable3.setValueAt(x + 1, x, 0);
                     jTable3.setValueAt(pres.getIdCliente(), x, 1);
                     jTable3.setValueAt(pres.getNombre(), x, 2);
-                    jTable3.setValueAt(pres.getCapitalinteres(), x, 3);
-                    jTable3.setValueAt(pres.getDeduccion(), x, 4);
-                    jTable3.setValueAt(pres.getCapitalinteres() - pres.getDeduccion(), x, 5);
-                } else if (clie.getTipo().equals("Empleado Temporal") && ded.getSaldoDeudor() != 0.0) {
-                    jTable3.setValueAt(x+1, x, 0);
+                    jTable3.setValueAt(formatNumber(pres.getCapitalinteres()), x, 3);
+                    jTable3.setValueAt(formatNumber(pres.getDeduccion()), x, 4);
+                    jTable3.setValueAt(formatNumber(pres.getCapitalinteres() - pres.getDeduccion()), x, 5);
+                    sumaded = sumaded + pres.getDeduccion();
+                } else if ("Empleado Temporal".equals(clie.getTipo()) && ded.getSaldoDeudor() > 1) {
+                    jTable3.setValueAt(x + 1, x, 0);
                     jTable3.setValueAt(pres.getIdCliente(), x, 1);
                     jTable3.setValueAt(pres.getNombre(), x, 2);
-                    jTable3.setValueAt(pres.getCapitalinteres(), x, 3);
-                    jTable3.setValueAt(pres.getDeduccion(), x, 4);
-                    jTable3.setValueAt(ded.getSaldoDeudor(), x, 5);
+                    jTable3.setValueAt(formatNumber(ded.getSaldoDeudor()), x, 3);
+                    jTable3.setValueAt(formatNumber(pres.getDeduccion()), x, 4);
+                    jTable3.setValueAt(formatNumber(ded.getSaldoDeudor() - ded.getDeduccion()), x, 5);
+                    sumaded = sumaded + pres.getDeduccion();
                 }
             }
+            DefaultTableModel temp = (DefaultTableModel) jTable3.getModel();
+            Object nuevo[] = {"", "", "", "", formatNumber(sumaded), "", "", "", ""};
+            temp.addRow(nuevo);
         } catch (SQLException ex) {
             Logger.getLogger(deduccionesEmpleadosTemporales.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -288,6 +293,8 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
             String parrafo2 = "Atencion: Unidad de Nominas.";
             String parrafo3 = "Remito listado de deducciones a personal por contrato, correspondiente al periodo desde "
                     + jDesde.getText() + " hasta " + jHasta.getText() + ".";
+            String parrafo4 = "___________________________________";
+            String parrafo5 = "Firma";
 
             String path = "template.docx";
             XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
@@ -324,6 +331,11 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
             tableOneRowOne.getCell(3).setText("S. ANTERIOR");
             tableOneRowOne.getCell(4).setText("DEDUCCION");
             tableOneRowOne.getCell(5).setText("SALDO");
+            
+            for (int i = 0; i < jTable3.getRowCount(); i++) {
+                XWPFTableRow row = tableOne.getRow(i);
+                row.getCell(0).setText(Integer.toString(i));
+            }
 
             ServiciosDB service = new ServiciosDB();
             Prestamos pres;
@@ -334,34 +346,63 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
             depts = (ArrayList<Prestamos>) service.listEmpleadosSocios("Empleado Temporal");
             for (int x = 0; x < depts.size(); x++) {
                 pres = depts.get(x);
-                ded = service.findByIdPrestamo(pres.getIdPrestamo());
-                if (ded == null) {
-                    XWPFTableRow row = tableOne.getRow(rowNr++);
-                    row.getCell(0).setText(Integer.toString(x+1));
-                    row.getCell(1).setText(pres.getIdCliente());
-                    row.getCell(2).setText(pres.getNombre());
-                    row.getCell(3).setText(Float.toString(pres.getCapitalinteres()));
-                    row.getCell(4).setText(Float.toString(pres.getDeduccion()));
-                    row.getCell(5).setText(Float.toString(pres.getCapitalinteres() - pres.getDeduccion()));
+                ArrayList<Deducciones> deptsded;
+                deptsded = (ArrayList<Deducciones>) service.obtenerUltimaDeduccionByIdPrestamo(pres.getIdPrestamo());
+                if (deptsded.isEmpty()) {
+                    ded = service.findByIdPrestamo(pres.getIdPrestamo());
                 } else {
+                    ded = deptsded.get(0);
+                }
+                clie = service.findByIdClientes(pres.getIdCliente());
+                if (clie.getTipo().equals("Empleado Temporal") && ded == null) {
                     XWPFTableRow row = tableOne.getRow(rowNr++);
-                    row.getCell(0).setText(Integer.toString(x+1));
                     row.getCell(1).setText(pres.getIdCliente());
                     row.getCell(2).setText(pres.getNombre());
-                    row.getCell(3).setText(Float.toString(pres.getCapitalinteres()));
-                    row.getCell(4).setText(Float.toString(pres.getDeduccion()));
-                    row.getCell(5).setText(Float.toString(ded.getSaldoDeudor()));
+                    row.getCell(3).setText(formatNumber(pres.getCapitalinteres()));
+                    row.getCell(4).setText(formatNumber(pres.getDeduccion()));
+                    row.getCell(5).setText(formatNumber(pres.getCapitalinteres() - pres.getDeduccion()));
+                } else if ("Empleado Temporal".equals(clie.getTipo()) && ded.getSaldoDeudor() > 1) {
+                    XWPFTableRow row = tableOne.getRow(rowNr++);
+                    row.getCell(1).setText(pres.getIdCliente());
+                    row.getCell(2).setText(pres.getNombre());
+                    row.getCell(3).setText(formatNumber(ded.getSaldoDeudor()));
+                    row.getCell(4).setText(formatNumber(pres.getDeduccion()));
+                    row.getCell(5).setText(formatNumber(ded.getSaldoDeudor() - ded.getDeduccion()));
                 }
-
             }
 
-            try (FileOutputStream outStream = new FileOutputStream("Deducciones temporales.docx")) {
+            XWPFParagraph paragraph4 = writedoc.createParagraph();
+            XWPFRun run4 = paragraph4.createRun();
+            run4.setFontSize(12);
+            run4.addBreak();
+            run4.addBreak();
+            run4.addBreak();
+            run4.setFontFamily("Consolas");
+            run4.setText(parrafo4);
+            paragraph4.setAlignment(ParagraphAlignment.CENTER);
+
+            XWPFParagraph paragraph5 = writedoc.createParagraph();
+            XWPFRun run5 = paragraph5.createRun();
+            run5.setFontSize(12);
+            run5.setFontFamily("Consolas");
+            run5.setText(parrafo5);
+            paragraph5.setAlignment(ParagraphAlignment.CENTER);
+
+            try (FileOutputStream outStream = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\Deducciones temporales.docx")) {
                 writedoc.write(outStream);
             }
 
         } catch (IOException ex) {
             Logger.getLogger(deduccionesSocios.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(deduccionesEmpleadosTemporales.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    public String formatNumber(float cantidad) {
+        String res;
+        DecimalFormat formato = new DecimalFormat("#,###.00");
+        res = formato.format(cantidad);
+        return res;
+    }
 }

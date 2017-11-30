@@ -1,34 +1,40 @@
 package indesapres.grafico;
 
 import indesapres.logica.ServiciosDB;
+import indesapres.modelos.Clientes;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.print.PrinterException;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 /**
  *
  * @author oscme
  */
-public class vistaClientes extends javax.swing.JFrame {
+public final class vistaClientes extends javax.swing.JFrame {
 
     DefaultTableModel modelo = new DefaultTableModel();
     public TableRowSorter trsFiltro;
@@ -63,7 +69,6 @@ public class vistaClientes extends javax.swing.JFrame {
     }
 
     public void generarColumnas() {
-        modelo.addColumn("CODIGO");
         modelo.addColumn("NOMBRE");
         modelo.addColumn("APELLIDO");
         modelo.addColumn("IDENTIDAD");
@@ -162,7 +167,7 @@ public class vistaClientes extends javax.swing.JFrame {
         jToolBar1.add(jLabel21);
 
         jButton1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jButton1.setText("Exportar");
+        jButton1.setText("Generar Documento");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -234,7 +239,7 @@ public class vistaClientes extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        exportar();
+        crearTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyPressed
@@ -308,7 +313,6 @@ public class vistaClientes extends javax.swing.JFrame {
     private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 
-    
     public void setIcon() {
         try {
             Image img = ImageIO.read(new File("Logo.png"));
@@ -317,29 +321,87 @@ public class vistaClientes extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void exportar() {
+
+    public void crearTable() {
         try {
-            Date date = new Date();
-            File file = new File("Clientes.xls");
-            TableModel model = jTable2.getModel();
-            try (FileWriter excel = new FileWriter(file)) {
-                for (int i = 0; i < model.getColumnCount(); i++) {
-                    excel.write(model.getColumnName(i) + "\t");
+            ServiciosDB service = new ServiciosDB();
+            Clientes clie;
+            int rowNr = 1;
+            ArrayList<Clientes> depts;
+            depts = (ArrayList<Clientes>) service.findAllClientes();
+            Date fechaActual = new Date();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(fechaActual);
+            String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
+            String parrafo2 = "Listado de Clientes";
+
+            String path = "templateOrizontal.docx";
+            XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
+
+            XWPFParagraph paragraph1 = writedoc.createParagraph();
+            XWPFRun run1 = paragraph1.createRun();
+            run1.setFontSize(12);
+            run1.setFontFamily("Consolas");
+            run1.setText(parrafo1);
+            paragraph1.setAlignment(ParagraphAlignment.LEFT);
+
+            XWPFParagraph paragraph2 = writedoc.createParagraph();
+            XWPFRun run2 = paragraph2.createRun();
+            run2.setFontSize(12);
+            run2.setBold(true);
+            run2.setFontFamily("Consolas");
+            run2.setText(parrafo2);
+            paragraph2.setAlignment(ParagraphAlignment.LEFT);
+
+            int nRows = depts.size()+1;
+            int nCols = 14;
+            XWPFTable tableOne = writedoc.createTable(nRows, nCols);
+            XWPFTableRow tableOneRowOne = tableOne.getRow(0);
+            tableOneRowOne.getCell(0).setText("Nº");
+            tableOneRowOne.getCell(1).setText("CODIGO");
+            tableOneRowOne.getCell(2).setText("NOMBRE");
+            tableOneRowOne.getCell(3).setText("APELLIDO");
+            tableOneRowOne.getCell(4).setText("IDENTIDAD");
+            tableOneRowOne.getCell(5).setText("DEPARTAMENTO");
+            tableOneRowOne.getCell(6).setText("MUNICIPIO");
+            tableOneRowOne.getCell(7).setText("DIRECCION");
+            tableOneRowOne.getCell(8).setText("TELEFONO");
+            tableOneRowOne.getCell(9).setText("EDAD");
+            tableOneRowOne.getCell(10).setText("PROFESION");
+            tableOneRowOne.getCell(11).setText("TIPO");
+            tableOneRowOne.getCell(12).setText("LABOR/AREA");
+            tableOneRowOne.getCell(13).setText("DEPARTAMENTO");
+
+            
+            for (int x = 0; x < depts.size(); x++) {
+                clie = depts.get(x);
+                if (clie != null) {
+                    XWPFTableRow row = tableOne.getRow(rowNr++);
+                    row.getCell(0).setText(Integer.toString(x + 1));
+                    row.getCell(1).setText(clie.getIdCliente());
+                    row.getCell(2).setText(clie.getNombre());
+                    row.getCell(3).setText(clie.getApellido());
+                    row.getCell(4).setText(clie.getIdentidad());
+                    row.getCell(5).setText(clie.getDepartamento());
+                    row.getCell(6).setText(clie.getMunicipio());
+                    row.getCell(7).setText(clie.getDireccion());
+                    row.getCell(8).setText(clie.getTelefono());
+                    row.getCell(9).setText(Integer.toString(clie.getEdad()));
+                    row.getCell(10).setText(clie.getProfesion());
+                    row.getCell(11).setText(clie.getTipo());
+                    row.getCell(12).setText(clie.getArea());
+                    row.getCell(13).setText(clie.getDepto());
+                }else{
+                    System.out.println("null");
                 }
-                
-                excel.write("\n");
-                
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    for (int j = 0; j < model.getColumnCount(); j++) {
-                        excel.write(model.getValueAt(i, j).toString() + "\t");
-                    }
-                    excel.write("\n");
-                }
+
+            }
+            try (FileOutputStream outStream = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\Lista de Clientes.docx")) {
+                writedoc.write(outStream);
             }
 
-        } catch (IOException e) {
-            System.out.println(e);
+        } catch (IOException | SQLException ex) {
+            Logger.getLogger(vistaClientes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
