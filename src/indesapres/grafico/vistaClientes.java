@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -398,6 +399,7 @@ public final class vistaClientes extends javax.swing.JFrame {
             }
             try (FileOutputStream outStream = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\Lista de Clientes.docx")) {
                 writedoc.write(outStream);
+                JOptionPane.showMessageDialog(null, "ARCHIVO CREADO CON EXITO!");
             }
 
         } catch (IOException | SQLException ex) {

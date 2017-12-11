@@ -370,6 +370,7 @@ public final class vistaPrestamos extends javax.swing.JFrame {
 
             try (FileOutputStream outStream = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\Listado de prestamos.docx")) {
                 writedoc.write(outStream);
+                JOptionPane.showMessageDialog(null, "ARCHIVO CREADO CON EXITO!");
             }
 
         } catch (IOException | SQLException ex) {

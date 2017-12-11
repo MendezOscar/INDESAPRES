@@ -508,6 +508,7 @@ public final class EstadoCuentas extends javax.swing.JFrame {
 
             try (FileOutputStream outStream = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\Desglose de prestamo de " + pres.getNombre() + ".docx")) {
                 writedoc.write(outStream);
+                JOptionPane.showMessageDialog(null, "ARCHIVO CREADO CON EXITO!");
             }
 
         } catch (IOException ex) {

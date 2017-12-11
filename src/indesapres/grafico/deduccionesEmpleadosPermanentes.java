@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -168,8 +169,8 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                .addGap(28, 28, 28))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -318,12 +319,13 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
             tableOneRowOne.getCell(3).setText("S. ANTERIOR");
             tableOneRowOne.getCell(4).setText("DEDUCCION");
             tableOneRowOne.getCell(5).setText("SALDO");
-            
+
             for (int i = 0; i < jTable3.getRowCount(); i++) {
                 XWPFTableRow row = tableOne.getRow(i);
                 row.getCell(0).setText(Integer.toString(i));
             }
 
+            float sumaded = (float) 0.0;
             ServiciosDB service = new ServiciosDB();
             Prestamos pres;
             Clientes clie;
@@ -348,6 +350,7 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
                     row.getCell(3).setText(formatNumber(pres.getCapitalinteres()));
                     row.getCell(4).setText(formatNumber(pres.getDeduccion()));
                     row.getCell(5).setText(formatNumber(pres.getCapitalinteres() - pres.getDeduccion()));
+                    sumaded = sumaded + pres.getDeduccion();
                 } else if ("Empleado Permanente".equals(clie.getTipo()) && ded.getSaldoDeudor() > 1) {
                     XWPFTableRow row = tableOne.getRow(rowNr++);
                     row.getCell(1).setText(pres.getIdCliente());
@@ -355,8 +358,11 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
                     row.getCell(3).setText(formatNumber(ded.getSaldoDeudor()));
                     row.getCell(4).setText(formatNumber(pres.getDeduccion()));
                     row.getCell(5).setText(formatNumber(ded.getSaldoDeudor() - ded.getDeduccion()));
+                    sumaded = sumaded + pres.getDeduccion();
                 }
             }
+            XWPFTableRow row = tableOne.getRow(nRows-1);
+            row.getCell(4).setText(formatNumber(sumaded));
 
             XWPFParagraph paragraph4 = writedoc.createParagraph();
             XWPFRun run4 = paragraph4.createRun();
@@ -378,6 +384,7 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
             try (FileOutputStream outStream = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\Deducciones Empleados Permanentes " + jQuincena.getSelectedItem().toString()
                     + " de " + jMes.getSelectedItem().toString() + ".docx")) {
                 writedoc.write(outStream);
+                JOptionPane.showMessageDialog(null, "ARCHIVO CREADO CON EXITO!");
             }
 
         } catch (IOException ex) {

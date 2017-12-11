@@ -396,6 +396,7 @@ public final class vistaDeduccionPorPrestamo extends javax.swing.JFrame {
             
             try (FileOutputStream outStream = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\Estado de cuentas" + pres.getNombre() + ".docx")) {
                 writedoc.write(outStream);
+                JOptionPane.showMessageDialog(null, "ARCHIVO CREADO CON EXITO!");
             }
 
         } catch (IOException ex) {

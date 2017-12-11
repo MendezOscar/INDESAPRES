@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -286,6 +287,7 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
 
     public void crearTable() {
         try {
+            float sumaded = (float) 0.0;
             Date fechaActual = new Date();
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(fechaActual);
@@ -361,6 +363,7 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
                     row.getCell(3).setText(formatNumber(pres.getCapitalinteres()));
                     row.getCell(4).setText(formatNumber(pres.getDeduccion()));
                     row.getCell(5).setText(formatNumber(pres.getCapitalinteres() - pres.getDeduccion()));
+                    sumaded = sumaded + pres.getDeduccion();
                 } else if ("Empleado Temporal".equals(clie.getTipo()) && ded.getSaldoDeudor() > 1) {
                     XWPFTableRow row = tableOne.getRow(rowNr++);
                     row.getCell(1).setText(pres.getIdCliente());
@@ -368,8 +371,11 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
                     row.getCell(3).setText(formatNumber(ded.getSaldoDeudor()));
                     row.getCell(4).setText(formatNumber(pres.getDeduccion()));
                     row.getCell(5).setText(formatNumber(ded.getSaldoDeudor() - ded.getDeduccion()));
+                    sumaded = sumaded + pres.getDeduccion();
                 }
             }
+            XWPFTableRow row = tableOne.getRow(nRows-1);
+            row.getCell(4).setText(formatNumber(sumaded));
 
             XWPFParagraph paragraph4 = writedoc.createParagraph();
             XWPFRun run4 = paragraph4.createRun();
@@ -390,6 +396,7 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
 
             try (FileOutputStream outStream = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\Deducciones temporales.docx")) {
                 writedoc.write(outStream);
+                JOptionPane.showMessageDialog(null, "ARCHIVO CREADO CON EXITO!");
             }
 
         } catch (IOException ex) {

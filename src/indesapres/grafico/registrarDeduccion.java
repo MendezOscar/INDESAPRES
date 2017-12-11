@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author oscme
  */
-public class registrarDeduccion extends javax.swing.JFrame {
+public final class registrarDeduccion extends javax.swing.JFrame {
 
     public DefaultTableModel tm;
     Date fechaActual;

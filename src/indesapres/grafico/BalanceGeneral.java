@@ -14,12 +14,17 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -39,7 +44,6 @@ public final class BalanceGeneral extends javax.swing.JFrame {
      */
     public BalanceGeneral() {
         initComponents();
-        setearinformacion();
     }
 
     /**
@@ -55,6 +59,13 @@ public final class BalanceGeneral extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jDesde = new javax.swing.JTextField();
+        jHasta = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -87,6 +98,55 @@ public final class BalanceGeneral extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
+        jButton2.setText("General");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel5.setText("Ver por mes");
+
+        jLabel6.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel6.setText("Desde:");
+
+        jLabel7.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel7.setText("Hasta:");
+
+        jDesde.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jDesde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDesdeActionPerformed(evt);
+            }
+        });
+        jDesde.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jDesdeKeyPressed(evt);
+            }
+        });
+
+        jHasta.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+        jHasta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jHastaActionPerformed(evt);
+            }
+        });
+        jHasta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jHastaKeyPressed(evt);
+            }
+        });
+
+        jButton3.setFont(new java.awt.Font("Consolas", 0, 11)); // NOI18N
+        jButton3.setText("Mostrar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,27 +154,52 @@ public final class BalanceGeneral extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton2)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(8, 8, 8)
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton3)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addGap(17, 17, 17))
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -124,6 +209,32 @@ public final class BalanceGeneral extends javax.swing.JFrame {
         // TODO add your handling code here:
         crearTable();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        setearinformacion();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jDesdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDesdeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDesdeActionPerformed
+
+    private void jDesdeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDesdeKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDesdeKeyPressed
+
+    private void jHastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jHastaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jHastaActionPerformed
+
+    private void jHastaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jHastaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jHastaKeyPressed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        filterDate();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,7 +271,14 @@ public final class BalanceGeneral extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JTextField jDesde;
+    private javax.swing.JTextField jHasta;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
@@ -190,8 +308,8 @@ public final class BalanceGeneral extends javax.swing.JFrame {
                 sumaDeducciones = sumaDeducciones + deducciones;
                 String idPrestamo = deptsd.get(x).getIdPrestamo();
                 pres = service.findByIdPrestamos(idPrestamo);
-                float capitalded = pres.getPrestamos() / (pres.getPlazo() * 2);
-                float interesded = pres.getTotalinteres() / (pres.getPlazo() * 2);
+                float capitalded = pres.getAbonocapital();
+                float interesded = pres.getInteresganado();
                 sumaCapitalded = sumaCapitalded + capitalded;
                 sumaInteresded = sumaInteresded + interesded;
             }
@@ -217,7 +335,7 @@ public final class BalanceGeneral extends javax.swing.JFrame {
         FileOutputStream outStream = null;
         try {
             Date date = new Date();
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");;
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             String path = "template.docx";
             XWPFDocument document = new XWPFDocument(new FileInputStream(new File(path)));
             String parrafo1 = "Balance General a la Fecha " + format.format(date);
@@ -250,18 +368,61 @@ public final class BalanceGeneral extends javax.swing.JFrame {
             outStream = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\Balance General.docx");
             document.write(outStream);
             outStream.close();
+            JOptionPane.showMessageDialog(null, "ARCHIVO CREADO CON EXITO!");
         } catch (FileNotFoundException ex) {
             Logger.getLogger(BalanceGeneral.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(BalanceGeneral.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public String formatNumber(float cantidad){
+
+    public String formatNumber(float cantidad) {
         String res;
         DecimalFormat formateador = new DecimalFormat("###,###.##");
         res = formateador.format(cantidad);
         return res;
+    }
+
+    public void filterDate() {
+        try {
+            SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+            Date fechaDesde = f.parse(jDesde.getText());
+            Date fechaHasta = f.parse(jHasta.getText());
+            System.out.println(fechaDesde);
+            Calendar cal1 = new GregorianCalendar();
+            Calendar cal2 = new GregorianCalendar();
+            Calendar cal3 = new GregorianCalendar();
+            cal1.setTime(fechaDesde);
+            cal1.setTime(fechaHasta);
+
+            ServiciosDB service = new ServiciosDB();
+            Prestamos pres;
+            float sumaPrestamos = (float) 0.0;
+            float sumaDeducciones = (float) 0.0;
+            float sumaCapital = (float) 0.0;
+            float sumaCapitalded = (float) 0.0;
+            float sumaInteresded = (float) 0.0;
+            Deducciones ded;
+            ArrayList<Prestamos> depts;
+            depts = (ArrayList<Prestamos>) service.findAllPrestamos();
+            ArrayList<Deducciones> deptsd;
+            deptsd = (ArrayList<Deducciones>) service.findAllDeducciones();
+            for (int x = 0; x < depts.size(); x++) {
+                pres = depts.get(x);
+                Date fecha = f.parse(pres.getFecha());
+                cal3.setTime(fecha);
+                if ((cal3.after(cal1) && cal3.before(cal2))) {
+                    float prestamos = depts.get(x).getPrestamos();
+                    float capital = depts.get(x).getCapitalinteres();
+                    sumaPrestamos = sumaPrestamos + prestamos;
+                    sumaCapital = sumaCapital + capital;
+                }
+            }
+            jTable1.setValueAt(formatNumber(sumaPrestamos), 0, 0);
+
+        } catch (ParseException | SQLException ex) {
+            Logger.getLogger(BalanceGeneral.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
