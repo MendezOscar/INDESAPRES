@@ -169,8 +169,8 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                .addGap(37, 37, 37))
         );
 
         pack();
@@ -284,7 +284,7 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
             String parrafo4 = "___________________________________";
             String parrafo5 = "Firma";
 
-            String path = "template.docx";
+            String path = "C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\template.docx";
             XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
 
             XWPFParagraph paragraph1 = writedoc.createParagraph();
@@ -388,8 +388,10 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
             }
 
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error!" + ex.toString());
             Logger.getLogger(deduccionesEmpleadosPermanentes.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error!" + ex.toString());
             Logger.getLogger(deduccionesEmpleadosPermanentes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

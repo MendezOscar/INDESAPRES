@@ -141,8 +141,8 @@ public final class deduccionesSocios extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(20, 20, 20)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                .addGap(23, 23, 23))
         );
 
         pack();
@@ -277,7 +277,7 @@ public final class deduccionesSocios extends javax.swing.JFrame {
             String parrafo4 = "___________________________________";
             String parrafo5 = "Firma";
 
-            String path = "template.docx";
+            String path = "C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\template.docx";
             XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
 
             XWPFParagraph paragraph1 = writedoc.createParagraph();

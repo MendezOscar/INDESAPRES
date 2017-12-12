@@ -298,7 +298,7 @@ public final class deduccionesEmpleadosTemporales extends javax.swing.JFrame {
             String parrafo4 = "___________________________________";
             String parrafo5 = "Firma";
 
-            String path = "template.docx";
+            String path = "C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\template.docx";
             XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
 
             XWPFParagraph paragraph1 = writedoc.createParagraph();

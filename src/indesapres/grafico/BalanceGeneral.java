@@ -336,7 +336,7 @@ public final class BalanceGeneral extends javax.swing.JFrame {
         try {
             Date date = new Date();
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-            String path = "template.docx";
+            String path = "C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\template.docx";
             XWPFDocument document = new XWPFDocument(new FileInputStream(new File(path)));
             String parrafo1 = "Balance General a la Fecha " + format.format(date);
 

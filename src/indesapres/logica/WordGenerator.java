@@ -25,7 +25,7 @@ public class WordGenerator {
             String parrafo11, String parrafo12, String parrafo13, String parrafo14, String parrafo15,
             String parrafo16, String parrafo17, String parrafo18, String nombre) throws IOException {
 
-        String path = "templateSerieA.docx";
+        String path = "C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\templateSerieA.docx";
         XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
 
         XWPFParagraph paragraph1 = writedoc.createParagraph();
@@ -168,7 +168,7 @@ public class WordGenerator {
         paragraph16.setAlignment(ParagraphAlignment.RIGHT);
 
         try {
-            try (FileOutputStream output = new FileOutputStream("SolicitudPrestamo_" + nombre + ".docx")) {
+            try (FileOutputStream output = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\SolicitudPrestamo_" + nombre + ".docx")) {
                 writedoc.write(output);
             }
             JOptionPane.showMessageDialog(null, "ARCHIVO CREADO CON EXITO!");
@@ -182,7 +182,7 @@ public class WordGenerator {
             String parrafo12, String parrafo13, String parrafo14, String parrafo15, String parrafo16, String parrafo17,
             String parrafo18, String parrafo19, String parrafo20, String parrafo21, String nombre) {
         try {
-            String path = "templateSerieA1.docx";
+            String path = "C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\templateSerieA1.docx";
             XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
 
             XWPFParagraph paragraph1 = writedoc.createParagraph();
@@ -345,7 +345,7 @@ public class WordGenerator {
             paragraph21.setAlignment(ParagraphAlignment.RIGHT);
 
             try {
-                try (FileOutputStream output = new FileOutputStream("SolicitudPrestamo_" + nombre + ".docx")) {
+                try (FileOutputStream output = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\SolicitudPrestamo_" + nombre + ".docx")) {
                     writedoc.write(output);
                 }
                 JOptionPane.showMessageDialog(null, "ARCHIVO CREADO CON EXITO!");
@@ -360,7 +360,7 @@ public class WordGenerator {
             String parrafo6, String parrafo7, String parrafo8, String parrafo9, String parrafo10, String parrafo11,
             String parrafo12, String parrafo13, String parrafo14, String parrafo15, String parrafo16, String nombre) {
         try {
-            String path = "templateSerieB.docx";
+            String path = "C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\templateSerieB.docx";
             XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
 
             XWPFParagraph paragraph1 = writedoc.createParagraph();
@@ -483,7 +483,7 @@ public class WordGenerator {
             paragraph16.setAlignment(ParagraphAlignment.RIGHT);
 
             try {
-                try (FileOutputStream output = new FileOutputStream("SolicitudPrestamo_" + nombre + ".docx")) {
+                try (FileOutputStream output = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\SolicitudPrestamo_" + nombre + ".docx")) {
                     writedoc.write(output);
                 }
                 JOptionPane.showMessageDialog(null, "ARCHIVO CREADO CON EXITO!");
@@ -497,7 +497,7 @@ public class WordGenerator {
     public void createWordPagare(String titulo, String parrafo1, String parrafo2, String parrafo3, String parrafo4,
             String parrafo5, String parrafo6, String parrafo7, String parrafo8, String parrafo9, String nombre) {
         try {
-            String path = "PAGARE.docx";
+            String path = "C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\PAGARE.docx";
             XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
 
             XWPFParagraph titulos = writedoc.createParagraph();
@@ -581,7 +581,7 @@ public class WordGenerator {
             paragraph9.setAlignment(ParagraphAlignment.LEFT);
 
             try {
-                try (FileOutputStream output = new FileOutputStream("Pagare_" + nombre + ".docx")) {
+                try (FileOutputStream output = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\Pagare_" + nombre + ".docx")) {
                     writedoc.write(output);
                 }
                 JOptionPane.showMessageDialog(null, "ARCHIVO CREADO CON EXITO!");

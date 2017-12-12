@@ -336,7 +336,7 @@ public final class vistaClientes extends javax.swing.JFrame {
             String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
             String parrafo2 = "Listado de Clientes";
 
-            String path = "templateOrizontal.docx";
+            String path = "C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\templateOrizontal.docx";
             XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
 
             XWPFParagraph paragraph1 = writedoc.createParagraph();

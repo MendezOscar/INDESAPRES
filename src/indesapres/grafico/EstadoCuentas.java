@@ -415,7 +415,7 @@ public final class EstadoCuentas extends javax.swing.JFrame {
             String parrafo3 = "Otorgado a: " + pres.getNombre();
             String parrafo4 = "Pagadero en " + pres.getPlazo() + " Meses / " + pres.getPlazo() * 2 + " pagos quincenales";
 
-            String path = "template.docx";
+            String path = "C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\template.docx";
             XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
 
             XWPFParagraph paragraph1 = writedoc.createParagraph();
