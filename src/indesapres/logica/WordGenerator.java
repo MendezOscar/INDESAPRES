@@ -22,8 +22,8 @@ public class WordGenerator {
 
     public void createWordSocio(String parrafo1, String parrafo2, String parrafo3, String parrafo4,
             String parrafo5, String parrafo6, String parrafo7, String parrafo8, String parrafo9, String parrafo10,
-            String parrafo11, String parrafo12, String parrafo13, String parrafo14, String parrafo15,
-            String parrafo16, String parrafo17, String parrafo18, String nombre) throws IOException {
+            String parrafo11, String parrafo12, String parrafo13, String parrafo14, String parrafo15, 
+            String parrafo17, String parrafo18, String nombre) throws IOException {
 
         String path = "C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\templateSerieA.docx";
         XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
@@ -146,13 +146,6 @@ public class WordGenerator {
         run13.setText(parrafo15);
         paragraph13.setAlignment(ParagraphAlignment.RIGHT);
 
-        XWPFParagraph paragraph14 = writedoc.createParagraph();
-        XWPFRun run14 = paragraph14.createRun();
-        run14.setFontSize(12);
-        run14.setFontFamily("Calibri");
-        run14.setText(parrafo16);
-        paragraph14.setAlignment(ParagraphAlignment.RIGHT);
-
         XWPFParagraph paragraph15 = writedoc.createParagraph();
         XWPFRun run15 = paragraph15.createRun();
         run15.setFontSize(12);
@@ -180,7 +173,7 @@ public class WordGenerator {
     public void createWordIndesa(String parrafo1, String parrafo2, String parrafo3, String parrafo4, String parrafo5,
             String parrafo6, String parrafo7, String parrafo8, String parrafo9, String parrafo10, String parrafo11,
             String parrafo12, String parrafo13, String parrafo14, String parrafo15, String parrafo16, String parrafo17,
-            String parrafo18, String parrafo19, String parrafo20, String parrafo21, String nombre) {
+            String parrafo18, String parrafo20, String parrafo21, String nombre) {
         try {
             String path = "C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\templateSerieA1.docx";
             XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
@@ -323,13 +316,6 @@ public class WordGenerator {
             run18.setText(parrafo18);
             paragraph18.setAlignment(ParagraphAlignment.RIGHT);
 
-            XWPFParagraph paragraph19 = writedoc.createParagraph();
-            XWPFRun run19 = paragraph19.createRun();
-            run19.setFontSize(12);
-            run19.setFontFamily("Calibri");
-            run19.setText(parrafo19);
-            paragraph19.setAlignment(ParagraphAlignment.RIGHT);
-
             XWPFParagraph paragraph20 = writedoc.createParagraph();
             XWPFRun run20 = paragraph20.createRun();
             run20.setFontSize(12);
@@ -358,7 +344,7 @@ public class WordGenerator {
 
     public void createWordEmpleado(String parrafo1, String parrafo2, String parrafo3, String parrafo4, String parrafo5,
             String parrafo6, String parrafo7, String parrafo8, String parrafo9, String parrafo10, String parrafo11,
-            String parrafo12, String parrafo13, String parrafo14, String parrafo15, String parrafo16, String nombre) {
+            String parrafo12, String parrafo13, String parrafo15, String parrafo16, String nombre) {
         try {
             String path = "C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\templateSerieB.docx";
             XWPFDocument writedoc = new XWPFDocument(new FileInputStream(new File(path)));
@@ -460,13 +446,6 @@ public class WordGenerator {
             run13.setFontFamily("Calibri");
             run13.setText(parrafo13);
             paragraph13.setAlignment(ParagraphAlignment.RIGHT);
-
-            XWPFParagraph paragraph14 = writedoc.createParagraph();
-            XWPFRun run14 = paragraph14.createRun();
-            run14.setFontSize(11);
-            run14.setFontFamily("Calibri");
-            run14.setText(parrafo14);
-            paragraph14.setAlignment(ParagraphAlignment.RIGHT);
 
             XWPFParagraph paragraph15 = writedoc.createParagraph();
             XWPFRun run15 = paragraph15.createRun();

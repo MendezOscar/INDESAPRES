@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -60,14 +59,14 @@ public final class deduccionesSocios extends javax.swing.JFrame {
         jTable3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nº", "CODIGO", "EMPLEADO", "PRESTAMO", "DEDUCCION", "SALDO"
+                "Nº", "CODIGO", "EMPLEADO", "PRESTAMO", "DEDUCCION", "ABONO CAPITAL", "ABONO INTERES", "SALDO"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -202,51 +201,49 @@ public final class deduccionesSocios extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void setearDeduccion() {
-        try {
-            float sumaded = (float) 0.0;
-            ServiciosDB service = new ServiciosDB();
-            Prestamos pres;
-            Clientes clie;
-            Deducciones ded;
-
-            ArrayList<Prestamos> depts;
-            depts = (ArrayList<Prestamos>) service.listEmpleadosSocios("Socio Olivo");
-            for (int x = 0; x < depts.size(); x++) {
-                agregarFilas();
-                pres = depts.get(x);
-                ArrayList<Deducciones> deptsded;
-                deptsded = (ArrayList<Deducciones>) service.obtenerUltimaDeduccionByIdPrestamo(pres.getIdPrestamo());
-                if (deptsded.isEmpty()) {
-                    ded = service.findByIdPrestamo(pres.getIdPrestamo());
-                } else {
-                    ded = deptsded.get(0);
-                }
-                clie = service.findByIdClientes(pres.getIdCliente());
-                if ("Socio Olivo".equals(clie.getTipo()) && ded == null) {
-                    jTable3.setValueAt(pres.getIdCliente(), x, 1);
-                    jTable3.setValueAt(pres.getNombre(), x, 2);
-                    jTable3.setValueAt(formatNumber(pres.getCapitalinteres()), x, 3);
-                    jTable3.setValueAt(formatNumber(pres.getDeduccion()), x, 4);
-                    jTable3.setValueAt(formatNumber(pres.getCapitalinteres() - pres.getDeduccion()), x, 5);
-                    sumaded = sumaded + pres.getDeduccion();
-                } else if ("Socio Olivo".equals(clie.getTipo()) && ded.getSaldoDeudor() > 1) {
-                    jTable3.setValueAt(pres.getIdCliente(), x, 1);
-                    jTable3.setValueAt(pres.getNombre(), x, 2);
-                    jTable3.setValueAt(formatNumber(ded.getSaldoDeudor()), x, 3);
-                    jTable3.setValueAt(formatNumber(pres.getDeduccion()), x, 4);
-                    jTable3.setValueAt(formatNumber(ded.getSaldoDeudor() - ded.getDeduccion()), x, 5);
-                    sumaded = sumaded + pres.getDeduccion();
-                }
+        float sumaded = (float) 0.0;
+        ServiciosDB service = new ServiciosDB();
+        Prestamos pres;
+        Clientes clie;
+        Deducciones ded, ded1;
+        ArrayList<Prestamos> depts;
+        depts = (ArrayList<Prestamos>) service.listEmpleadosSocios("Socio Olivo");
+        for (int x = 0; x < depts.size(); x++) {
+            agregarFilas();
+            pres = depts.get(x);
+            ArrayList<Deducciones> deptsded;
+            deptsded = (ArrayList<Deducciones>) service.obtenerUltimaDeduccionByIdPrestamo(pres.getIdPrestamo());
+            if (deptsded.isEmpty()) {
+                ded = service.findByIdPrestamo(pres.getIdPrestamo());
+            } else {
+                ded = deptsded.get(0);
             }
-            for (int i = 0; i < jTable3.getRowCount(); i++) {
-                jTable3.setValueAt(i + 1, i, 1);
+            if (ded == null) {
+                jTable3.setValueAt(pres.getIdPrestamo(), x, 1);
+                jTable3.setValueAt(pres.getNombre(), x, 2);
+                jTable3.setValueAt(formatNumber(pres.getCapitalinteres()), x, 3);
+                jTable3.setValueAt(formatNumber(pres.getDeduccion()), x, 4);
+                jTable3.setValueAt(formatNumber(pres.getAbonocapital()), x, 5);
+                jTable3.setValueAt(formatNumber(pres.getInteresganado()), x, 6);
+                jTable3.setValueAt(formatNumber(pres.getCapitalinteres() - pres.getDeduccion()), x, 7);
+                sumaded = sumaded + pres.getDeduccion();
+            } else if (ded.getSaldoDeudor() > 1) {
+                jTable3.setValueAt(pres.getIdPrestamo(), x, 1);
+                jTable3.setValueAt(pres.getNombre(), x, 2);
+                jTable3.setValueAt(formatNumber(ded.getSaldoDeudor()), x, 3);
+                jTable3.setValueAt(formatNumber(pres.getDeduccion()), x, 4);
+                jTable3.setValueAt(formatNumber(pres.getAbonocapital()), x, 5);
+                jTable3.setValueAt(formatNumber(pres.getInteresganado()), x, 6);
+                jTable3.setValueAt(formatNumber(ded.getSaldoDeudor() - pres.getDeduccion()), x, 7);
+                sumaded = sumaded + pres.getDeduccion();
             }
-            DefaultTableModel temp = (DefaultTableModel) jTable3.getModel();
-            Object nuevo[] = {"", "", "", "", formatNumber(sumaded), "", "", "", ""};
-            temp.addRow(nuevo);
-        } catch (SQLException ex) {
-            Logger.getLogger(deduccionesEmpleadosTemporales.class.getName()).log(Level.SEVERE, null, ex);
         }
+        for (int i = 0; i < jTable3.getRowCount(); i++) {
+            jTable3.setValueAt(i + 1, i, 0);
+        }
+        DefaultTableModel temp = (DefaultTableModel) jTable3.getModel();
+        Object nuevo[] = {"", "", "", "", formatNumber(sumaded), "", "", "", ""};
+        temp.addRow(nuevo);
     }
 
     public void agregarFilas() {
@@ -307,11 +304,13 @@ public final class deduccionesSocios extends javax.swing.JFrame {
             XWPFTable tableOne = writedoc.createTable(nRows, nCols);
             XWPFTableRow tableOneRowOne = tableOne.getRow(0);
             tableOneRowOne.getCell(0).setText("Nº");
-            tableOneRowOne.getCell(1).setText("CODIGO");
+            tableOneRowOne.getCell(1).setText("CLIENTE-PRESTAMO");
             tableOneRowOne.getCell(2).setText("SOCIO");
             tableOneRowOne.getCell(3).setText("S. ANTERIOR");
             tableOneRowOne.getCell(4).setText("DEDUCCION");
-            tableOneRowOne.getCell(5).setText("SALDO");
+            tableOneRowOne.getCell(5).setText("ABONO CAPITAL");
+            tableOneRowOne.getCell(6).setText("ABONO INTERES");
+            tableOneRowOne.getCell(7).setText("SALDO");
 
             for (int i = 0; i < jTable3.getRowCount(); i++) {
                 XWPFTableRow row = tableOne.getRow(i);
@@ -321,7 +320,7 @@ public final class deduccionesSocios extends javax.swing.JFrame {
             ServiciosDB service = new ServiciosDB();
             Prestamos pres;
             Clientes clie;
-            Deducciones ded;
+            Deducciones ded, ded1;
             int rowNr = 1;
             ArrayList<Prestamos> depts;
             depts = (ArrayList<Prestamos>) service.listEmpleadosSocios("Socio Olivo");
@@ -334,27 +333,30 @@ public final class deduccionesSocios extends javax.swing.JFrame {
                 } else {
                     ded = deptsded.get(0);
                 }
-                clie = service.findByIdClientes(pres.getIdCliente());
-                if ("Socio Olivo".equals(clie.getTipo()) && ded == null) {
+                if (ded == null) {
                     XWPFTableRow row = tableOne.getRow(rowNr++);
-                    row.getCell(1).setText(pres.getIdCliente());
+                    row.getCell(1).setText(pres.getIdPrestamo());
                     row.getCell(2).setText(pres.getNombre());
                     row.getCell(3).setText(formatNumber(pres.getCapitalinteres()));
                     row.getCell(4).setText(formatNumber(pres.getDeduccion()));
-                    row.getCell(5).setText(formatNumber(pres.getCapitalinteres() - pres.getDeduccion()));
+                    row.getCell(5).setText(formatNumber(pres.getAbonocapital()));
+                    row.getCell(6).setText(formatNumber(pres.getInteresganado()));
+                    row.getCell(7).setText(formatNumber(pres.getCapitalinteres() - pres.getDeduccion()));
                     sumaded = sumaded + pres.getDeduccion();
-                } else if ("Socio Olivo".equals(clie.getTipo()) && ded.getSaldoDeudor() > 1) {
+                } else if (ded.getSaldoDeudor() > 1) {
                     XWPFTableRow row = tableOne.getRow(rowNr++);
-                    row.getCell(1).setText(pres.getIdCliente());
+                    row.getCell(1).setText(pres.getIdPrestamo());
                     row.getCell(2).setText(pres.getNombre());
                     row.getCell(3).setText(formatNumber(ded.getSaldoDeudor()));
                     row.getCell(4).setText(formatNumber(pres.getDeduccion()));
-                    row.getCell(5).setText(formatNumber(ded.getSaldoDeudor() - ded.getDeduccion()));
+                    row.getCell(5).setText(formatNumber(pres.getAbonocapital()));
+                    row.getCell(6).setText(formatNumber(pres.getInteresganado()));
+                    row.getCell(7).setText(formatNumber(ded.getSaldoDeudor() - pres.getDeduccion()));
                     sumaded = sumaded + pres.getDeduccion();
                 }
 
             }
-            XWPFTableRow row = tableOne.getRow(nRows-1);
+            XWPFTableRow row = tableOne.getRow(nRows - 1);
             row.getCell(4).setText(formatNumber(sumaded));
 
             XWPFParagraph paragraph4 = writedoc.createParagraph();
@@ -379,7 +381,7 @@ public final class deduccionesSocios extends javax.swing.JFrame {
                 writedoc.write(outStream);
                 JOptionPane.showMessageDialog(null, "ARCHIVO CREADO CON EXITO!");
             }
-        } catch (IOException | SQLException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(deduccionesSocios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

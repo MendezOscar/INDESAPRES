@@ -719,7 +719,7 @@ public final class registrarDeduccion extends javax.swing.JFrame {
                 setearCodigo();
                 buscarPrestamo();
                 buscarCliente();
-            } else if (ded.getSaldoDeudor() == 0.0) {
+            } else if (ded.getSaldoDeudor() < 1) {
                 JOptionPane.showMessageDialog(null, "El Prestamo: " + ded.getIdPrestamo() + " ya esta pagado");
             } else {
                 setearCodigo();

@@ -326,18 +326,11 @@ public final class EstadoCuentas extends javax.swing.JFrame {
         for (int x = 0; x < pres.getPlazo() * 2; x++) {
             agregarFilas();
             if (x == 0) {
-                jTable2.setValueAt(pres.getFecha(), x + 1, 1);
+                jTable2.setValueAt(jDate.getText(), x + 1, 1);
                 jTable2.setValueAt(pres.getAbonocapital(), x + 1, 7);
                 jTable2.setValueAt(pres.getInteresganado(), x + 1, 8);
                 jTable2.setValueAt(pres.getDeduccion(), x + 1, 9);
                 jTable2.setValueAt(pres.getCapitalinteres() - pres.getDeduccion(), x + 1, 10);
-            } else if (x == 1) {
-                jTable2.setValueAt(fecha, x + 1, 1);
-                jTable2.setValueAt(pres.getAbonocapital(), x + 1, 7);
-                jTable2.setValueAt(pres.getInteresganado(), x + 1, 8);
-                jTable2.setValueAt(pres.getDeduccion(), x + 1, 9);
-                float saldo = (float) jTable2.getValueAt(x, 10);
-                jTable2.setValueAt(saldo - pres.getDeduccion(), x + 1, 10);
             } else {
                 String dat = (String) jTable2.getValueAt(x, 1);
                 jTable2.setValueAt(sumarDiasFecha(dat, obtenerdias(pres.getIdCliente())), x + 1, 1);
@@ -347,7 +340,6 @@ public final class EstadoCuentas extends javax.swing.JFrame {
                 float saldo = (float) jTable2.getValueAt(x, 10);
                 jTable2.setValueAt(saldo - pres.getDeduccion(), x + 1, 10);
             }
-
         }
 
     }
@@ -376,7 +368,7 @@ public final class EstadoCuentas extends javax.swing.JFrame {
             calendar.add(Calendar.DAY_OF_YEAR, dias);
             String dat = calendar.getTime().toString();
             DateFormat formatter = new SimpleDateFormat(
-            "EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+                    "EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
             Date date = (Date) formatter.parse(dat);
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
@@ -479,14 +471,6 @@ public final class EstadoCuentas extends javax.swing.JFrame {
                 if (x == 0) {
                     XWPFTableRow row = tableOne.getRow(rowNr++);
                     row.getCell(0).setText(Integer.toString(x + 1));
-                    row.getCell(1).setText(pres.getFecha());
-                    row.getCell(7).setText(Float.toString(pres.getAbonocapital()));
-                    row.getCell(8).setText(Float.toString(pres.getInteresganado()));
-                    row.getCell(9).setText(Float.toString(pres.getDeduccion()));
-                    row.getCell(10).setText(Float.toString(pres.getCapitalinteres() - pres.getDeduccion()));
-                } else if (x == 1) {
-                    XWPFTableRow row = tableOne.getRow(rowNr++);
-                    row.getCell(0).setText(Integer.toString(x + 1));
                     row.getCell(1).setText(fecha);
                     row.getCell(7).setText(Float.toString(pres.getAbonocapital()));
                     row.getCell(8).setText(Float.toString(pres.getInteresganado()));
@@ -515,8 +499,8 @@ public final class EstadoCuentas extends javax.swing.JFrame {
             Logger.getLogger(EstadoCuentas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public String formatNumber(float cantidad){
+
+    public String formatNumber(float cantidad) {
         String res;
         DecimalFormat formateador = new DecimalFormat("##,###.##");
         res = formateador.format(cantidad);

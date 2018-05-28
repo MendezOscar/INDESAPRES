@@ -259,10 +259,6 @@ public final class vistaClientes extends javax.swing.JFrame {
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // TODO add your handling code here:
-        int row = jTable2.getSelectedRow();
-        String idClient = jTable2.getValueAt(row, 0).toString();
-        registrarPrestamo.jCodigo1.setText(idClient);
-        this.setVisible(false);
     }//GEN-LAST:event_jTable2MouseClicked
 
     /**

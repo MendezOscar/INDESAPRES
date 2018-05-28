@@ -92,6 +92,9 @@ public final class registrarPrestamo extends javax.swing.JFrame {
         jButton12 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Registrar prestamo");
+        setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
 
         jToolBar1.setBackground(new java.awt.Color(204, 204, 255));
         jToolBar1.setRollover(true);
@@ -622,6 +625,7 @@ public final class registrarPrestamo extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             buscarCliente();
+            confirmacionPrestamo();
             setearCodigo();
         }
     }//GEN-LAST:event_jCodigo1KeyPressed
@@ -822,9 +826,6 @@ public final class registrarPrestamo extends javax.swing.JFrame {
 
     private void jPrestamoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPrestamoKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            setPrestamo();
-        }
     }//GEN-LAST:event_jPrestamoKeyPressed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -868,10 +869,8 @@ public final class registrarPrestamo extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new registrarPrestamo().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new registrarPrestamo().setVisible(true);
         });
     }
 
@@ -1091,7 +1090,7 @@ public final class registrarPrestamo extends javax.swing.JFrame {
             NumberToLetterConverter nc = new NumberToLetterConverter();
             String prestamo = Float.toString(pres.getPrestamos());
             float papeleria = (float) 25.0;
-            float total = pres.getPrestamos() - verificarSiPrestamo() - pres.getDeduccion() - papeleria;
+            float total = pres.getPrestamos() - verificarSiPrestamo() - papeleria;
             String dia = Integer.toString(obtenerDia());
             String anio = Integer.toString(obtenerAnio());
 
@@ -1100,11 +1099,12 @@ public final class registrarPrestamo extends javax.swing.JFrame {
                     + "C.V. en SOLICITUD de un préstamo por valor de " + formatNumber(pres.getPrestamos()) + "("
                     + nc.convertNumberToLetter(prestamo) + " lempiras exactos" + ")" + " Estoy entendido que de aprobarse esta solicitud, el "
                     + "valor autorizado sufrirá un incremento por concepto de  la tasa de interés y otros gastos de administración "
-                    + "aplicados al mismo; de interés y otros gastos de administración aplicados al mismo para que; periódicamente "
-                    + "de mis ingresos realice la deducción de " + formatNumber(pres.getDeduccion()) + " Del pago";
+                    + "así también; estoy enterado que el valor de toda cuota atrasada sufrirá un recargo de 2% mensual. Además, en "
+                    + "este acto autorizo al departamento contable de la referida compañía, para que periódicamente de mis ingresos realice"
+                    + "la deducción de " + formatNumber(pres.getDeduccion()) + " así:";
             String parrafo2 = "por renta quincenal------------------------- L.  " + formatNumber(pres.getDeduccion()) + "\n";
             String parrafo3 = "Del incentivo trimestral a la producción------------   ___________ \n";
-            String parrafo4 = "Del Bono Navideño ----------------------------------   ___________  Suma L__________ \n";
+            String parrafo4 = "Del Bono Navideño ----------------------------------   ___________  ";
             String parrafo5 = "más los correspondientes intereses ganados y/o cargos por mora, y éste valor lo traslade automáticamente "
                     + "a INDESA de C.V. hasta cancelar el total del  préstamo autorizado.\n"
                     + "El Batey Santa Cruz de Yojoa, Cortes. " + nc.convertNumberToLetter(dia) + " dias de " + obtenerMes() + " del " + nc.convertNumberToLetter(anio) + " \n";
@@ -1115,18 +1115,17 @@ public final class registrarPrestamo extends javax.swing.JFrame {
             String parrafo9 = "Valor autorizado……………………………………………..  L " + formatNumber(pres.getPrestamos()) + "      S U M A";
             String parrafo10 = "+ Intereses  ganados……………………………………….    " + formatNumber(pres.getTotalinteres()) + "      L " + formatNumber(pres.getCapitalinteres());
             String parrafo11 = "Taza de interés " + pres.getInteresanual() + "%  anual, pagadero en  " + pres.getPlazo() + " "
-                    + "meses; para realizar pagos " + Tipopagos() + ""
+                    + "meses; para realizar " + pres.getPlazo() * 2 + " pagos " + Tipopagos() + "de "
                     + " L " + formatNumber(pres.getDeduccion()) + " (Capital L. " + formatNumber(pres.getAbonocapital()) + " + intereses L." + formatNumber(pres.getInteresganado()) + ") por pago/letra.\n";
             String parrafo12 = ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n";
             String parrafo13 = "	                           	AUTORIZACION        \n";
             String parrafo14 = "                                                 Autorizado Lps. " + formatNumber(pres.getPrestamos()) + " -\n";
-            String parrafo15 = "                                                 Saldo Anterior  " + formatNumber(verificarSiPrestamo()) + "\n";
-            String parrafo16 = "		                                     1ra. cuota  " + formatNumber(pres.getDeduccion()) + "\n";
-            String parrafo17 = "	                                          ts. Papelería  " + formatNumber(papeleria) + "\n";
+            String parrafo15 = "                                                 Saldo Anterior  "  + verificarSiPrestamo() + " \n";
+            String parrafo17 = "	                                          Gts. Papelería  " + formatNumber(papeleria) + "\n";
             String parrafo18 = "					          Valor. Chk. L. " + formatNumber(total);
             WordGenerator wg = new WordGenerator();
             wg.createWordSocio(parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7, parrafo8, parrafo9,
-                    parrafo10, parrafo11, parrafo12, parrafo13, parrafo14, parrafo15, parrafo16, parrafo17,
+                    parrafo10, parrafo11, parrafo12, parrafo13, parrafo14, parrafo15, parrafo17,
                     parrafo18, idPrestamo);
         } catch (SQLException | IOException ex) {
             Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
@@ -1190,7 +1189,7 @@ public final class registrarPrestamo extends javax.swing.JFrame {
             NumberToLetterConverter nc = new NumberToLetterConverter();
             String prestamo = Float.toString(pres.getPrestamos());
             float papeleria = (float) 25.0;
-            float total = pres.getPrestamos() - verificarSiPrestamo() - pres.getDeduccion() - papeleria;
+            float total = pres.getPrestamos() - verificarSiPrestamo() - papeleria;
             String dia = Integer.toString(obtenerDia());
             String anio = Integer.toString(obtenerAnio());
             Aval aval = buscarCliente(clie.getIdCliente());
@@ -1221,20 +1220,19 @@ public final class registrarPrestamo extends javax.swing.JFrame {
             String parrafo12 = "Valor autorizado……………………………………………..  L " + formatNumber(pres.getPrestamos()) + "      S U M A\n";
             String parrafo13 = "+ Intereses  ganados……………………………………….    " + formatNumber(pres.getTotalinteres()) + "      L " + formatNumber(pres.getCapitalinteres());
             String parrafo14 = "Taza de interés " + pres.getInteresanual() + "%  anual, pagadero en  " + pres.getPlazo() + " "
-                    + "meses; para realizar pagos " + Tipopagos() + ""
-                    + " L " + formatNumber(pres.getDeduccion()) + " (Capital L. " + formatNumber(pres.getAbonocapital()) + " + intereses L." + formatNumber(pres.getInteresganado()) + ") por pago/letra.\n";
+                    + "meses; para realizar " + pres.getPlazo() * 2 + " pagos " + Tipopagos() + " de "
+                    + "L " + formatNumber(pres.getDeduccion()) + " (Capital L. " + formatNumber(pres.getAbonocapital()) + " + intereses L." + formatNumber(pres.getInteresganado()) + ") por pago/letra.\n";
             String parrafo15 = ":::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::";
             String parrafo16 = "AUTORIZACION";
             String parrafo17 = "                                                Autorizado Lps. " + formatNumber(pres.getPrestamos()) + " -\n";
             String parrafo18 = "                                                 Saldo Anterior " + formatNumber(verificarSiPrestamo()) + "\n";
-            String parrafo19 = "		                                     1ra. cuota " + formatNumber(pres.getDeduccion()) + "\n";
-            String parrafo20 = "	                                          ts. Papelería " + formatNumber(papeleria) + "\n";
+            String parrafo20 = "	                                          Gts. Papelería " + formatNumber(papeleria) + "\n";
             String parrafo21 = "					          Valor. Chk. L." + formatNumber(total);
 
             WordGenerator wg = new WordGenerator();
             wg.createWordIndesa(parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7, parrafo8, parrafo9,
                     parrafo10, parrafo11, parrafo12, parrafo13, parrafo14, parrafo15, parrafo16, parrafo17, parrafo18,
-                    parrafo19, parrafo20, parrafo21, idPrestamo);
+                    parrafo20, parrafo21, idPrestamo);
         } catch (SQLException ex) {
             Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1252,7 +1250,7 @@ public final class registrarPrestamo extends javax.swing.JFrame {
             NumberToLetterConverter nc = new NumberToLetterConverter();
             String prestamo = Float.toString(pres.getPrestamos());
             float papeleria = (float) 25.0;
-            float total = pres.getPrestamos() - verificarSiPrestamo() - pres.getDeduccion() - papeleria;
+            float total = pres.getPrestamos() - verificarSiPrestamo() - papeleria;
             String dia = Integer.toString(obtenerDia());
             String anio = Integer.toString(obtenerAnio());
 
@@ -1282,13 +1280,12 @@ public final class registrarPrestamo extends javax.swing.JFrame {
             String parrafo11 = "AUTORIZACION";
             String parrafo12 = "                                                Autorizado Lps.   " + formatNumber(pres.getPrestamos()) + " -\n";
             String parrafo13 = "                                               Saldo Anterior    " + formatNumber(verificarSiPrestamo()) + "\n";
-            String parrafo14 = "		                                     1ra. cuota     " + formatNumber(pres.getDeduccion()) + "\n";
-            String parrafo15 = "	                                            ts. Papelería   " + formatNumber(papeleria) + "\n";
+            String parrafo15 = "	                                            Gts. Papelería   " + formatNumber(papeleria) + "\n";
             String parrafo16 = "					            Valor. Chk. L.  " + formatNumber(total);
 
             WordGenerator wg = new WordGenerator();
             wg.createWordEmpleado(parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7, parrafo8, parrafo9,
-                    parrafo10, parrafo11, parrafo12, parrafo13, parrafo14, parrafo15, parrafo16, idPrestamo);
+                    parrafo10, parrafo11, parrafo12, parrafo13, parrafo15, parrafo16, idPrestamo);
         } catch (SQLException ex) {
             Logger.getLogger(registrarPrestamo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1349,7 +1346,6 @@ public final class registrarPrestamo extends javax.swing.JFrame {
     public float verificarSiPrestamo() {
         float saldoDeudor = (float) 0.0;
         String idCliente = jCodigo1.getText();
-        String idPrestamo = jCodigo.getText();
         ServiciosDB service = new ServiciosDB();
         ArrayList<Prestamos> depts;
         depts = (ArrayList<Prestamos>) service.obtenerUltimoPrestamoByIdCliente(idCliente);
@@ -1357,33 +1353,32 @@ public final class registrarPrestamo extends javax.swing.JFrame {
             return saldoDeudor;
         } else {
             Prestamos pres = depts.get(0);
-            Deducciones ded = service.findByIdPrestamo(pres.getIdPrestamo());
-            if (ded == null) {
+            ArrayList<Deducciones> ded;
+            ded = (ArrayList<Deducciones>) service.obtenerUltimaDeduccionByIdPrestamo(pres.getIdPrestamo());
+            if (ded.isEmpty()) {
                 return saldoDeudor;
             } else {
-                if (ded.getSaldoDeudor() == 0.0) {
+                Deducciones d = ded.get(0);
+                if (d.getSaldoDeudor() < 1) {
                     return saldoDeudor;
                 } else {
-                    saldoDeudor = ded.getSaldoDeudor();
+                    saldoDeudor = d.getSaldoDeudor();
                     return saldoDeudor;
                 }
             }
         }
     }
 
-    public float obtenerPrestamo() {
-        float prestamo = Float.parseFloat(jPrestamo.getText());
-        if (verificarSiPrestamo() == 0.0) {
-            return prestamo;
+    public boolean confirmacionPrestamo() {
+        System.out.println(verificarSiPrestamo());
+        if (verificarSiPrestamo() > 1) {
+            JOptionPane.showMessageDialog(null, "EL Cliente tiene un deuda de: Lps " + verificarSiPrestamo() + " se aplicara refinanciamiento");
+            return true;
         } else {
-            prestamo = prestamo - verificarSiPrestamo();
-            return prestamo;
+            System.out.println("nada");
         }
-    }
 
-    public void setPrestamo() {
-        String prestamo = Float.toString(obtenerPrestamo());
-        jPrestamo.setText(prestamo);
+        return false;
     }
 
     public void setIcon() {

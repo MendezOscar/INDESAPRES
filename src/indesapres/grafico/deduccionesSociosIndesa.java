@@ -31,9 +31,9 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
  *
  * @author oscme
  */
-public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
+public final class deduccionesSociosIndesa extends javax.swing.JFrame {
 
-    public deduccionesEmpleadosPermanentes() {
+    public deduccionesSociosIndesa() {
         initComponents();
         setearDeduccion();
         setIcon();
@@ -84,14 +84,14 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
         jTable3.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Nº", "CODIGO", "EMPLEADO", "PRESTAMO", "DEDUCCION", "ABONO CAPITAL", "ABONO INTERES", "SALDO"
+                "Nº", "CODIGO", "EMPLEADO", "PRESTAMO", "DEDUCCION", "SALDO"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -106,7 +106,7 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
         jScrollPane5.setViewportView(jTable3);
 
         jLabel1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jLabel1.setText("LISTADO DE DEDUCIONES EMPLEADOS PERMANENTES");
+        jLabel1.setText("LISTADO DE DEDUCIONES SOCIOS INDESA");
 
         jButton1.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jButton1.setText("GENERAR DOCUMENTO");
@@ -194,7 +194,7 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new deduccionesEmpleadosPermanentes().setVisible(true);
+            new deduccionesSociosIndesa().setVisible(true);
         });
     }
 
@@ -219,7 +219,7 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
             Clientes clie;
             Deducciones ded, ded1;
             ArrayList<Prestamos> depts;
-            depts = (ArrayList<Prestamos>) service.listEmpleadosPermanentes("Empleado Permanente");
+            depts = (ArrayList<Prestamos>) service.listEmpleadosPermanentes("Socio Indesa");
             for (int x = 0; x < depts.size(); x++) {
                 pres = depts.get(x);
                 ArrayList<Deducciones> deptsded;
@@ -236,9 +236,7 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
                     jTable3.setValueAt(pres.getNombre(), x, 2);
                     jTable3.setValueAt(formatNumber(pres.getCapitalinteres()), x, 3);
                     jTable3.setValueAt(formatNumber(pres.getDeduccion()), x, 4);
-                    jTable3.setValueAt(formatNumber(pres.getAbonocapital()), x, 5);
-                    jTable3.setValueAt(formatNumber(pres.getInteresganado()), x, 6);
-                    jTable3.setValueAt(formatNumber(pres.getCapitalinteres() - pres.getDeduccion()), x, 7);
+                    jTable3.setValueAt(formatNumber(pres.getCapitalinteres() - pres.getDeduccion()), x, 5);
                     sumaded = sumaded + pres.getDeduccion();
                 } else if (ded.getSaldoDeudor() > 1) {
                     jTable3.setValueAt(x + 1, x, 0);
@@ -246,9 +244,7 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
                     jTable3.setValueAt(pres.getNombre(), x, 2);
                     jTable3.setValueAt(formatNumber(ded.getSaldoDeudor()), x, 3);
                     jTable3.setValueAt(formatNumber(pres.getDeduccion()), x, 4);
-                    jTable3.setValueAt(formatNumber(pres.getAbonocapital()), x, 5);
-                    jTable3.setValueAt(formatNumber(pres.getInteresganado()), x, 6);
-                    jTable3.setValueAt(formatNumber(ded.getSaldoDeudor() - pres.getDeduccion()), x, 7);
+                    jTable3.setValueAt(formatNumber(ded.getSaldoDeudor() - ded.getDeduccion()), x, 5);
                     sumaded = sumaded + pres.getDeduccion();
                 }
                 agregarFilas();
@@ -257,7 +253,7 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
             Object nuevo[] = {"", "", "", "", formatNumber(sumaded), "", "", "", ""};
             temp.addRow(nuevo);
         } catch (SQLException ex) {
-            Logger.getLogger(deduccionesEmpleadosPermanentes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(deduccionesSociosIndesa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -283,7 +279,7 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
             calendar.setTime(fechaActual);
             String parrafo1 = new SimpleDateFormat("dd/MM/yyyy").format(fechaActual);
             String parrafo2 = "Atencion: Unidad de Nominas.";
-            String parrafo3 = "Remito listado de deducciones a empleados permanentes, correspondiente a la " + jQuincena.getSelectedItem().toString()
+            String parrafo3 = "Remito listado de deducciones a socios indesa, correspondiente a la " + jQuincena.getSelectedItem().toString()
                     + " de " + jMes.getSelectedItem().toString() + " del año " + calendar.get(Calendar.YEAR) + ".";
             String parrafo4 = "___________________________________";
             String parrafo5 = "Firma";
@@ -322,9 +318,7 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
             tableOneRowOne.getCell(2).setText("EMPLEADO");
             tableOneRowOne.getCell(3).setText("S. ANTERIOR");
             tableOneRowOne.getCell(4).setText("DEDUCCION");
-            tableOneRowOne.getCell(5).setText("ABONO CAPITAL");
-            tableOneRowOne.getCell(6).setText("ABONO INTERES");
-            tableOneRowOne.getCell(7).setText("SALDO");
+            tableOneRowOne.getCell(5).setText("SALDO");
 
             for (int i = 0; i < jTable3.getRowCount(); i++) {
                 XWPFTableRow row = tableOne.getRow(i);
@@ -338,7 +332,7 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
             Deducciones ded, ded1;
             int rowNr = 1;
             ArrayList<Prestamos> depts;
-            depts = (ArrayList<Prestamos>) service.listEmpleadosSocios("Empleado Permanente");
+            depts = (ArrayList<Prestamos>) service.listEmpleadosSocios("Socio Indesa");
             for (int x = 0; x < depts.size(); x++) {
                 pres = depts.get(x);
                 ArrayList<Deducciones> deptsded;
@@ -355,9 +349,7 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
                     row.getCell(2).setText(pres.getNombre());
                     row.getCell(3).setText(formatNumber(pres.getCapitalinteres()));
                     row.getCell(4).setText(formatNumber(pres.getDeduccion()));
-                    row.getCell(5).setText(formatNumber(pres.getAbonocapital()));
-                    row.getCell(6).setText(formatNumber(pres.getInteresganado()));
-                    row.getCell(7).setText(formatNumber(pres.getCapitalinteres() - pres.getDeduccion()));
+                    row.getCell(5).setText(formatNumber(pres.getCapitalinteres() - pres.getDeduccion()));
                     sumaded = sumaded + pres.getDeduccion();
                 } else if (ded.getSaldoDeudor() > 1) {
                     XWPFTableRow row = tableOne.getRow(rowNr++);
@@ -365,9 +357,7 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
                     row.getCell(2).setText(pres.getNombre());
                     row.getCell(3).setText(formatNumber(ded.getSaldoDeudor()));
                     row.getCell(4).setText(formatNumber(pres.getDeduccion()));
-                    row.getCell(5).setText(formatNumber(pres.getAbonocapital()));
-                    row.getCell(6).setText(formatNumber(pres.getInteresganado()));
-                    row.getCell(7).setText(formatNumber(ded.getSaldoDeudor() - pres.getDeduccion()));
+                    row.getCell(5).setText(formatNumber(ded.getSaldoDeudor() - ded.getDeduccion()));
                     sumaded = sumaded + pres.getDeduccion();
                 }
             }
@@ -399,7 +389,7 @@ public final class deduccionesEmpleadosPermanentes extends javax.swing.JFrame {
 
         } catch (IOException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error!" + ex.toString());
-            Logger.getLogger(deduccionesEmpleadosPermanentes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(deduccionesSociosIndesa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

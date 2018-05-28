@@ -32,7 +32,7 @@ public final class registrarAval extends javax.swing.JFrame {
         String Nombre = jNombre.getText();
         String direccion = jDireccion.getText();
         String profesion = jProfesion.getText();
-        String empresa = jEmpresa.getText();
+        String empresa = jCia.getSelectedItem().toString();
         String labor = jArea.getText();
         String depto = jDepto.getSelectedItem().toString();
         String anios = jAnio.getText();
@@ -74,7 +74,7 @@ public final class registrarAval extends javax.swing.JFrame {
         jSalario.setText(Float.toString(aval.getSalario()));
         jAnio.setText(aval.getAnios());
         jMeses.setText(aval.getMeses());
-        jEmpresa.setText(aval.getEmpresa());
+        jCia.setSelectedItem(aval.getEmpresa());
         jidAval.setText(aval.getIdAval());
         jidPrestamo.setText(aval.getIdPrestamo());
         jidCliente.setText(aval.getIdCliente());
@@ -125,7 +125,6 @@ public final class registrarAval extends javax.swing.JFrame {
         jLabel31 = new javax.swing.JLabel();
         jDepto = new javax.swing.JComboBox<>();
         jLabel32 = new javax.swing.JLabel();
-        jEmpresa = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
         jSalario = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
@@ -137,8 +136,10 @@ public final class registrarAval extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jidAval = new javax.swing.JTextField();
         jLabel36 = new javax.swing.JLabel();
-        jBueno = new javax.swing.JCheckBox();
         jMalo = new javax.swing.JCheckBox();
+        jButton7 = new javax.swing.JButton();
+        jLabel37 = new javax.swing.JLabel();
+        jCia = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registro Clientes");
@@ -304,7 +305,7 @@ public final class registrarAval extends javax.swing.JFrame {
         jLabel1.setText("CODIGO DE CLIENTE");
 
         jLabel2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jLabel2.setText("NOMBRE");
+        jLabel2.setText("NOMBRE DEL AVAL");
 
         jidCliente.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jidCliente.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -347,8 +348,8 @@ public final class registrarAval extends javax.swing.JFrame {
 
         jProfesion.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
-        jLabel28.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jLabel28.setText("IDENTIDAD");
+        jLabel28.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
+        jLabel28.setText("INFORMACION DEL AVAL");
 
         jLabel29.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel29.setText("LABOR / AREA");
@@ -365,8 +366,6 @@ public final class registrarAval extends javax.swing.JFrame {
 
         jLabel32.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel32.setText("EMPRESA");
-
-        jEmpresa.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
 
         jLabel33.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel33.setText("SALARIO NETO");
@@ -426,14 +425,6 @@ public final class registrarAval extends javax.swing.JFrame {
         jLabel36.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jLabel36.setText("RESPONSABILIDAD DE PAGO");
 
-        jBueno.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jBueno.setText("BUENO");
-        jBueno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBuenoActionPerformed(evt);
-            }
-        });
-
         jMalo.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jMalo.setText("MALO");
         jMalo.addActionListener(new java.awt.event.ActionListener() {
@@ -441,6 +432,20 @@ public final class registrarAval extends javax.swing.JFrame {
                 jMaloActionPerformed(evt);
             }
         });
+
+        jButton7.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jButton7.setText("Verificar Aval");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jLabel37.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        jLabel37.setText("IDENTIDAD DEL AVAL");
+
+        jCia.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jCia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Compañia Agricola Olivo", " " }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -486,13 +491,16 @@ public final class registrarAval extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jidPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel28)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jIdentidad, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jLabel37)
+                                                .addGap(10, 10, 10)
+                                                .addComponent(jIdentidad, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jButton7))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel4)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jidAval, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(jidAval, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jLabel28)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(4, 4, 4)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -510,8 +518,8 @@ public final class registrarAval extends javax.swing.JFrame {
                                                 .addComponent(jSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel32)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jCia, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(jLabel34)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -520,7 +528,7 @@ public final class registrarAval extends javax.swing.JFrame {
                                                 .addComponent(jLabel35)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jMeses, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGap(0, 67, Short.MAX_VALUE))))
+                                .addGap(0, 1, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -529,10 +537,8 @@ public final class registrarAval extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel36)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jMalo)
-                    .addComponent(jBueno))
-                .addGap(19, 19, 19))
+                .addComponent(jMalo)
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -547,7 +553,7 @@ public final class registrarAval extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(11, 11, 11)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jidCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -557,10 +563,13 @@ public final class registrarAval extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jidAval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addComponent(jLabel28)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel28)
-                            .addComponent(jIdentidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jIdentidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton7)
+                            .addComponent(jLabel37))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -578,11 +587,11 @@ public final class registrarAval extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel32)
-                    .addComponent(jEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel34)
                     .addComponent(jAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel35)
-                    .addComponent(jMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
@@ -593,16 +602,11 @@ public final class registrarAval extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
                     .addComponent(jSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBueno)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jMalo)))
-                .addGap(16, 16, 16))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jMalo))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -753,13 +757,33 @@ public final class registrarAval extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jidAvalKeyPressed
 
-    private void jBuenoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuenoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBuenoActionPerformed
-
     private void jMaloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMaloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMaloActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        String id = jIdentidad.getText();
+        if ("".equals(id)) {
+            JOptionPane.showMessageDialog(null, "Ingrese codigo");
+        } else {
+            try {
+                Aval aval;
+                ServiciosDB service = new ServiciosDB();
+                aval = service.findByIdentidadAval(id);
+                if (aval == null) {
+                    JOptionPane.showMessageDialog(null, "El Cliente: " + id + " no existe");
+                } else if ("0".equals(aval.getResponsabilidad())) {
+                    JOptionPane.showMessageDialog(null, "El Cliente: " + id + " tiene mal record");
+                } else {
+                    JOptionPane.showMessageDialog(null, "El Cliente: " + id + " no tiene mal historial de pago");
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(registrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -798,16 +822,16 @@ public final class registrarAval extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField jAnio;
     private javax.swing.JTextField jArea;
-    private javax.swing.JCheckBox jBueno;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JComboBox<String> jCia;
     private javax.swing.JComboBox<String> jDepto;
     private javax.swing.JTextField jDireccion;
-    private javax.swing.JTextField jEmpresa;
     private javax.swing.JTextField jIdentidad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -837,6 +861,7 @@ public final class registrarAval extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
@@ -910,9 +935,7 @@ public final class registrarAval extends javax.swing.JFrame {
     }
 
     private String obtenerResponsable() {
-        if (jBueno.isSelected()) {
-            return "1";
-        } else if (jMalo.isSelected()) {
+        if (jMalo.isSelected()) {
             return "0";
         }
         return "1";
