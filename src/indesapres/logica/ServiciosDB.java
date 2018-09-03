@@ -330,7 +330,7 @@ public class ServiciosDB {
 
     public Prestamos findByIdPrestamos(String id) {
         String query = "SELECT * FROM PRESTAMOS WHERE IDPRESTAMO = ?";
-        abrirConexion();
+       // abrirConexion();
         try (PreparedStatement stmt = con.prepareStatement(query)) {
             stmt.setString(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -342,9 +342,9 @@ public class ServiciosDB {
                     rs.getFloat("INTERESACUMULADO"), rs.getFloat("TOTALINTERESES"),
                     rs.getFloat("CAPITALINTERES"), rs.getFloat("DEDUCCION"), rs.getFloat("ABONOCAPITAL"),
                     rs.getFloat("INTERESGANADO"), rs.getInt("CONTADOR"), rs.getString("TIPOPAGO"));
-            rs.close();
-            stmt.close();
-            con.close();
+           // rs.close();
+           // stmt.close();
+            //con.close();
             return pres;
         } catch (SQLException se) {
             JOptionPane.showMessageDialog(null, "ERROR Codigo de Prestamo: " + id + " no se ha encontrado." + se.toString());
@@ -491,7 +491,7 @@ public class ServiciosDB {
     }
 
     public List<Prestamos> findAllPrestamos() throws SQLException {
-        abrirConexion();
+        //abrirConexion();
         try (Statement stmt = con.createStatement()) {
             String query = "SELECT * FROM PRESTAMOS";
             ResultSet rs = stmt.executeQuery(query);
@@ -503,9 +503,9 @@ public class ServiciosDB {
                         rs.getFloat("CAPITALINTERES"), rs.getFloat("DEDUCCION"), rs.getFloat("ABONOCAPITAL"),
                         rs.getFloat("INTERESGANADO"), rs.getInt("CONTADOR"), rs.getString("TIPOPAGO")));
             }
-            stmt.close();
-            rs.close();
-            con.close();
+            //stmt.close();
+            //rs.close();
+            //con.close();
             return depts;
         } catch (SQLException se) {
             JOptionPane.showMessageDialog(null, "ERROR." + se.toString());
@@ -722,7 +722,7 @@ public class ServiciosDB {
     }
 
     public List<Deducciones> findAllDeducciones() throws SQLException {
-        abrirConexion();
+     //   abrirConexion();
         try (Statement stmt = con.createStatement()) {
             String query = "SELECT * FROM DEDUCCION";
             ResultSet rs = stmt.executeQuery(query);
@@ -732,9 +732,9 @@ public class ServiciosDB {
                         rs.getString("NOMBRE"), rs.getFloat("PRESTAMO"), rs.getFloat("DEDUCCION"),
                         rs.getFloat("SALDODEUDOR"), rs.getInt("CONTADOR")));
             }
-            stmt.close();
-            rs.close();
-            con.close();
+           // stmt.close();
+           // rs.close();
+           // con.close();
             return depts;
         } catch (SQLException se) {
             JOptionPane.showMessageDialog(null, "ERROR." + se.toString());

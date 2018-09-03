@@ -315,7 +315,7 @@ public final class BalanceGeneral extends javax.swing.JFrame {
         try {
             Date date = new Date();
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-            String path = "C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Prestamos\\template.docx";
+            String path = "C:\\Users\\admin\\Desktop\\Programas\\INDESAPRES\\template.docx";
             XWPFDocument document = new XWPFDocument(new FileInputStream(new File(path)));
             String parrafo1 = "Balance General a la Fecha " + format.format(date);
 
@@ -347,7 +347,7 @@ public final class BalanceGeneral extends javax.swing.JFrame {
             tableRow1.getCell(3).setText(capital);
             tableRow1.getCell(4).setText(interes);
             tableRow1.getCell(5).setText(gastospap);
-            outStream = new FileOutputStream("C:\\Users\\Oscar Mendez\\Documents\\INDESAPRES\\Documentos Indesa\\Balance General.docx");
+            outStream = new FileOutputStream("C:\\Users\\admin\\Desktop\\Programas\\INDESAPRES\\Balance General.docx");
             document.write(outStream);
             outStream.close();
             JOptionPane.showMessageDialog(null, "ARCHIVO CREADO CON EXITO!");
